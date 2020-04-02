@@ -1,6 +1,10 @@
 package com.powerhouse.test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +31,25 @@ class SprintTest {
 	void SprintShouldHaveDescription() {
 		s.setDescription("description");
 		assertEquals("description", s.getDescription());
+	}
+
+	@Test
+	void testSprintShouldHaveListOfPriorities() {
+		assertThat(s.getPriorities()).isInstanceOf(List.class);
+	}
+
+	@Test
+	void testSpringShouldHaveListOfTasks() {
+		assertThat(s.getTasks()).isInstanceOf(List.class);
+	}
+	
+	void testSprintShouldHaveStartDate() {
+		s.setStartDate(new Date());
+		assertThat(s.getStartDate()).isNot(null);
+	}
+	void testSprintShouldHaveEndDate() {
+		s.setEndDate(new Date());
+		assertThat(s.getStartDate()).isNot(null);
 	}
 
 }
