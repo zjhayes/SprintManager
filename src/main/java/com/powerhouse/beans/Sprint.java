@@ -15,12 +15,14 @@ public class Sprint {
 	private Date startDate;
 	private Date endDate;
 	private List<String> priorities;
+	private List<String> workflows;
 	private List<Task> tasks;
 
 	public Sprint() {
 		name = "";
 		description = "";
 		priorities = new ArrayList<String>();
+		workflows = new ArrayList<String>();
 		tasks = new ArrayList<Task>();
 	}
 }
