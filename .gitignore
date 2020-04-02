@@ -1,7 +1,7 @@
 
 # Created by https://www.gitignore.io/api/java,macos,maven,eclipse,java-web
 # Edit at https://www.gitignore.io/?templates=java,macos,maven,eclipse,java-web
-
+applications.properties
 ### Eclipse ###
 .metadata
 bin/
@@ -141,3 +141,4 @@ buildNumber.properties
 .flattened-pom.xml
 
 # End of https://www.gitignore.io/api/java,macos,maven,eclipse,java-web
+src/main/resources/application.properties

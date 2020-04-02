@@ -30,18 +30,15 @@ public class Sprint {
 	private Date startDate;
 	private Date endDate;
 	private List<String> priorities;
-<<<<<<< Updated upstream
-=======
 	private List<String> workflows;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
->>>>>>> Stashed changes
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
 	private List<Task> tasks;
 
 	public Sprint() {
 		name = "";
 		description = "";
 		priorities = new ArrayList<String>();
+		workflows = new ArrayList<String>();
 		tasks = new ArrayList<Task>();
 	}
 }

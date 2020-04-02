@@ -1,9 +1,4 @@
 package com.powerhouse.beans;
-
-<<<<<<< Updated upstream
-public class Task {
-
-=======
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +10,9 @@ import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+public class Task {
+
 
 @Entity
 @Data
@@ -32,5 +30,4 @@ public class Task {
 	private int storyPoints;
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH}, fetch = FetchType.EAGER)
 	private Sprint sprint;
->>>>>>> Stashed changes
 }
