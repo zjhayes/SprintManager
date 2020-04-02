@@ -2,10 +2,10 @@
 Java II final project - Team PowerHouse
 
 ### Project Architecture
-![Project Architecture](/program-architecture.png)
+![Project Architecture](./Documentation/program-architecture.png)
 
 ### View Layout
-![View Layout](/view-layouts.png)
+![View Layout](./Documentation/view-layouts.png)
 
 The Sprint Manager helps Agile teams track sprints. A sprint is a number of tasks to be accomplished within a set period of time (usually a week).
 
