@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1">
+<title>Sprints</title>
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+<script
+	defer
+	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<section class="hero is-small has-text-centered">
+		<div class="hero-body">
+			<div class="container">
+				<h1 class="title">Sprints</h1>
+				<p class="subtitle"><a href="#">Add Sprint</a></p>
+
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="column is-10 is-offset-1">
+			<table class="table is-bordered is-fullwidth">
+				<thead>
+					<tr>
+						<th>Sprint Name</th>
+						<th>Sprint Description</th>
+						<th>Sprint Start Date</th>
+						<th>Sprint End Date</th>
+						<th>Tasks</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="sprint: ${sprints}">
+						<td><a
+							href="#"
+							th:text="${sprint.name}"></a></td>
+						<td th:text="${sprint.description}" />
+						<td th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
+						<td th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
+						<td th:text="${#lists.size(sprint.tasks)}" />
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</body>
+</html>
