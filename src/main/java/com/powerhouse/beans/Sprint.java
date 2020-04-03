@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
 import lombok.AllArgsConstructor;
@@ -29,16 +30,12 @@ public class Sprint {
 	private String description;
 	private Date startDate;
 	private Date endDate;
-	private List<String> priorities;
-	private List<String> workflows;
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
 	private List<Task> tasks;
 
 	public Sprint() {
 		name = "";
 		description = "";
-		priorities = new ArrayList<String>();
-		workflows = new ArrayList<String>();
 		tasks = new ArrayList<Task>();
 	}
 }
