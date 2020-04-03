@@ -34,11 +34,6 @@ class SprintTest {
 	}
 
 	@Test
-	void testSprintShouldHaveListOfPriorities() {
-		assertThat(s.getPriorities()).isInstanceOf(List.class);
-	}
-
-	@Test
 	void testSpringShouldHaveListOfTasks() {
 		assertThat(s.getTasks()).isInstanceOf(List.class);
 	}
