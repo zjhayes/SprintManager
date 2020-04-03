@@ -1,4 +1,4 @@
-package com.powerhouse.repository;
+package com.powerhouse.controller;
 
 import org.springframework.context.annotation.Configuration;
 
