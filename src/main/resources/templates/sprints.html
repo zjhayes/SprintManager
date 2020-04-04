@@ -18,7 +18,9 @@
 		<div class="hero-body">
 			<div class="container">
 				<h1 class="title">Sprints</h1>
-				<p class="subtitle"><a href="#">Add Sprint</a></p>
+				<p class="subtitle">
+					<a href="#">Add Sprint</a>
+				</p>
 
 			</div>
 		</div>
@@ -26,14 +28,15 @@
 
 	<section class="section">
 		<div class="column is-10 is-offset-1">
-			<table class="table is-bordered is-fullwidth">
+			<table class="table is-bordered is-fullwidth is-striped is-hoverable">
 				<thead>
 					<tr>
 						<th>Sprint Name</th>
 						<th>Sprint Description</th>
-						<th>Sprint Start Date</th>
-						<th>Sprint End Date</th>
-						<th>Tasks</th>
+						<th width="12%">Start Date</th>
+						<th width="12%">End Date</th>
+						<th width="20%">Progress</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -44,7 +47,8 @@
 						<td th:text="${sprint.description}" />
 						<td th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
 						<td th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
-						<td th:text="${#lists.size(sprint.tasks)}" />
+<!-- 						<td th:text="${#lists.size(sprint.tasks)}" />
+ -->						<td><progress class="progress is-large" th:value="${sprint.calculateCompletedPercentage()}"  max="100"/></td>
 					</tr>
 				</tbody>
 			</table>
