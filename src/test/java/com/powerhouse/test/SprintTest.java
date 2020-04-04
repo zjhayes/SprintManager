@@ -3,6 +3,7 @@ package com.powerhouse.test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.powerhouse.beans.Sprint;
+import com.powerhouse.beans.Task;
 
 class SprintTest {
 	private Sprint s;
@@ -37,14 +39,22 @@ class SprintTest {
 	void testSpringShouldHaveListOfTasks() {
 		assertThat(s.getTasks()).isInstanceOf(List.class);
 	}
-	
-	void testSprintShouldHaveStartDate() {
-		s.setStartDate(new Date());
-		assertThat(s.getStartDate()).isNot(null);
+
+	@Test
+	void testSprintShouldReturn0PercentWhenItHasNoTasks() {
+		assertThat(s.calculateCompletedPercentage()).isEqualTo(0);
 	}
-	void testSprintShouldHaveEndDate() {
-		s.setEndDate(new Date());
-		assertThat(s.getStartDate()).isNot(null);
+
+	@Test
+	void testSprintShouldReturn50PercentWhenHalfOfTasksAreComplete() {
+		Task t1 = new Task();
+		Task t2 = new Task();
+		t1.setCompleted(true);
+		List<Task> tasks = new ArrayList<>();
+		tasks.add(t1);
+		tasks.add(t2);
+		s.setTasks(tasks);
+		assertThat(s.calculateCompletedPercentage()).isEqualTo(50);
 	}
 
 }
