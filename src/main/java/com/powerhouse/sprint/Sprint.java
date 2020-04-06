@@ -1,4 +1,4 @@
-package com.powerhouse.beans;
+package com.powerhouse.sprint;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +9,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+
+import com.powerhouse.model.NamedEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

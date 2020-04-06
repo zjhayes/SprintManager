@@ -48,13 +48,11 @@
 				<tbody>
 					<tr th:each="sprint: ${sprints}">
 						<td><a
-							th:href="@{/sprint/{id}(id=${sprint.id})}"
+							th:href="@{/sprints/{id}(id=${sprint.id})}"
 							th:text="${sprint.name}"></a></td>
 						<td th:text="${sprint.description}" />
 						<td th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
 						<td th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
-						<!-- 						<td th:text="${#lists.size(sprint.tasks)}" />
- -->
 						<td><progress
 								class="progress is-large"
 								th:value="${sprint.calculateCompletedPercentage()}"

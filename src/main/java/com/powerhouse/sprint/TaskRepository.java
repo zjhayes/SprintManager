@@ -1,8 +1,6 @@
-package com.powerhouse.repository;
+package com.powerhouse.sprint;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.powerhouse.beans.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
