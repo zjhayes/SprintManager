@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1">
+<title>Sprints</title>
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+<script
+	defer
+	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<section class="hero is-small has-text-centered">
+		<div class="hero-body">
+			<div class="container">
+				<h1
+					th:text="${sprint.name}"
+					class="title"></h1>
+				<p class="subtitle">
+					<a th:href="@{/}">Home</a>
+				</p>
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="column is-10 is-offset-1">
+			<div class="box">
+				<div class="row">
+					<div class="column">
+						<strong>Description:</strong> <span
+							th:text="${sprint.description}" />
+					</div>
+				</div>
+				<div class="column">
+					<strong>Start Date:</strong> <span
+						th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
+				</div>
+				<div class="column">
+					<strong>End Date:</strong> <span
+						th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
+				</div>
+
+				<section class="section box">
+					<label class="label is-size-3 has-text-centered">Tasks</label>
+
+					<table class="has-border table is-striped is-fullwidth ">
+						<thead>
+							<tr>
+								<th width="50%">Task</th>
+								<th>Assigned To</th>
+								<th>Priority</th>
+								<th>Current Step</th>
+								<th width="8%">Points</th>
+								<th width="4%">Complete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<form>
+								<tr th:each="task: ${sprint.tasks}">
+									<td th:text="${task.description}">
+									<td th:text="${task.assignedUser}">
+									<td th:text="${task.priority}">
+									<td th:text="${task.currentStep}">
+									<td th:text="${task.storyPoints}">
+									<td class="has-text-centered"><i th:if="${task.completed}" class="fa fa-check"/></td>
+								</tr>
+							</form>
+						</tbody>
+					</table>
+				</section>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

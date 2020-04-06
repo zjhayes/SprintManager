@@ -6,9 +6,9 @@
 	name="viewport"
 	content="width=device-width, initial-scale=1">
 <title>Sprints</title>
-<link 
-	rel="stylesheet" 
-	type="text/css" 
+<link
+	rel="stylesheet"
+	type="text/css"
 	href="css/style.css">
 <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
 <script src="js/progressbar.js"></script>
@@ -48,18 +48,22 @@
 				<tbody>
 					<tr th:each="sprint: ${sprints}">
 						<td><a
-							href="#"
+							th:href="@{/sprint/{id}(id=${sprint.id})}"
 							th:text="${sprint.name}"></a></td>
 						<td th:text="${sprint.description}" />
 						<td th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
 						<td th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
-<!-- 						<td th:text="${#lists.size(sprint.tasks)}" />
- -->						<td><progress class="progress is-large" th:value="${sprint.calculateCompletedPercentage()}"  max="100"/></td>
+						<!-- 						<td th:text="${#lists.size(sprint.tasks)}" />
+ -->
+						<td><progress
+								class="progress is-large"
+								th:value="${sprint.calculateCompletedPercentage()}"
+								max="100" /></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</section>
-	
+
 </body>
 </html>
