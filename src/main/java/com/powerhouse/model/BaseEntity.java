@@ -1,4 +1,4 @@
-package com.powerhouse.beans;
+package com.powerhouse.model;
 
 import java.io.Serializable;
 

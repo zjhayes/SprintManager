@@ -1,4 +1,4 @@
-package com.powerhouse.controller;
+package com.powerhouse.sprint;
 
 import java.util.List;
 
@@ -8,26 +8,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.powerhouse.beans.Sprint;
-import com.powerhouse.repository.SprintRepository;
-
 @Controller
-public class WebController {
+public class SprintController {
 
 	@Autowired
 	SprintRepository sprintRepo;
 
-	@GetMapping("/")
-	public String viewSprints(Model model) {
+	@GetMapping({"/sprints", "/"})
+	public String viewAllSprints(Model model) {
 		List<Sprint> allSprints = sprintRepo.findAll();
 		model.addAttribute("sprints", allSprints);
-		return "sprints";
+		return "sprint/sprints";
 	}
 
-	@GetMapping("/sprint/{sprintID}")
+	@GetMapping("/sprints/{sprintID}")
 	public String viewSprintDetails(@PathVariable("sprintID") long sprintID, Model model) {
 		Sprint s = sprintRepo.getOne(sprintID);
 		model.addAttribute("sprint", s);
-		return "sprintDetail";
+		return "sprint/sprintDetail";
 	}
 }

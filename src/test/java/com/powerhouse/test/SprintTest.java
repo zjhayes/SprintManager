@@ -8,8 +8,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.powerhouse.beans.Sprint;
-import com.powerhouse.beans.Task;
+
+import com.powerhouse.sprint.Sprint;
+import com.powerhouse.sprint.Task;
 
 class SprintTest {
 	private Sprint s;
