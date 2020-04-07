@@ -18,13 +18,22 @@ public class SprintController {
 	public String viewAllSprints(Model model) {
 		List<Sprint> allSprints = sprintRepo.findAll();
 		model.addAttribute("sprints", allSprints);
-		return "sprint/sprints";
+		return "sprints/sprints";
 	}
 
 	@GetMapping("/sprints/{sprintID}")
 	public String viewSprintDetails(@PathVariable("sprintID") long sprintID, Model model) {
 		Sprint s = sprintRepo.getOne(sprintID);
 		model.addAttribute("sprint", s);
-		return "sprint/sprintDetail";
+		return "sprints/sprintDetail";
 	}
+	
+	@GetMapping("/sprints/{sprintID}/addTask")
+	public String initTaskForm(@PathVariable("sprintID") long sprintID, Model model) {
+		Task t = new Task();
+		t.setSprint(sprintRepo.getOne(sprintID));
+		model.addAttribute("task", t);
+		return "sprints/taskForm";
+	}	
+
 }
