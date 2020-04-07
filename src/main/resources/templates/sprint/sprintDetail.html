@@ -45,7 +45,10 @@
 				</div>
 
 				<section class="section box">
-					<label class="label is-size-3 has-text-centered">Tasks</label>
+					<div class="row has-text-centered">
+						<span class="is-size-3 has-text-centered">Tasks </span><small><a
+							th:href="@{/sprints/{sprintID}/addTask(sprintID=${sprint.id})}"> Add Task</a></small>
+					</div>
 
 					<table class="has-border table is-striped is-fullwidth ">
 						<thead>
@@ -66,7 +69,9 @@
 									<td th:text="${task.priority}">
 									<td th:text="${task.currentStep}">
 									<td th:text="${task.storyPoints}">
-									<td class="has-text-centered"><i th:if="${task.completed}" class="fa fa-check"/></td>
+									<td class="has-text-centered"><i
+										th:if="${task.completed}"
+										class="fa fa-check" /></td>
 								</tr>
 							</form>
 						</tbody>
