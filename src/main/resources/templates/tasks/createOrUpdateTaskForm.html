@@ -27,9 +27,15 @@
 		</div>
 	</section>
 	<div class="column is-10 is-offset-1">
-
 		<section class="box">
-			<form class="form-horizontal">
+			<form
+				class="form-horizontal"
+				method="post"
+				th:object="${task}">
+				<input
+					type="hidden"
+					th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
 				<fieldset>
 
 					<!-- Form Name -->
@@ -39,10 +45,11 @@
 					<div class="field">
 						<label
 							class="label"
-							for="subject">Subject</label>
+							for="subject">Task</label>
 						<div class="control">
 							<input
-								id="subject"
+								id="description"
+								th:field="*{taskDescription}"
 								name="subject"
 								type="text"
 								class="input ">
@@ -50,15 +57,17 @@
 						</div>
 					</div>
 
+
 					<!-- Text input-->
 					<div class="field">
 						<label
 							class="label"
-							for="description">Description</label>
+							for="assigned-to">Assigned To</label>
 						<div class="control">
 							<input
-								id="description"
-								name="description"
+								id="assigned-to"
+								th:field="*{assignedUser}"
+								name="assigned-to"
 								type="text"
 								class="input ">
 
@@ -75,11 +84,20 @@
 								<select
 									id="priority"
 									name="priority"
+									th:field="*{priority}"
 									class="">
-									<option>High</option>
-									<option>Medium</option>
-									<option>Low</option>
-									<option>Blocker</option>
+									<option
+										th:value="High"
+										th:text="High">High</option>
+									<option
+										th:value="Medium"
+										th:text="Medium">Medium</option>
+									<option
+										th:value="Low"
+										th:text="Low">Low</option>
+									<option
+										th:value="Blocker"
+										th:text="Blocker">Blocker</option>
 								</select>
 							</div>
 						</div>
@@ -95,29 +113,22 @@
 								<select
 									id="current-step"
 									name="current-step"
+									th:field="*{currentStep}"
 									class="">
-									<option>To Do</option>
-									<option>Doing</option>
-									<option>Done</option>
+									<option
+										th:value="Todo"
+										th:text="Todo">Todo</option>
+									<option
+										th:value="Doing"
+										th:text="Doing">Doing</option>
+									<option
+										th:value="Done"
+										th:text="Done">Done</option>
 								</select>
 							</div>
 						</div>
 					</div>
 
-					<!-- Text input-->
-					<div class="field">
-						<label
-							class="label"
-							for="assigned-to">Assigned To</label>
-						<div class="control">
-							<input
-								id="assigned-to"
-								name="assigned-to"
-								type="text"
-								class="input ">
-
-						</div>
-					</div>
 
 					<!-- Multiple Checkboxes -->
 					<div class="field">
@@ -129,6 +140,7 @@
 								class="checkbox"
 								for="completed-0"> <input
 								type="checkbox"
+								th:field="*{completed}"
 								name="completed"
 								id="completed-0"
 								value="Completed"> Completed

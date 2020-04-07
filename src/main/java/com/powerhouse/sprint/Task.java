@@ -19,8 +19,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class Task extends BaseEntity {
 
-	private String subject;
-	private String description;
+	private String taskDescription;
 	private String assignedUser;
 	private String priority;
 
@@ -31,6 +30,6 @@ public class Task extends BaseEntity {
 	// implemented
 	private String currentStep;
 	private int storyPoints;
-	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH }, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Sprint sprint;
 }

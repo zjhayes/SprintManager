@@ -19,12 +19,12 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class Sprint extends NamedEntity {
 	private String description;
 	private Date startDate;
 	private Date endDate;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = { CascadeType.MERGE, CascadeType.REMOVE })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = CascadeType.ALL)
 	private List<Task> tasks;
 
 	public Sprint() {
@@ -41,6 +41,13 @@ public class Sprint extends NamedEntity {
 		long percentage = Math.round(completedTasks.size() / (double) tasks.size() * 100);
 		System.out.println(percentage);
 		return percentage;
+	}
+
+	public void addTask(Task task) {
+		if (task.isNew()) {
+			this.tasks.add(task);
+		}
+		task.setSprint(this);
 	}
 
 }
