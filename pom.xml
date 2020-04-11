@@ -8,7 +8,7 @@
 		<version>2.2.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.powerhouse</groupId>
+	<groupId>com.powerhouse.sprints</groupId>
 	<artifactId>SprintManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SprintManager</name>

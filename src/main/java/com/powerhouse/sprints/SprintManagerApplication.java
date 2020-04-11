@@ -1,4 +1,4 @@
-package com.powerhouse;
+package com.powerhouse.sprints;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
