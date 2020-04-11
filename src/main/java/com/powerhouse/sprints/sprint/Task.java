@@ -1,11 +1,11 @@
-package com.powerhouse.sprint;
+package com.powerhouse.sprints.sprint;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
-import com.powerhouse.model.BaseEntity;
+import com.powerhouse.sprints.model.BaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

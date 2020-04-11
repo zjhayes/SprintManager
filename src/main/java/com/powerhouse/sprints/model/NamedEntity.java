@@ -1,4 +1,4 @@
-package com.powerhouse.model;
+package com.powerhouse.sprints.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

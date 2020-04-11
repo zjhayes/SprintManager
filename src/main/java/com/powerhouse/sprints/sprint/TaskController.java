@@ -1,4 +1,4 @@
-package com.powerhouse.sprint;
+package com.powerhouse.sprints.sprint;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
