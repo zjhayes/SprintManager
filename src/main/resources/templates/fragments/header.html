@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<nav
+		th:fragment="header"
+		class="navbar is-dark "
+		role="navigation"
+		aria-label="main navigation">
+		<div class="navbar-brand">
+			<a
+				class="navbar-item"
+				href="/"> <span class="title content has-text-white">Sprint
+					Manager</span>
+			</a>
+		</div>
+		<div
+			sec:authorize="isAuthenticated()"
+			class="navbar-end">
+			<a
+				href="#"
+				class="button has-text-dark navbar-item"
+				onclick="document.getElementById('logout-form').submit();">
+				Logout </a>
+			<form
+				id="logout-form"
+				th:action="@{/logout}"
+				method="post">
+				<input
+					type="hidden"
+					name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+			</form>
+
+		</div>
+
+	</nav>
+
+</body>
+</html>
