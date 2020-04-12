@@ -20,6 +20,8 @@
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
+	<div th:insert="fragments/header :: header"></div>
+
 	<section class="hero is-small has-text-centered">
 		<div class="hero-body">
 			<div class="container">
@@ -27,22 +29,6 @@
 				<p class="subtitle">
 					<a href="#">Add Sprint</a>
 				</p>
-				<div sec:authorize="!isFullyAuthenticated()">
-					<a
-						href="#"
-						onclick="document.getElementById('logout-form').submit();">
-						Logout </a>
-					<form
-						id="logout-form"
-						th:action="@{/logout}"
-						method="post">
-						<input
-							type="hidden"
-							name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-					</form>
-
-				</div>
 			</div>
 		</div>
 	</section>

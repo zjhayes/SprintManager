@@ -21,25 +21,7 @@
     ></script>
   </head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <span class="title content">Sprint Manager</span>
-        </a>
-
-        <a
-          role="button"
-          class="navbar-burger burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-    </nav>
+  	<div th:insert="fragments/header :: header"></div>
     <section>
       <div style="" class="column has-text-centered">
         <h1 class="title">Register</h1>
