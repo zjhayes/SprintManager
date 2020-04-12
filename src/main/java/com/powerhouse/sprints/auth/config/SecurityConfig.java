@@ -12,7 +12,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// @formatter:off
-
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+		.authorizeRequests(authorize -> authorize
+			.antMatchers("/css/**", "/").permitAll()
+			.antMatchers("/sprints/**").hasRole("ROLES_USER")
+		)
+		.formLogin(formLogin -> formLogin
+			.loginPage("/login")
+			.failureUrl("/login-error")
+			.defaultSuccessUrl("/sprints")
+		).logout(logout -> logout
+				.logoutUrl("/logout")
+		);
+	}
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
