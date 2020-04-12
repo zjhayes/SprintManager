@@ -14,7 +14,7 @@ public class SprintController {
 	@Autowired
 	SprintRepository sprintRepo;
 
-	@GetMapping({"/sprints", "/"})
+	@GetMapping({"/sprints"})
 	public String viewAllSprints(Model model) {
 		List<Sprint> allSprints = sprintRepo.findAll();
 		model.addAttribute("sprints", allSprints);
