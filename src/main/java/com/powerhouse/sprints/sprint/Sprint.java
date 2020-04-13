@@ -8,9 +8,11 @@ import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.powerhouse.sprints.model.NamedEntity;
+import com.powerhouse.sprints.project.Project;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +28,8 @@ public class Sprint extends NamedEntity {
 	private Date endDate;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = CascadeType.ALL)
 	private List<Task> tasks;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Project project;
 
 	public Sprint() {
 		setName("");
