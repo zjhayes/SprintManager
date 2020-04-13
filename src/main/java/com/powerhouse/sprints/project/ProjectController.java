@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.powerhouse.sprints.sprint.Sprint;
+
 @Controller
 public class ProjectController
 {
@@ -25,16 +27,14 @@ public class ProjectController
 	}
 	
 	@GetMapping("/addProject")
-	public String addProject(Model model)
-	{
+	public String addProject(Model model) {
 		Project p = new Project();
 		model.addAttribute("newProject", p);
 		return "projects/project-settings";
 	}
 	
 	@PostMapping("/addProject")
-	public String addProject(@ModelAttribute Project p, Model model)
-	{
+	public String addProject(@ModelAttribute Project p, Model model) {
 		p.setCreatedDate(LocalDate.now());
 		projectRepo.save(p);
 		return viewAllProjects(model);
@@ -45,5 +45,20 @@ public class ProjectController
 		Project p = projectRepo.getOne(projectID);
 		model.addAttribute("project", p);
 		return "projects/project-details";
+	}
+	
+	@GetMapping("/projects/{projectID}/addSprint")
+	public String addSprintToProject(@PathVariable("projectID") long projectID,Model model) {
+		
+		Sprint s = new Sprint();
+		s.setProject(projectRepo.getOne(projectID));
+		model.addAttribute("newSprint", s);
+		return "sprints/sprintSettings";
+	}
+	
+	@GetMapping("/test")
+	public String test(Model model)
+	{
+		return viewAllProjects(model);
 	}
 }

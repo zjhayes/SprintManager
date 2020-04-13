@@ -23,14 +23,16 @@
 					th:text="${project.name}"
 					class="title"></h1>
 				<p class="subtitle">
-					<a href="#">Add Sprint</a>
+					<a href="#">Project Settings</a>
 				</p>
 			</div>
 		</div>
 	</section>
-	
 	<section class="section">
 		<div class="column is-10 is-offset-1">
+			<p class="subtitle">
+				<a th:href="@{/projects/{id}/addSprint(id=${project.id})}">Add Sprint</a>
+			</p>
 			<table class="table is-bordered is-fullwidth is-striped is-hoverable">
 				<thead>
 					<tr>
