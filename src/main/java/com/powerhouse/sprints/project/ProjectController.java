@@ -30,7 +30,7 @@ public class ProjectController
 	public String addProject(Model model) {
 		Project p = new Project();
 		model.addAttribute("newProject", p);
-		return "projects/project-settings";
+		return "projects/projectSettings";
 	}
 	
 	@PostMapping("/addProject")
@@ -44,7 +44,7 @@ public class ProjectController
 	public String viewProjectDetails(@PathVariable("projectID") long projectID, Model model) {
 		Project p = projectRepo.getOne(projectID);
 		model.addAttribute("project", p);
-		return "projects/project-details";
+		return "projects/projectBoard";
 	}
 	
 	@GetMapping("/projects/{projectID}/addSprint")
@@ -54,11 +54,5 @@ public class ProjectController
 		s.setProject(projectRepo.getOne(projectID));
 		model.addAttribute("newSprint", s);
 		return "sprints/sprintSettings";
-	}
-	
-	@GetMapping("/test")
-	public String test(Model model)
-	{
-		return viewAllProjects(model);
 	}
 }
