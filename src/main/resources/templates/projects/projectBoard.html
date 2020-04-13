@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1">
+<title>Project Board</title>
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+<script
+	defer
+	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<div th:insert="fragments/header :: header"></div>
+
+	<section class="hero is-small has-text-centered">
+		<div class="hero-body">
+			<div class="container">
+				<h1
+					th:text="${project.name}"
+					class="title"></h1>
+				<p class="subtitle">
+					<a href="#">Project Settings</a>
+				</p>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<div class="column is-10 is-offset-1">
+			<p class="subtitle">
+				<a th:href="@{/projects/{id}/addSprint(id=${project.id})}">Add Sprint</a>
+			</p>
+			<table class="table is-bordered is-fullwidth is-striped is-hoverable">
+				<thead>
+					<tr>
+						<th>Sprint Name</th>
+						<th>Sprint Description</th>
+						<th width="12%">Start Date</th>
+						<th width="12%">End Date</th>
+						<th width="20%">Progress</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="sprint: ${project.sprints}">
+						<td><a
+							th:href="@{/sprints/{id}(id=${sprint.id})}"
+							th:text="${sprint.name}"></a></td>
+						<td th:text="${sprint.description}" />
+						<td th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
+						<td th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
+						<td><progress
+								class="progress is-large"
+								th:value="${sprint.calculateCompletedPercentage()}"
+								max="100" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</body>
+</html>
