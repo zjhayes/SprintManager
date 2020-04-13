@@ -5,7 +5,7 @@
 <meta
 	name="viewport"
 	content="width=device-width, initial-scale=1">
-<title>Projects</title>
+<title>Project Settings</title>
 <link
 	rel="stylesheet"
 	type="text/css"
@@ -25,30 +25,29 @@
 	<section class="hero is-small has-text-centered">
 		<div class="hero-body">
 			<div class="container">
-				<h1 class="title">Projects</h1>
-				<p class="subtitle">
-					<a href="/addProject">Add Project</a>
-				</p>
+				<h1 class="title">Project Settings</h1>
 			</div>
 		</div>
 	</section>
 
 	<section class="section">
 		<div class="column is-10 is-offset-1">
-			<table class="table is-bordered is-fullwidth is-striped is-hoverable">
-				<thead>
-					<tr>
-						<th>Project Name</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="project: ${projects}">
-						<td><a
-							th:href="@{/projects/{id}(id=${project.id})}"
-							th:text="${project.name}"></a></td>
-					</tr>
-				</tbody>
-			</table>
+			<form class="form-horizontal" th:object="${newProject}" th:action="@{/addProject}" method="POST">
+				<fieldset>
+					<div class="field">
+					  <label class="label" for="name">Project Name</label>
+					  <div class="control">
+					  	<input id="name" name="name" type="text" class="input">
+					  </div>
+					</div>
+					<div class="field">
+					  <label class="label" for="submt"></label>
+					  <div class="control">
+					    <button id="submt" name="submt" class="button is-primary">Save</button>
+					  </div>
+					</div>
+				</fieldset>
+			</form>
 		</div>
 	</section>
 

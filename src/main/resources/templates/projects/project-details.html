@@ -5,13 +5,7 @@
 <meta
 	name="viewport"
 	content="width=device-width, initial-scale=1">
-<title>Projects</title>
-<link
-	rel="stylesheet"
-	type="text/css"
-	href="css/style.css">
-<script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
-<script src="js/progressbar.js"></script>
+<title>Project Details</title>
 <link
 	rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
@@ -25,32 +19,45 @@
 	<section class="hero is-small has-text-centered">
 		<div class="hero-body">
 			<div class="container">
-				<h1 class="title">Projects</h1>
+				<h1
+					th:text="${project.name}"
+					class="title"></h1>
 				<p class="subtitle">
-					<a href="/addProject">Add Project</a>
+					<a href="#">Add Sprint</a>
 				</p>
 			</div>
 		</div>
 	</section>
-
+	
 	<section class="section">
 		<div class="column is-10 is-offset-1">
 			<table class="table is-bordered is-fullwidth is-striped is-hoverable">
 				<thead>
 					<tr>
-						<th>Project Name</th>
+						<th>Sprint Name</th>
+						<th>Sprint Description</th>
+						<th width="12%">Start Date</th>
+						<th width="12%">End Date</th>
+						<th width="20%">Progress</th>
+
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="project: ${projects}">
+					<tr th:each="sprint: ${project.sprints}">
 						<td><a
-							th:href="@{/projects/{id}(id=${project.id})}"
-							th:text="${project.name}"></a></td>
+							th:href="@{/sprints/{id}(id=${sprint.id})}"
+							th:text="${sprint.name}"></a></td>
+						<td th:text="${sprint.description}" />
+						<td th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
+						<td th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
+						<td><progress
+								class="progress is-large"
+								th:value="${sprint.calculateCompletedPercentage()}"
+								max="100" /></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</section>
-
 </body>
 </html>

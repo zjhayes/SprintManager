@@ -34,6 +34,5 @@ public class SprintController {
 		t.setSprint(sprintRepo.getOne(sprintID));
 		model.addAttribute("task", t);
 		return "sprints/taskForm";
-	}	
-
+	}
 }
