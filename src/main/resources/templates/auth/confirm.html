@@ -24,91 +24,60 @@
 </head>
 <body>
 	<div th:insert="fragments/header :: header"></div>
-	<div
-		th:if="${confirmationMessage}"
-		class="alert alert-success"
-		role="alert"
-		th:text=${confirmationMessage}></div>
-
-	<div
-		th:if="${alreadyRegisteredMessage}"
-		class="alert alert-danger"
-		role="alert"
-		th:text="${alreadyRegisteredMessage}"></div>
 
 	<section>
 		<div
 			style=""
 			class="column has-text-centered">
-			<h1 class="title">Register</h1>
+			<h1 class="title">Complete Your Registration</h1>
 		</div>
 		<div class="column is-4 is-offset-4">
+			<div
+				th:if="${successMessage}"
+				class="notification is-success"
+				th:text=${successMessage}>
+				<button class="delete"></button>
+			</div>
+
+			<div
+				th:if="${errorMessage}"
+				class="notification is-danger"
+				role="alert"
+				th:text=${errorMessage}>
+				<button class="delete"></button>
+
+			</div>
+
+			<div
+				th:if="${invalidToken}"
+				class="notification is-danger"
+				role="alert"
+				th:text=${invalidToken}>
+				<button class="delete"></button>
+			</div>
+
 			<form
 				class="form-horizontal"
+				th:if="!${invalidToken} and !${successMessage}"
 				autocomplete="off"
 				action="#"
 				method="post"
-				th:action="@{/register}"
-				th:object="${user}">
-				<div
-					th:if="${confirmationMessage}"
-					class="notification is-success"
-					th:text=${confirmationMessage}>
-					<button class="delete"></button>
-				</div>
-				<div
-					th:if="${alreadyRegisteredMessage}"
-					class="notification is-danger">
-					<button class="delete"></button>
-					That email address is already registered!
-				</div>
-
+				th:action="@{/confirm}"
+				th:object="${passwordForm}">
+				<input
+					type="hidden"
+					name="token"
+					th:value=${confirmationToken}>
 
 				<fieldset>
-					<div class="field">
-						<label class="label">First Name</label>
-						<div class="control">
-							<input
-								th:field="*{firstName}"
-								class="input"
-								type="text"
-								placeholder="Name" />
-						</div>
-					</div>
-					<div class="field">
-						<label class="label">Last Name</label>
-						<div class="control">
-							<input
-								name="lastName"
-								th:field="*{lastName}"
-								class="input"
-								type="text"
-								placeholder="Name" />
-						</div>
-					</div>
-
-					<div class="field">
-						<label class="label">DMACC Email</label>
-						<div class="control has-icons-left has-icons-right">
-							<input
-								class="input"
-								th:field="*{email}"
-								type="email"
-								placeholder="Email" /> <span class="icon is-small is-left">
-								<i class="fas fa-envelope"></i>
-							</span>
-						</div>
-					</div>
-
-					<!-- 					Lets move this to the confirmation page
-
-Password input
 					<div class="field">
 						<label class="label">Password</label>
 						<p class="control has-icons-left">
 							<input
 								class="input"
 								type="password"
+								name="password"
+								id="password"
 								placeholder="Password" /> <span class="icon is-small is-left">
 								<i class="fas fa-lock"></i>
 							</span>
@@ -119,21 +88,19 @@ Password input
 						<p class="control has-icons-left">
 							<input
 								class="input"
+								name="password_confirm"
 								type="password"
+								id="password_confirm"
 								placeholder="Password" /> <span class="icon is-small is-left">
 								<i class="fas fa-lock"></i>
 							</span>
 						</p>
 					</div>
- -->
 					<div class="field">
 						<p class="control">
-							<button class="button is-success">Register</button>
+							<button class="button is-success">Confirm</button>
 						</p>
 					</div>
-					<p>
-						Already have an account? <a>Login</a>
-					</p>
 				</fieldset>
 			</form>
 		</div>

@@ -3,6 +3,7 @@ package com.powerhouse.sprints.auth.user;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -14,6 +15,7 @@ import com.powerhouse.sprints.model.BaseEntity;
 import lombok.Data;
 
 @Data
+@Entity
 public class User extends BaseEntity {
 	
 	@Column(name = "email", nullable = false, unique = true)
