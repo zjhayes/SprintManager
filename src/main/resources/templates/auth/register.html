@@ -1,82 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sprints</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
-    ></script>
+<head>
+<meta charset="utf-8" />
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1" />
+<title>Sprints</title>
+<link
+	rel="stylesheet"
+	type="text/css"
+	href="css/style.css" />
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script
+	defer
+	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
-    />
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
-    ></script>
-  </head>
-  <body>
-  	<div th:insert="fragments/header :: header"></div>
-    <section>
-      <div style="" class="column has-text-centered">
-        <h1 class="title">Register</h1>
-      </div>
-      <div class="column is-4 is-offset-4">
-        <form class="form-horizontal">
-          <fieldset>
-            <div class="field">
-              <label class="label">Name</label>
-              <div class="control">
-                <input class="input" type="text" placeholder="Name" />
-              </div>
-            </div>
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
+<script
+	defer
+	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<div th:insert="fragments/header :: header"></div>
+	<div
+		th:if="${confirmationMessage}"
+		class="alert alert-success"
+		role="alert"
+		th:text=${confirmationMessage}></div>
 
-            <div class="field">
-              <label class="label">DMACC Email</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input" type="email" placeholder="Email" />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
-              </div>
-            </div>
+	<div
+		th:if="${alreadyRegisteredMessage}"
+		class="alert alert-danger"
+		role="alert"
+		th:text="${alreadyRegisteredMessage}"></div>
 
-            <!-- Password input-->
-            <div class="field">
-              <label class="label">Password</label>
-              <p class="control has-icons-left">
-                <input class="input" type="password" placeholder="Password" />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
-            <div class="field">
-              <label class="label">Confirm Password</label>
-              <p class="control has-icons-left">
-                <input class="input" type="password" placeholder="Password" />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
+	<section>
+		<div
+			style=""
+			class="column has-text-centered">
+			<h1 class="title">Register</h1>
+		</div>
+		<div class="column is-4 is-offset-4">
+			<form
+				class="form-horizontal"
+				autocomplete="off"
+				action="#"
+				method="post"
+				th:action="@{/register}"
+				th:object="${user}">
+				<div
+					th:if="${confirmationMessage}"
+					class="notification is-success"
+					th:text=${confirmationMessage}>
+					<button class="delete"></button>
+				</div>
+				<div
+					th:if="${alreadyRegisteredMessage}"
+					class="notification is-danger">
+					<button class="delete"></button>
+					That email address is already registered!
+				</div>
 
-            <div class="field">
-              <p class="control">
-                <button class="button is-success">
-                  Register
-                </button>
-              </p>
-			</div>
-			<p>Already have an account? <a>Login</a></p>
-          </fieldset>
-        </form>
-      </div>
-    </section>
-  </body>
+
+				<fieldset>
+					<div class="field">
+						<label class="label">First Name</label>
+						<div class="control">
+							<input
+								th:field="*{firstName}"
+								class="input"
+								type="text"
+								placeholder="Name" />
+						</div>
+					</div>
+					<div class="field">
+						<label class="label">Last Name</label>
+						<div class="control">
+							<input
+								name="lastName"
+								th:field="*{lastName}"
+								class="input"
+								type="text"
+								placeholder="Name" />
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">DMACC Email</label>
+						<div class="control has-icons-left has-icons-right">
+							<input
+								class="input"
+								th:field="*{email}"
+								type="email"
+								placeholder="Email" /> <span class="icon is-small is-left">
+								<i class="fas fa-envelope"></i>
+							</span>
+						</div>
+					</div>
+
+					<!-- 					Lets move this to the confirmation page
+
+Password input
+					<div class="field">
+						<label class="label">Password</label>
+						<p class="control has-icons-left">
+							<input
+								class="input"
+								type="password"
+								placeholder="Password" /> <span class="icon is-small is-left">
+								<i class="fas fa-lock"></i>
+							</span>
+						</p>
+					</div>
+					<div class="field">
+						<label class="label">Confirm Password</label>
+						<p class="control has-icons-left">
+							<input
+								class="input"
+								type="password"
+								placeholder="Password" /> <span class="icon is-small is-left">
+								<i class="fas fa-lock"></i>
+							</span>
+						</p>
+					</div>
+ -->
+					<div class="field">
+						<p class="control">
+							<button class="button is-success">Register</button>
+						</p>
+					</div>
+					<p>
+						Already have an account? <a>Login</a>
+					</p>
+				</fieldset>
+			</form>
+		</div>
+	</section>
+	<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+		    $notification = $delete.parentNode;
+
+		    $delete.addEventListener('click', () => {
+		      $notification.parentNode.removeChild($notification);
+		    });
+		  });
+		});
+	</script>
+</body>
 </html>
