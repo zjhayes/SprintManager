@@ -9,8 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 
 import com.powerhouse.sprints.model.BaseEntity;
-import com.powerhouse.sprints.model.NamedEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
