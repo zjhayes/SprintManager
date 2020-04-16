@@ -16,7 +16,7 @@ public class SprintController {
 	@Autowired
 	SprintRepository sprintRepo;
 
-	@GetMapping({"/sprints"})
+	@GetMapping({ "/sprints" })
 	public String viewAllSprints(Model model) {
 		List<Sprint> allSprints = sprintRepo.findAll();
 		model.addAttribute("sprints", allSprints);
@@ -29,7 +29,7 @@ public class SprintController {
 		model.addAttribute("sprint", s);
 		return "sprints/sprintDetail";
 	}
-	
+
 	@GetMapping("/sprints/{sprintID}/addTask")
 	public String initTaskForm(@PathVariable("sprintID") long sprintID, Model model) {
 		Task t = new Task();
@@ -37,7 +37,7 @@ public class SprintController {
 		model.addAttribute("task", t);
 		return "sprints/taskForm";
 	}
-	
+
 	@PostMapping("/projects/addSprint")
 	public String addSprintToProject(@ModelAttribute Sprint s, Model model) {
 		sprintRepo.save(s);

@@ -1,8 +1,12 @@
-package com.powerhouse.sprints.auth.user;
+package com.powerhouse.sprints.auth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.powerhouse.sprints.auth.user.RoleRepository;
+import com.powerhouse.sprints.auth.user.User;
+import com.powerhouse.sprints.auth.user.UserRepository;
 
 @Service("userService")
 public class UserService {

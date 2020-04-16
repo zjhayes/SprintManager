@@ -21,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
+import com.powerhouse.sprints.auth.service.EmailService;
+import com.powerhouse.sprints.auth.service.UserService;
 
 @Controller
 public class UserController {
