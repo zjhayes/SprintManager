@@ -74,11 +74,9 @@
 									<td class="has-text-centered"><i
 										th:if="${task.completed}"
 										class="fa fa-check" /></td>
-									<td><a th:href="@{{sprintID}/tasks/{taskId}/edit (sprintID=${sprint.id}, taskId=${task.id})}">Edit</a></td>
-										
-<!-- Will delete the Spring! 
+<td><a th:href="@{{sprintID}/tasks/{taskId}/edit (sprintID=${sprint.id}, taskId=${task.id})}">Edit</a></td>
 <td><a th:href="@{{sprintID}/tasks/{taskId}/delete (sprintID=${sprint.id}, taskId=${task.id})}">Delete</a></td> 
--->				
+			
 									
 								</tr>
 							</form>
