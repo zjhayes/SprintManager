@@ -73,7 +73,8 @@ public class TaskController {
 	@GetMapping("/tasks/{taskId}/delete")
 	public String deleteTask(@PathVariable("taskId") long taskId, Sprint sprint, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
-		this.taskRepo.delete(task);
+		sprint.getTasks().remove(task);
+		sprintRepo.save(sprint);
 		return "redirect:/sprints/{sprintID}";
 	}
 }
