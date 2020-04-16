@@ -47,4 +47,33 @@ public class TaskController {
 		this.taskRepo.save(task);
 		return "redirect:/sprints/{sprintID}";
 	}
+	
+	@GetMapping("/tasks/{taskId}/edit")
+	public String initUpdateOwnerForm(@PathVariable("taskId") long taskId, Model model) {
+		Task task = this.taskRepo.findById(taskId).orElse(null);
+		model.addAttribute(task);
+		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
+	}
+
+	@PostMapping("/tasks/{taskId}/edit")
+	public String processUpdateTaskForm(Task task, Model model,
+			@PathVariable("taskId") long taskId) {
+			task.setId(taskId);
+			this.taskRepo.save(task);
+			return "redirect:/sprints/{sprintID}";
+	}
+	
+	@PostMapping("/tasks/{taskId}/update")
+	public String reviseTask(Task task, Model model) {
+		this.taskRepo.save(task);
+		model.addAttribute("sprint.tasks", taskRepo.findAll());
+		return "redirect:/sprints/{sprintID}";
+	}
+	
+	@GetMapping("/tasks/{taskId}/delete")
+	public String deleteTask(@PathVariable("taskId") long taskId, Model model) {
+		Task task = taskRepo.findById(taskId).orElse(null);
+		this.taskRepo.delete(task);
+		return "redirect:/sprints/{sprintID}";
+	}
 }
