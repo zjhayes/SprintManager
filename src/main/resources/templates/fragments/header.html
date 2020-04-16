@@ -18,21 +18,26 @@
 		<div
 			sec:authorize="isAuthenticated()"
 			class="navbar-end">
-			<a
-				href="#"
-				class="button has-text-dark navbar-item"
-				onclick="document.getElementById('logout-form').submit();">
-				Logout </a>
-			<form
-				id="logout-form"
-				th:action="@{/logout}"
-				method="post">
-				<input
-					type="hidden"
-					name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
-			</form>
-
+			<div class="navbar-item">
+				Logged in as:
+				<div sec:authentication="name"></div>
+			</div>
+			<div class="navbar-item">
+				<a
+					href="#"
+					class="button navbar-item"
+					onclick="document.getElementById('logout-form').submit();">
+					Logout </a>
+				<form
+					id="logout-form"
+					th:action="@{/logout}"
+					method="post">
+					<input
+						type="hidden"
+						name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
+			</div>
 		</div>
 
 	</nav>
