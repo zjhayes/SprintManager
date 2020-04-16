@@ -23,14 +23,14 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Project extends NamedEntity {
 
-	//TODO Add Permitted Users
+	// TODO Add Permitted Users
 	@CreationTimestamp
 	private LocalDate createdDate;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Sprint> sprints;
-	
+
 	public Project() {
-		
+
 		super();
 	}
 }

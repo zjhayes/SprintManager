@@ -1,4 +1,4 @@
-package com.powerhouse.sprints.auth.user;
+package com.powerhouse.sprints.auth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Role extends BaseEntity {
 
-    @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
+	@Column(name = "role", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private RoleEnum role;
 
 	@ManyToMany(mappedBy = "roles")
