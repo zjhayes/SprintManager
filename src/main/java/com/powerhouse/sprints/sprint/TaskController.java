@@ -56,10 +56,10 @@ public class TaskController {
 	}
 
 	@PostMapping("/tasks/{taskId}/edit")
-	public String processUpdateTaskForm(Task task, Model model,
+	public String processUpdateTaskForm(Task task, Sprint sprint, Model model,
 			@PathVariable("taskId") long taskId) {
-			task.setId(taskId);
-			this.taskRepo.save(task);
+			sprint.addTask(task);
+			taskRepo.save(task);
 			return "redirect:/sprints/{sprintID}";
 	}
 	

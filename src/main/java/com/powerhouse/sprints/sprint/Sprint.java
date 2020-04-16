@@ -1,7 +1,7 @@
 package com.powerhouse.sprints.sprint;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +25,10 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Sprint extends NamedEntity {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String description;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
