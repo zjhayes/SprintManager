@@ -1,9 +1,12 @@
 package com.powerhouse.sprints.auth.user;
 
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
 
 import com.powerhouse.sprints.model.BaseEntity;
+import com.powerhouse.sprints.project.Project;
 
 import lombok.Data;
 
@@ -43,4 +47,7 @@ public class User extends BaseEntity {
 
 	@ManyToMany
 	private Set<Role> roles;
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy="groupMembers", cascade=CascadeType.ALL)
+	private List<Project> projects;
 }
