@@ -47,7 +47,11 @@ public class User extends BaseEntity {
 
 	@ManyToMany
 	private Set<Role> roles;
-	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy="groupMembers", cascade=CascadeType.ALL)
-	private List<Project> projects;
+
+	@ManyToMany(mappedBy = "projectMembers", cascade = CascadeType.ALL)
+	private Set<Project> projects;
+
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 }

@@ -2,6 +2,7 @@ package com.powerhouse.sprints.project;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -33,8 +34,8 @@ public class Project extends NamedEntity {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Sprint> sprints;
 	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy="projects", cascade=CascadeType.ALL)
-	private List<User> users;
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	private Set<User> projectMembers;
 
 	public Project() {
 		super();
