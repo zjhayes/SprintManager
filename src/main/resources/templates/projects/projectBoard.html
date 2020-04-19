@@ -23,7 +23,7 @@
 					th:text="${project.name}"
 					class="title"></h1>
 				<p class="subtitle">
-					<a href="#">Project Settings</a>
+					<a th:href="@{/projects/edit/{id}(id=${project.id})}">Project Settings</a>
 				</p>
 			</div>
 		</div>

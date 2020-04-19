@@ -53,6 +53,23 @@ public class ProjectController {
 		projectRepo.save(p);
 		return viewAllProjects(model);
 	}
+	
+	@GetMapping("/projects/edit/{id}")
+	public String showUpdateProject(@PathVariable("id") long id, Model model)
+	{
+		Project p = projectRepo.findById(id).orElse(null);
+		model.addAttribute("newProject", p);
+		model.addAttribute("allUsers", userRepo.findAll());
+		return "projects/projectSettings";
+	}
+	
+	@PostMapping("/projects/update/{id}")
+	public String reviseProject(Project p, Model model)
+	{
+		projectRepo.save(p);
+		
+		return viewAllProjects(model);
+	}
 
 	@GetMapping("/projects/{projectID}")
 	public String viewProjectDetails(@PathVariable("projectID") long projectID, Model model) {
@@ -67,6 +84,6 @@ public class ProjectController {
 		Sprint s = new Sprint();
 		s.setProject(projectRepo.getOne(projectID));
 		model.addAttribute("newSprint", s);
-		return "sprints/sprintSettings";
+		return "projects/projectSettings";
 	}
 }
