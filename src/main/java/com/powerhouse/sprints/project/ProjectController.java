@@ -21,8 +21,6 @@ import com.powerhouse.sprints.auth.user.User;
 import com.powerhouse.sprints.auth.user.UserRepository;
 import com.powerhouse.sprints.sprint.Sprint;
 
-import dmacc.beans.Contact;
-
 @Controller
 public class ProjectController {
 	@Autowired
