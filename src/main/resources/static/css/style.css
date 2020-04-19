@@ -18,3 +18,13 @@ progress[value]::-webkit-progress-value {
 .bar-error[value]::-webkit-progress-value {
 	background-color: #E56A66;
 }
+
+.delete_button a
+{
+	color: red;
+}
+
+.delete_button {
+	margin: 0 auto;
+  	text-align: right;
+}

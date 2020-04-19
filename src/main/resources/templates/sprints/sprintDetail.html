@@ -6,6 +6,7 @@
 	name="viewport"
 	content="width=device-width, initial-scale=1">
 <title>Sprints</title>
+<script src="js/progressbar.js"></script>
 <link
 	rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
@@ -69,7 +70,7 @@
 							<form>
 								<tr th:each="task: ${sprint.tasks}">
 									<td th:text="${task.taskDescription}">
-									<td th:text="${task.assignedUser}">
+									<td th:text="${task.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
 									<td th:text="${task.priority}">
 									<td th:text="${task.currentStep}">
 									<td th:text="${task.storyPoints}">
