@@ -50,8 +50,9 @@ public class ProjectController {
 	}
 
 	@PostMapping("/projects/update")
-	public String addProject(@ModelAttribute Project p, Model model) {
+	public String addProject(@ModelAttribute Project p, @RequestParam("projectMembers") List<Long> users, Model model) {
 		p.setCreatedDate(LocalDate.now());
+		addMembersToProject(users, p);
 		projectRepo.save(p);
 		return viewAllProjects(model);
 	}
@@ -68,11 +69,7 @@ public class ProjectController {
 	@PostMapping("/projects/update/{id}")
 	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model)
 	{
-		for(Long userID : users) {
-			User member = userRepo.findById(userID).orElse(null);
-			member.addToProject(p);
-			p.addMember(member);
-		}
+		addMembersToProject(users, p);
 		projectRepo.save(p);	
 		return viewAllProjects(model);
 	}
@@ -91,5 +88,13 @@ public class ProjectController {
 		s.setProject(projectRepo.getOne(projectID));
 		model.addAttribute("newSprint", s);
 		return "sprints/sprintSettings";
+	}
+	
+	private void addMembersToProject(List<Long> users, Project p) {
+		for(Long userID : users) {
+			User member = userRepo.findById(userID).orElse(null);
+			member.addToProject(p);
+			p.addMember(member);
+		}
 	}
 }
