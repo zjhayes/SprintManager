@@ -69,7 +69,7 @@
 							<form>
 								<tr th:each="task: ${sprint.tasks}">
 									<td th:text="${task.taskDescription}">
-									<td th:text="${task.assignedUser.getFullName()}">
+									<td th:text="${task.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
 									<td th:text="${task.priority}">
 									<td th:text="${task.currentStep}">
 									<td th:text="${task.storyPoints}">
