@@ -36,9 +36,7 @@
 				<input
 					type="hidden"
 					th:name="${_csrf.parameterName}"
-					th:value="${_csrf.token}" /> 
-					
-					<input
+					th:value="${_csrf.token}" /> <input
 					type="hidden"
 					name="id"
 					th:value="*{id}" />
@@ -71,13 +69,15 @@
 							class="label"
 							for="assigned-to">Assigned To</label>
 						<div class="control">
-							<input
-								id="assigned-to"
-								th:field="*{assignedUser}"
-								name="assigned-to"
-								type="text"
-								class="input"
-								required>
+							<div class="select">
+
+								<select th:field="*{assignedUser}">
+									<option
+										th:each="user : ${sprint.project.projectMembers}"
+										th:value="${user.id}"
+										th:text="${user.getFullName()}">Assigned</option>
+								</select>
+							</div>
 						</div>
 					</div>
 
