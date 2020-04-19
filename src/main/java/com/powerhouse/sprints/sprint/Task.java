@@ -4,7 +4,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+import com.powerhouse.sprints.auth.user.User;
 import com.powerhouse.sprints.model.BaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -25,9 +27,10 @@ public class Task extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String taskDescription;
-	private String assignedUser;
+	@OneToOne
+	private User assignedUser;
 	private String priority;
-
+	
 	// Starting simple
 	private boolean completed;
 
