@@ -47,7 +47,7 @@ public class ProjectController {
 		return "projects/projectSettings";
 	}
 
-	@PostMapping("/addProject")
+	@PostMapping("/projects/update")
 	public String addProject(@ModelAttribute Project p, Model model) {
 		p.setCreatedDate(LocalDate.now());
 		projectRepo.save(p);
@@ -66,8 +66,7 @@ public class ProjectController {
 	@PostMapping("/projects/update/{id}")
 	public String reviseProject(Project p, Model model)
 	{
-		projectRepo.save(p);
-		
+		projectRepo.save(p);	
 		return viewAllProjects(model);
 	}
 
