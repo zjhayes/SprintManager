@@ -28,6 +28,7 @@ public class Project extends NamedEntity {
 	private LocalDate createdDate;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Sprint> sprints;
+	
 
 	public Project() {
 
