@@ -83,6 +83,6 @@ public class ProjectController {
 		Sprint s = new Sprint();
 		s.setProject(projectRepo.getOne(projectID));
 		model.addAttribute("newSprint", s);
-		return "projects/projectSettings";
+		return "sprints/sprintSettings";
 	}
 }
