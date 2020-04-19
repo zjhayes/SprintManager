@@ -21,6 +21,8 @@ import com.powerhouse.sprints.auth.user.User;
 import com.powerhouse.sprints.auth.user.UserRepository;
 import com.powerhouse.sprints.sprint.Sprint;
 
+import dmacc.beans.Contact;
+
 @Controller
 public class ProjectController {
 	@Autowired
@@ -71,6 +73,15 @@ public class ProjectController {
 	{
 		addMembersToProject(users, p);
 		projectRepo.save(p);	
+		return viewAllProjects(model);
+	}
+	
+	@GetMapping("/projects/delete/{id}")
+	public String deleteUser(@PathVariable("id") long id, Model model)
+	{
+		Project p = projectRepo.findById(id).orElse(null);
+		projectRepo.delete(p);
+		
 		return viewAllProjects(model);
 	}
 
