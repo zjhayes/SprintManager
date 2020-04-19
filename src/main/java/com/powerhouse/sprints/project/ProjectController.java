@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.powerhouse.sprints.auth.user.User;
 import com.powerhouse.sprints.auth.user.UserRepository;
 import com.powerhouse.sprints.sprint.Sprint;
 
@@ -64,8 +66,13 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/projects/update/{id}")
-	public String reviseProject(Project p, Model model)
+	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model)
 	{
+		for(Long userID : users) {
+			User member = userRepo.findById(userID).orElse(null);
+			member.addToProject(p);
+			p.addMember(member);
+		}
 		projectRepo.save(p);	
 		return viewAllProjects(model);
 	}

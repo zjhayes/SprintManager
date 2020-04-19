@@ -66,4 +66,8 @@ public class User extends BaseEntity {
 	public String getFullName() {
 		return firstName + " " + lastName;
 	}
+	
+	public void addToProject(Project project) {
+		projects.add(project);
+	}
 }

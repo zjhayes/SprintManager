@@ -28,7 +28,6 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Project extends NamedEntity {
 
-	// TODO Add Permitted Users
 	@CreationTimestamp
 	private LocalDate createdDate;
 
@@ -41,5 +40,9 @@ public class Project extends NamedEntity {
 
 	public Project() {
 		super();
+	}
+	
+	public void addMember(User member) {
+		projectMembers.add(member);
 	}
 }
