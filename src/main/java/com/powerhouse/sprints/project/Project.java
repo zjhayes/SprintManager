@@ -33,15 +33,15 @@ public class Project extends NamedEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Sprint> sprints;
-	
+
 	@ToString.Exclude
-	@ManyToMany(mappedBy="projects")
+	@ManyToMany(mappedBy = "projects")
 	private Set<User> projectMembers = new HashSet<User>();
 
 	public Project() {
 		super();
 	}
-	
+
 	public void addMember(User member) {
 		projectMembers.add(member);
 	}
