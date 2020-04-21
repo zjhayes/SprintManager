@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByConfirmationToken(String confirmationToken);
 
 	Set<User> findByProjectsIn(Set<Project> projects);
+
+	User findOneByEmail(String email);
 }
