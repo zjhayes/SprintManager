@@ -25,4 +25,8 @@ public class Role extends BaseEntity {
 
 	@ManyToMany(mappedBy = "roles")
 	private Set<User> users;
+
+	public Role(RoleEnum role) {
+		this.role = role;
+	}
 }
