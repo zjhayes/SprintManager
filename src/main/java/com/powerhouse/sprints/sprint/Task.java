@@ -30,7 +30,7 @@ public class Task extends BaseEntity {
 	@OneToOne
 	private User assignedUser;
 	private String priority;
-	
+
 	// Starting simple
 	private boolean completed;
 
