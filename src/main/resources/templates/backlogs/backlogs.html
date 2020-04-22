@@ -16,19 +16,22 @@
 	<section class="hero is-small has-text-centered">
 		<div class="hero-body">
 			<div class="container">
-				<h1  class="title">Project Backlog</h1>
+				<h1 class="title">Project Backlog</h1>
 			</div>
 		</div>
 	</section>
 	<section class="section box">
 		<div class="row has-text-centered">
-		<p class="subtitle">
-				<a th:href="@{/projects/{projectID}/tasks/new (projectID=${project.id})}">Add Task to Backlog</a>
+			<p class="subtitle">
+				<!--  
+			<a th:href="@{/projects/{projectID}/tasks/new (projectID=${project.id})}">Add Task to Backlog</a>
+			-->
+
 				<a th:href="@{../backlogs/}">Add Task to Sprint</a>
 			</p>
 			<span class="is-size-3 has-text-centered">Tasks </span>
 		</div>
-	
+
 		<table class="has-border table is-striped is-fullwidth ">
 			<thead>
 				<tr>
@@ -39,13 +42,49 @@
 					<th width="8%">Points</th>
 					<th width="4%">Complete</th>
 					<th><p class="subtitle">
-					<a th:href="@{../backlogs/}">Add to Sprint</a>
-					</p></th>
+							<a th:href="@{../backlogs/}">Add to Sprint</a>
+						</p></th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				
+				<form method="post" th:object="${backlog.task}">
+					<!-- Do I even need "th:object="${backlog.task}"" here? -->
+				<tr th:each="task: ${backlog.tasks}">
+					<td th:text="${backlog.taskDescription}">
+					<td th:text="${backlog.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
+					<td th:text="${backlog.priority}">
+					<td th:text="${backlog.currentStep}">
+					<td th:text="${backlog.storyPoints}">
+					<td class="has-text-centered"><i th:if="${backlog.completed}"
+						class="fa fa-check" /></td>
+
+					<!-- Select Basic -->
+					<div class="field">
+						<label class="label" for="current-sprint">Sprint</label>
+						<div class="control">
+							<div class="select">
+								<select id="sprint-id" name="sprint-id" th:field="*{sprint.id}"
+									class="">
+									<tr th:each="sprint: ${project.sprints}">
+										<option th:value="${project.sprint.id}"
+											th:text="${project.sprint.id}">Sprint #</option>
+									</tr>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<!-- Button -->
+					<div class="field">
+						<label class="label" for="submit"></label>
+						<div class="control">
+							<button id="submit" name="submit" class="button is-default">Move
+								task to sprint</button>
+						</div>
+					</div>
+				</tr>
+				</form>
 			</tbody>
 		</table>
 	</section>

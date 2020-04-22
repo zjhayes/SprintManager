@@ -24,7 +24,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Backlog extends NamedEntity {
 	
-	private static final long serialVersionUID = 1L;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "backlog", cascade = CascadeType.ALL)
 	private List<Task> tasks;

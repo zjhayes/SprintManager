@@ -45,6 +45,7 @@ public class Project extends NamedEntity {
 	
 	public Project() {
 		super();
+		backlog = new Backlog();
 	}
 	
 	public void addMember(User member) {
