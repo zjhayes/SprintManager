@@ -36,8 +36,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
 		if (alreadySetup)
 			return;
-		createRoleIfNotFound(RoleEnum.ROLES_USER);
-		createRoleIfNotFound(RoleEnum.ROLES_ADMIN);
+		createRoleIfNotFound("ROLE_USER");
+		createRoleIfNotFound("ROLE_ADMIN");
 		User admin = createAdminUserIfNotFound();
 		userRepository.save(admin);
 		alreadySetup = true;
@@ -48,7 +48,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 		User admin = userRepository.findOneByEmail("admin@cis175sprints.com");
 		if (admin == null) {
 			admin = new User();
-			Role adminRole = roleRepository.findOneByRole(RoleEnum.ROLES_ADMIN);
+			Role adminRole = roleRepository.findOneByName("ROLE_ADMIN");
 			admin.setFirstName("ADMIN");
 			admin.setLastName("ADMIN");
 			admin.setPassword(passwordEncoder.encode("admin"));
@@ -61,11 +61,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 	}
 
 	@Transactional
-	private Role createRoleIfNotFound(RoleEnum roleEnum) {
+	private Role createRoleIfNotFound(String name) {
 
-		Role role = roleRepository.findOneByRole(roleEnum);
+		Role role = roleRepository.findOneByName(name);
 		if (role == null) {
-			role = new Role(roleEnum);
+			role = new Role(name);
 			roleRepository.save(role);
 		}
 		return role;

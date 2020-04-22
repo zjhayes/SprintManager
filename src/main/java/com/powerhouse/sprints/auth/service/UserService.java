@@ -28,7 +28,7 @@ public class UserService {
 	}
 
 	public void saveUser(User user) {
-		user.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findOneByRole(RoleEnum.ROLES_USER))));
+		user.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findOneByName("ROLE_USER"))));
 		userRepository.save(user);
 	}
 }
