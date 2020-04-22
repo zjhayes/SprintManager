@@ -6,7 +6,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.powerhouse.sprints.model.NamedEntity;
 import com.powerhouse.sprints.project.Project;
@@ -22,11 +24,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Backlog extends NamedEntity {
 	
+	private static final long serialVersionUID = 1L;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "backlog", cascade = CascadeType.ALL)
 	private List<Task> tasks;
 	
-	// add cascade goodness here
+	@OneToOne
+	@MapsId
 	private Project project;
 	
 
@@ -34,9 +38,13 @@ public class Backlog extends NamedEntity {
 	 * default constructor
 	 */
 	public Backlog() {
-		super();
 		tasks = new ArrayList<Task>();
 	}
 	
-	
+	public void addTask(Task task) {
+		if (task.isNew()) {
+			this.tasks.add(task);
+		}
+		task.setBacklog(this);
+	}
 }

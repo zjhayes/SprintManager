@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.powerhouse.sprints.backlog.Backlog;
+import com.powerhouse.sprints.backlog.BacklogRepository;
+
 @Controller
 @RequestMapping("/sprints/{sprintID}")
 public class TaskController {
@@ -17,10 +20,12 @@ public class TaskController {
 
 	private final SprintRepository sprintRepo;
 	private final TaskRepository taskRepo;
+	private final BacklogRepository backlogRepo;
 
-	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo) {
+	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, BacklogRepository backlogRepo) {
 		this.sprintRepo = sprintRepo;
 		this.taskRepo = taskRepo;
+		this.backlogRepo = backlogRepo;
 	}
 
 	@ModelAttribute("sprint")
@@ -47,6 +52,24 @@ public class TaskController {
 		this.taskRepo.save(task);
 		return "redirect:/sprints/{sprintID}";
 	}
+
+/**
+  	@GetMapping("/backlog/tasks/new")
+	public String initCreationForm(Backlog backlog, Model model) {
+		Task task = new Task();
+		backlog.addTask(task);
+		model.addAttribute("task", task);
+		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
+	}
+
+	@PostMapping("/backlog/tasks/new")
+	public String processCreationForm(Backlog backlog, Task task, Model model) {
+		backlog.addTask(task);
+		//this.backlogRepo.save(task);
+		return "redirect:/backlogs/backlogs";
+	}
+ */	
+	
 	
 	@GetMapping("/tasks/{taskId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("taskId") long taskId, Model model) {

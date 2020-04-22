@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.powerhouse.sprints.auth.user.User;
+import com.powerhouse.sprints.backlog.Backlog;
 import com.powerhouse.sprints.model.BaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -41,4 +42,6 @@ public class Task extends BaseEntity {
 	@ToString.Exclude
 	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST }, fetch = FetchType.EAGER)
 	private Sprint sprint;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Backlog backlog;
 }

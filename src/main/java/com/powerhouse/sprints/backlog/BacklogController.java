@@ -19,5 +19,4 @@ public class BacklogController {
 		model.addAttribute("backlogs", backlogTasks);
 		return "backlogs/backlogs";
 	}
-
 }

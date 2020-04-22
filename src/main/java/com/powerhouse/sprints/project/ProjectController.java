@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.powerhouse.sprints.auth.user.User;
 import com.powerhouse.sprints.auth.user.UserRepository;
+import com.powerhouse.sprints.backlog.Backlog;
+import com.powerhouse.sprints.backlog.BacklogRepository;
 import com.powerhouse.sprints.sprint.Sprint;
+import com.powerhouse.sprints.sprint.Task;
 
 @Controller
 public class ProjectController {
@@ -27,6 +30,13 @@ public class ProjectController {
 	ProjectRepository projectRepo;
 	@Autowired
 	UserRepository userRepo;
+	
+	private final BacklogRepository backlogRepo;
+	
+	
+	public ProjectController(BacklogRepository backlogRepo) {
+		this.backlogRepo = backlogRepo;
+	}
 
 	@GetMapping("/projects")
 	public String viewAllProjects(Model model) {
@@ -98,6 +108,27 @@ public class ProjectController {
 		model.addAttribute("newSprint", s);
 		return "sprints/sprintSettings";
 	}
+	
+	@GetMapping("/{projectID}/tasks/new")
+	public String initCreationForm(@PathVariable("projectID") long projectID, Backlog backlog, Model model) {
+		Task task = new Task();
+		backlog.addTask(task);
+		model.addAttribute("task", task);
+		return "backlogs/createTaskForm";
+	}
+
+	@PostMapping("/{projectID}/tasks/new")
+	public String processCreationForm(@PathVariable("projectID") long projectID, Backlog backlog, Task task, Model model) {
+		backlog.addTask(task);
+		//this.backlogRepo.save(task);
+		return "redirect:/backlogs/backlogs";
+	}
+	
+	
+	
+	
+	
+	
 	
 	private void addMembersToProject(List<Long> users, Project p) {
 		for(Long userID : users) {
