@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.powerhouse.sprints.auth.user.Role;
-import com.powerhouse.sprints.auth.user.RoleEnum;
 import com.powerhouse.sprints.auth.user.RoleRepository;
 import com.powerhouse.sprints.auth.user.User;
 import com.powerhouse.sprints.auth.user.UserRepository;
