@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -48,8 +49,7 @@ public class User extends BaseEntity {
 	@Column(name = "confirmation_token")
 	private String confirmationToken;
 
-	@ManyToMany
-	@ToString.Exclude
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
 
 	@ManyToMany
