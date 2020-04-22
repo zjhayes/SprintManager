@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.powerhouse.sprints.auth.user.RoleEnum;
+
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -24,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests(authorize -> authorize
 			.antMatchers("/css/**", "/").permitAll()
 			.antMatchers("/sprints/**").authenticated()
+			.antMatchers("/admin").hasRole("ADMIN")
 		)
 		.formLogin(formLogin -> formLogin
 			.loginPage("/login")
