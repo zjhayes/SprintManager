@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Long> {
-	List<Role> findByRole(RoleEnum role);
 
-	Role findOneByRole(RoleEnum roleEnum);
+	List<Role> findByName(String name);
+	Role findOneByName(String name);
 }
