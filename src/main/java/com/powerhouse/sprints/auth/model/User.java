@@ -1,4 +1,4 @@
-package com.powerhouse.sprints.auth.user;
+package com.powerhouse.sprints.auth.model;
 
 import java.util.HashSet;
 import java.util.Set;

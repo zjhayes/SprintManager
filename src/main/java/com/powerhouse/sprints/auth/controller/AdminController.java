@@ -1,4 +1,4 @@
-package com.powerhouse.sprints.auth.user;
+package com.powerhouse.sprints.auth.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
