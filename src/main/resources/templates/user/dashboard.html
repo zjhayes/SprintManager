@@ -37,9 +37,9 @@
 			</div>
 		</section>
 		<section>
-			<div class="row">
-				<div class="column is-6">
-					<h2 class="subtitle has-text-centered">Your tasks</h2>
+			<div class="columns">
+				<div class=" column ">
+					<h2 class="subtitle">Your tasks</h2>
 					<table class="table is-fullwidth is-bordered is-striped">
 						<thead>
 							<tr>
@@ -61,8 +61,32 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="column">
+					<h2 class="subtitle ">Your Projects</h2>
+					<table class="table is-fullwidth is-bordered is-striped">
+						<tbody>
+							<tr th:each="project: ${user.projects}">
+								<td width="20%" th:text="${project.name}" />
+								<td>
+									<table class="table is-fullwidth">
+										<tbody>
+											<tr th:each="sprint: ${project.sprints}">
+												<td width="20%" th:text="${sprint.name}">
+												<td><progress
+														class="progress is-large"
+														th:value="${sprint.calculateCompletedPercentage()}"
+														max="100" /></td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</section>
 	</div>
+
 </body>
 </html>
