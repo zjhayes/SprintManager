@@ -28,8 +28,38 @@
 		<section class="hero">
 			<div class="hero-body">
 				<div class="container has-text-centered">
-					<h1 class="title">User</h1>
-					<h1 class="title">Hi, <span th:text="${#authentication.getPrincipal().getUser().getFirstName()}" class="title"></span>!</h1>
+					<h1 class="title">
+						Hi, <span
+							th:text="${#authentication.getPrincipal().getUser().getFirstName()}"
+							class="title"></span>!
+					</h1>
+				</div>
+			</div>
+		</section>
+		<section>
+			<div class="row">
+				<div class="column is-6">
+					<h2 class="subtitle has-text-centered">Your tasks</h2>
+					<table class="table is-fullwidth is-bordered is-striped">
+						<thead>
+							<tr>
+								<th>Task</th>
+								<th>Sprint</th>
+								<th>Status</th>
+								<th>Due</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="task: ${tasks}">
+								<td th:text="${task.taskDescription}">
+								<td><a
+									th:text="${task.sprint.name}"
+									th:href="@{/sprints/{sprintID}(sprintID=${task.sprint.id})}" />
+								<td th:text="${task.currentStep}">
+								<td th:text="${task.sprint.endDate}">
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</section>
