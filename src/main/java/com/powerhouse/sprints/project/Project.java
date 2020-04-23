@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.powerhouse.sprints.auth.user.User;
+import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.model.NamedEntity;
 import com.powerhouse.sprints.sprint.Sprint;
 

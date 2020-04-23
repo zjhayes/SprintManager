@@ -10,10 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.powerhouse.sprints.auth.user.Role;
-import com.powerhouse.sprints.auth.user.RoleRepository;
-import com.powerhouse.sprints.auth.user.User;
-import com.powerhouse.sprints.auth.user.UserRepository;
+import com.powerhouse.sprints.auth.model.Role;
+import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.auth.repository.RoleRepository;
+import com.powerhouse.sprints.auth.repository.UserRepository;
 
 @Component
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {

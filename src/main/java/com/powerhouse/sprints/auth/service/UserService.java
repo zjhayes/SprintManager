@@ -6,10 +6,10 @@ import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.powerhouse.sprints.auth.user.Role;
-import com.powerhouse.sprints.auth.user.RoleRepository;
-import com.powerhouse.sprints.auth.user.User;
-import com.powerhouse.sprints.auth.user.UserRepository;
+import com.powerhouse.sprints.auth.model.Role;
+import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.auth.repository.RoleRepository;
+import com.powerhouse.sprints.auth.repository.UserRepository;
 
 @Service("userService")
 public class UserService {

@@ -6,7 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.powerhouse.sprints.auth.user.User;
+import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.model.BaseEntity;
 
 import lombok.AllArgsConstructor;
