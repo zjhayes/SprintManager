@@ -2,6 +2,7 @@ package com.powerhouse.sprints.auth.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.auth.service.EmailService;
 import com.powerhouse.sprints.auth.service.SecurityService;
 import com.powerhouse.sprints.auth.service.UserService;
+import com.powerhouse.sprints.project.Project;
+import com.powerhouse.sprints.project.ProjectRepository;
 import com.powerhouse.sprints.sprint.Task;
 import com.powerhouse.sprints.sprint.TaskRepository;
 
@@ -34,6 +37,7 @@ public class UserController {
 	private UserService userService;
 	private SecurityService securityService;
 	private TaskRepository taskRepo;
+	private ProjectRepository projectRepo;
 
 	@Autowired
 	public UserController(UserService userService, SecurityService securityService, TaskRepository taskRepo) {
@@ -53,6 +57,7 @@ public class UserController {
 		modelAndView.setViewName("user/dashboard");
 		List<Task> userTasks = taskRepo.findAllByCompletedFalseAndAssignedUserId(authenticatedUser.getId());
 		modelAndView.addObject("tasks", userTasks);
+		modelAndView.addObject("user", authenticatedUser);
 		return modelAndView;
 	}
 }
