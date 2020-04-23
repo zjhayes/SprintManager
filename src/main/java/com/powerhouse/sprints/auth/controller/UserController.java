@@ -1,5 +1,6 @@
 package com.powerhouse.sprints.auth.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,17 +26,20 @@ import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.auth.service.EmailService;
 import com.powerhouse.sprints.auth.service.SecurityService;
 import com.powerhouse.sprints.auth.service.UserService;
+import com.powerhouse.sprints.sprint.Task;
+import com.powerhouse.sprints.sprint.TaskRepository;
 
 @Controller
 public class UserController {
 	private UserService userService;
 	private SecurityService securityService;
+	private TaskRepository taskRepo;
 
 	@Autowired
-	public UserController(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService,
-			EmailService emailService, SecurityService securityService) {
+	public UserController(UserService userService, SecurityService securityService, TaskRepository taskRepo) {
 		this.userService = userService;
 		this.securityService = securityService;
+		this.taskRepo = taskRepo;
 	}
 
 	@GetMapping("/")
@@ -47,6 +51,8 @@ public class UserController {
 	public ModelAndView showUserDashboard(ModelAndView modelAndView) {
 		User authenticatedUser = userService.findByEmail(securityService.findLoggedInUsername());
 		modelAndView.setViewName("user/dashboard");
+		List<Task> userTasks = taskRepo.findAllByCompletedFalseAndAssignedUserId(authenticatedUser.getId());
+		modelAndView.addObject("tasks", userTasks);
 		return modelAndView;
 	}
 }
