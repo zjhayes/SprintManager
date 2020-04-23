@@ -1,4 +1,4 @@
-package com.powerhouse.sprints.auth.user;
+package com.powerhouse.sprints.auth.controller;
 
 import java.util.Map;
 import java.util.UUID;
@@ -10,48 +10,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
+import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.auth.service.EmailService;
+import com.powerhouse.sprints.auth.service.SecurityService;
 import com.powerhouse.sprints.auth.service.UserService;
 
 @Controller
-public class UserController {
+public class RegistrationController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private UserService userService;
 	private EmailService emailService;
 
 	@Autowired
-	public UserController(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService,
+	public RegistrationController(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService,
 			EmailService emailService) {
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.userService = userService;
 		this.emailService = emailService;
-	}
-
-	@GetMapping("/")
-	public String welcome(Model model) {
-		return "auth/welcome";
-	}
-
-	@GetMapping("/login")
-	public String login(Model model) {
-		return "auth/login";
-	}
-
-	@RequestMapping("/login-error")
-	public String loginError(Model model) {
-		model.addAttribute("loginError", true);
-		return "auth/login";
 	}
 
 	// create registration form

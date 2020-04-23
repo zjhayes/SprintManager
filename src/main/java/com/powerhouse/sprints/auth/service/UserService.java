@@ -6,11 +6,10 @@ import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.powerhouse.sprints.auth.user.Role;
-import com.powerhouse.sprints.auth.user.RoleEnum;
-import com.powerhouse.sprints.auth.user.RoleRepository;
-import com.powerhouse.sprints.auth.user.User;
-import com.powerhouse.sprints.auth.user.UserRepository;
+import com.powerhouse.sprints.auth.model.Role;
+import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.auth.repository.RoleRepository;
+import com.powerhouse.sprints.auth.repository.UserRepository;
 
 @Service("userService")
 public class UserService {
@@ -28,7 +27,7 @@ public class UserService {
 	}
 
 	public void saveUser(User user) {
-		user.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findOneByRole(RoleEnum.ROLES_USER))));
+		user.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findOneByName("ROLE_USER"))));
 		userRepository.save(user);
 	}
 }

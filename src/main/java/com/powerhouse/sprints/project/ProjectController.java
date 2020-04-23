@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.powerhouse.sprints.auth.user.User;
-import com.powerhouse.sprints.auth.user.UserRepository;
+import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.auth.repository.UserRepository;
 import com.powerhouse.sprints.sprint.Sprint;
 
 @Controller
