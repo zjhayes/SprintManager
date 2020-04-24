@@ -1,4 +1,4 @@
-package com.powerhouse.sprints.auth.model;
+package com.powerhouse.sprints.auth.user;
 
 import java.util.Set;
 
@@ -6,14 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 
 import com.powerhouse.sprints.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @Entity
@@ -21,14 +19,10 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Role extends BaseEntity {
 
-	@Column(name = "name", nullable = false)
-	private String name;
+	@Column(name = "role", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private RoleEnum role;
 
-	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-	@ToString.Exclude
+	@ManyToMany(mappedBy = "roles")
 	private Set<User> users;
-
-	public Role(String name) {
-		this.name = name;
-	}
 }

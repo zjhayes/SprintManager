@@ -59,9 +59,9 @@
 					</div>
 				</fieldset>
 			</form>
-			<div class="delete_button">
-			<a th:href="@{/projects/delete/{id}(id=${newProject.id})}" th:text="${newProject.id != null} ? 'Delete Project' : null"></a>
-		</div>
+			<div class="delete_button align-right">
+				<a th:href="@{/projects/delete/{id}(id=${newProject.id})}" th:text="${newProject.id != null} ? 'Delete Project' : null"></a>
+			</div>
 		</div>
 	</section>
 </body>
