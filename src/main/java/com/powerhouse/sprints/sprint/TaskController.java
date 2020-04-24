@@ -14,7 +14,7 @@ import com.powerhouse.sprints.project.Project;
 import com.powerhouse.sprints.project.ProjectRepository;
 
 @Controller
-@RequestMapping("/sprints/{sprintID}")
+@RequestMapping("/projects/{projectID}")
 public class TaskController {
 	private static final String VIEWS_TASKS_CREATE_OR_UPDATE_FORM = "tasks/createOrUpdateTaskForm";
 
@@ -28,12 +28,12 @@ public class TaskController {
 		this.taskRepo = taskRepo;
 	}
 
-	@ModelAttribute("sprint")
-	public Sprint findSprint(@PathVariable("sprintID") long sprintID) {
-		return this.sprintRepo.findById(sprintID).orElse(null);
+	@ModelAttribute("project")
+	public Project findSprint(@PathVariable("projectID") long projectID) {
+		return this.projectRepo.findById(projectID).orElse(null);
 	}
 
-	@InitBinder("sprint")
+	@InitBinder("project")
 	public void initOwnerBinder(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
