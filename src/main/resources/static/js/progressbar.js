@@ -10,11 +10,11 @@ $(document).ready(function() {
     //$(bars[i]).width(progress + '%');
     //console.log($(bars[i]).val());
     if (progress >= "90") {
-      $(bars[i]).addClass("is-success");
+      $(bars[i]).addClass("bar-success");
     } else if (progress >= "50" && progress < "90") {
-      $(bars[i]).addClass("is-warning");
+      $(bars[i]).addClass("bar-warning");
     } else {
-      $(bars[i]).addClass("is-error");
+      $(bars[i]).addClass("bar-error");
     }
   }
 });

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.auth.user.User;
 import com.powerhouse.sprints.model.NamedEntity;
 import com.powerhouse.sprints.sprint.Sprint;
 
@@ -33,15 +33,15 @@ public class Project extends NamedEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Sprint> sprints;
-
+	
 	@ToString.Exclude
-	@ManyToMany(mappedBy = "projects")
+	@ManyToMany(mappedBy="projects")
 	private Set<User> projectMembers = new HashSet<User>();
 
 	public Project() {
 		super();
 	}
-
+	
 	public void addMember(User member) {
 		projectMembers.add(member);
 	}

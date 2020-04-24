@@ -1,13 +1,9 @@
-package com.powerhouse.sprints.auth.model;
+package com.powerhouse.sprints.auth.user;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.transaction.annotation.Transactional;
 
 public class UserDetailsImpl implements UserDetails {
 	private User user;
@@ -18,11 +14,8 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-		for (Role role : user.getRoles()) {
-			grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-		}
-		return grantedAuthorities;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
