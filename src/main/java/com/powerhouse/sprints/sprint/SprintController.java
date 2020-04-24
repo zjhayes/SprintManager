@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.powerhouse.sprints.project.Project;
 
 @Controller
 public class SprintController {
@@ -33,10 +36,11 @@ public class SprintController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
 	}
 
-	@GetMapping("/sprints/{sprintID}")
-	public String viewSprintDetails(@PathVariable("sprintID") long sprintID, Model model) {
+	@GetMapping("projects/{projectID}/sprints/{sprintID}")
+	public String viewSprintDetails(@PathVariable("sprintID") long sprintID,@PathVariable("projectID") long projectID, Model model) {
 		Sprint s = sprintRepo.getOne(sprintID);
 		model.addAttribute("sprint", s);
+		model.addAttribute("projectID", projectID);
 		return "sprints/sprintDetail";
 	}
 
@@ -52,5 +56,18 @@ public class SprintController {
 	public String addSprintToProject(@ModelAttribute Sprint s, Model model) {
 		sprintRepo.save(s);
 		return "redirect:/projects/" + s.getProject().getId();
+	}
+	
+	@GetMapping("/sprints/edit/{id}")
+	public String showUpdateProject(@PathVariable("id") long id, Model model) {
+		Sprint s = sprintRepo.findById(id).orElse(null);
+		model.addAttribute("newSprint", s);
+		return "/sprints/sprintSettings";
+	}
+	
+	@PostMapping("/sprints/update/{id}")
+	public String reviseProject(Sprint s, Model model) {
+		sprintRepo.save(s);
+		return "/projects/" + s.getProject().getId();
 	}
 }

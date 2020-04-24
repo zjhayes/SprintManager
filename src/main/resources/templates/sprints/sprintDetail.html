@@ -25,7 +25,7 @@
 					th:text="${sprint.name}"
 					class="title"></h1>
 				<p class="subtitle">
-					<a th:href="@{/}">Home</a>
+					<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return to Project</a>
 				</p>
 			</div>
 		</div>
