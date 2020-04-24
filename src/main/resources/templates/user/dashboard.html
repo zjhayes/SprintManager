@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1" />
+<title>Sprints</title>
+<script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+<script src="/js/progressbar.js"></script>
+<link
+	rel="stylesheet"
+	type="text/css"
+	href="css/style.css" />
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script
+	defer
+	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
+<script
+	defer
+	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<div th:insert="fragments/header :: header"></div>
+	<div class="container ">
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container has-text-centered">
+					<h1 class="title is-1">
+						Hi, <span
+							th:text="${#authentication.getPrincipal().getUser().getFirstName()}"
+							class=""></span>!
+					</h1>
+				</div>
+			</div>
+		</section>
+		<section>
+			<div class="columns">
+				<div class=" column ">
+					<h2 class="title is-3">Your tasks</h2>
+					<table
+						th:if="${not #lists.isEmpty(tasks)}"
+						class="table is-fullwidth is-bordered is-striped">
+						<thead>
+							<tr>
+								<th>Task</th>
+								<th>Sprint</th>
+								<th>Status</th>
+								<th>Due</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="task: ${tasks}">
+								<td th:text="${task.taskDescription}">
+								<td><a
+									th:text="${task.sprint.name}"
+									th:href="@{/sprints/{sprintID}(sprintID=${task.sprint.id})}" />
+								<td th:text="${task.currentStep}">
+								<td th:text="${task.sprint.endDate}">
+							</tr>
+						</tbody>
+					</table>
+					<div
+						th:if="${#lists.isEmpty(tasks)}"
+						class="">
+						<h1 class="subtitle">You're all caught up! Whoo!</h1>
+					</div>
+
+				</div>
+				<div class="column">
+					<h2 class="title is-3 ">Your Projects</h2>
+					<table class="table is-fullwidth is-bordered is-striped">
+						<tbody>
+							<tr th:each="project: ${user.projects}">
+								<td width="20%"><a
+									th:text="${project.name}"
+									th:href="@{/projects/{sprintID}(sprintID=${sprintID})}"></a></td>
+								<td>
+									<table class="table is-fullwidth">
+										<tbody>
+											<tr th:each="sprint: ${project.sprints}">
+												<td width="20%"><a
+													th:text="${sprint.name}"
+													th:href="@{/sprints/{sprintID}(sprintID=${sprint.id})}"></a></td>
+												<td><progress
+														class="progress is-large"
+														th:value="${sprint.calculateCompletedPercentage()}"
+														max="100" /></td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+</html>

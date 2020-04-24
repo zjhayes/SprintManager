@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.powerhouse.sprints.auth.user.User;
-import com.powerhouse.sprints.auth.user.UserRepository;
+import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.auth.repository.UserRepository;
 import com.powerhouse.sprints.sprint.Sprint;
 
 @Controller
@@ -34,11 +34,10 @@ public class ProjectController {
 		model.addAttribute("projects", allSprints);
 		return "projects/projects";
 	}
-	
-	@InitBinder     
-	public void initBinder(WebDataBinder binder){
-	     binder.registerCustomEditor( Date.class,
-	                         new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));   
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
 	}
 
 	@GetMapping("/addProject")
@@ -56,30 +55,27 @@ public class ProjectController {
 		projectRepo.save(p);
 		return viewAllProjects(model);
 	}
-	
+
 	@GetMapping("/projects/edit/{id}")
-	public String showUpdateProject(@PathVariable("id") long id, Model model)
-	{
+	public String showUpdateProject(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		model.addAttribute("newProject", p);
 		model.addAttribute("allUsers", userRepo.findAll());
 		return "projects/projectSettings";
 	}
-	
+
 	@PostMapping("/projects/update/{id}")
-	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model)
-	{
+	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model) {
 		addMembersToProject(users, p);
-		projectRepo.save(p);	
+		projectRepo.save(p);
 		return viewAllProjects(model);
 	}
-	
+
 	@GetMapping("/projects/delete/{id}")
-	public String deleteUser(@PathVariable("id") long id, Model model)
-	{
+	public String deleteUser(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		projectRepo.delete(p);
-		
+
 		return viewAllProjects(model);
 	}
 
@@ -98,9 +94,9 @@ public class ProjectController {
 		model.addAttribute("newSprint", s);
 		return "sprints/sprintSettings";
 	}
-	
+
 	private void addMembersToProject(List<Long> users, Project p) {
-		for(Long userID : users) {
+		for (Long userID : users) {
 			User member = userRepo.findById(userID).orElse(null);
 			member.addToProject(p);
 			p.addMember(member);
