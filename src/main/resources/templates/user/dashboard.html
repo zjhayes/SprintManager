@@ -73,7 +73,7 @@
 									<table class="table is-fullwidth">
 										<tbody>
 											<tr th:each="sprint: ${project.sprints}">
-												<td width="20%" th:text="${sprint.name}">
+												<td width="20%"><a th:text="${sprint.name}" th:href="@{/sprints/{sprintID}(sprintID=${sprint.id})}"></a></td>
 												<td><progress
 														class="progress is-large"
 														th:value="${sprint.calculateCompletedPercentage()}"
