@@ -30,10 +30,11 @@ public class SprintController {
 		model.addAttribute("sprints", allSprints);
 		return "sprints/sprints";
 	}
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+	
+	@InitBinder     
+	public void initBinder(WebDataBinder binder){
+	     binder.registerCustomEditor( Date.class,
+	                         new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));   
 	}
 
 	@GetMapping("projects/{projectID}/sprints/{sprintID}")
