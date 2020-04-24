@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.powerhouse.sprints.project.Project;
 
 @Controller
 public class SprintController {
@@ -34,10 +37,11 @@ public class SprintController {
 	                         new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));   
 	}
 
-	@GetMapping("/sprints/{sprintID}")
-	public String viewSprintDetails(@PathVariable("sprintID") long sprintID, Model model) {
+	@GetMapping("projects/{projectID}/sprints/{sprintID}")
+	public String viewSprintDetails(@PathVariable("sprintID") long sprintID, @PathVariable("projectID") long projectID, Model model) {
 		Sprint s = sprintRepo.getOne(sprintID);
 		model.addAttribute("sprint", s);
+		model.addAttribute("projectID", projectID);
 		return "sprints/sprintDetail";
 	}
 
@@ -49,9 +53,30 @@ public class SprintController {
 		return "sprints/taskForm";
 	}
 
-	@PostMapping("/projects/addSprint")
+	@PostMapping("/projects/{projectID}/sprints/update")
 	public String addSprintToProject(@ModelAttribute Sprint s, Model model) {
 		sprintRepo.save(s);
+		return "redirect:/projects/" + s.getProject().getId();
+	}
+	
+	@GetMapping("/projects/{projectID}/sprints/{sprintID}/edit")
+	public String showUpdateProject(@PathVariable("sprintID") long id, @PathVariable("projectID") long projectID, Model model) {
+		Sprint s = sprintRepo.findById(id).orElse(null);
+		model.addAttribute("newSprint", s);
+		model.addAttribute("projectID", projectID);
+		return "sprints/sprintSettings";
+	}
+	
+	@PostMapping("/projects/{projectID}/sprints/update/{sprintID}")
+	public String reviseSprint(Sprint s, Model model) {
+		sprintRepo.save(s);
+		return "redirect:/projects/" + s.getProject().getId();
+	}
+	
+	@GetMapping("/projects/{projectID}/sprints/delete/{sprintID}")
+	public String deleteSprint(@PathVariable("sprintID") long sprintID, Model model) {
+		Sprint s = sprintRepo.findById(sprintID).orElse(null);
+		sprintRepo.delete(s);
 		return "redirect:/projects/" + s.getProject().getId();
 	}
 }

@@ -75,8 +75,7 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/projects/delete/{id}")
-	public String deleteUser(@PathVariable("id") long id, Model model)
-	{
+	public String deleteProject(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		projectRepo.delete(p);
 		
@@ -96,6 +95,7 @@ public class ProjectController {
 		Sprint s = new Sprint();
 		s.setProject(projectRepo.getOne(projectID));
 		model.addAttribute("newSprint", s);
+		model.addAttribute("projectID", projectID);
 		return "sprints/sprintSettings";
 	}
 	

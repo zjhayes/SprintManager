@@ -48,7 +48,7 @@
 				<tbody>
 					<tr th:each="sprint: ${project.sprints}">
 						<td><a
-							th:href="@{/sprints/{id}(id=${sprint.id})}"
+							th:href="@{/projects/{projectID}/sprints/{id}(id=${sprint.id}, projectID=${project.id})}"
 							th:text="${sprint.name}"></a></td>
 						<td th:text="${sprint.description}" />
 						<td th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />

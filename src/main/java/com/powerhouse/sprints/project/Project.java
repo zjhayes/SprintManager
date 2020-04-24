@@ -31,7 +31,7 @@ public class Project extends NamedEntity {
 	@CreationTimestamp
 	private LocalDate createdDate;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = { CascadeType.MERGE })
 	private List<Sprint> sprints;
 	
 	@ToString.Exclude
