@@ -60,7 +60,7 @@ public class ProjectController {
 		p.setCreatedDate(LocalDate.now());
 		addMembersToProject(users, p);
 		projectRepo.save(p);
-		return viewAllProjects(model);
+		return "redirect:/projects/" + p.getId();
 	}
 	
 	@GetMapping("/projects/edit/{id}")
@@ -72,12 +72,12 @@ public class ProjectController {
 		return "projects/projectSettings";
 	}
 	
-	@PostMapping("/projects/update/{id}")
+	@PostMapping("/projects/update/{projectID}")
 	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model)
 	{
 		addMembersToProject(users, p);
 		projectRepo.save(p);	
-		return viewAllProjects(model);
+		return "redirect:/projects/{projectID}";
 	}
 	
 	@GetMapping("/projects/delete/{id}")
