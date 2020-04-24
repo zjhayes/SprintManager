@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.powerhouse.sprints.project.Project;
+import com.powerhouse.sprints.project.ProjectRepository;
+
 @Controller
 @RequestMapping("/sprints/{sprintID}")
 public class TaskController {
@@ -17,8 +20,10 @@ public class TaskController {
 
 	private final SprintRepository sprintRepo;
 	private final TaskRepository taskRepo;
+	private final ProjectRepository projectRepo;
 
-	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo) {
+	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo) {
+		this.projectRepo = projectRepo;
 		this.sprintRepo = sprintRepo;
 		this.taskRepo = taskRepo;
 	}
@@ -57,18 +62,18 @@ public class TaskController {
 
 	@PostMapping("/tasks/{taskId}/edit")
 	public String processUpdateTaskForm(Task task, Sprint sprint, Model model, @PathVariable("taskId") long taskId) {
-		sprint.addTask(task);
-		taskRepo.save(task);
-		return "redirect:/sprints/{sprintID}";
+			sprint.addTask(task);
+			taskRepo.save(task);
+			return "redirect:/sprints/{sprintID}";
 	}
-
+	
 	@PostMapping("/tasks/{taskId}/update")
 	public String reviseTask(Task task, Model model) {
 		this.taskRepo.save(task);
 		model.addAttribute("sprint.tasks", taskRepo.findAll());
 		return "redirect:/sprints/{sprintID}";
 	}
-
+	
 	@GetMapping("/tasks/{taskId}/delete")
 	public String deleteTask(@PathVariable("taskId") long taskId, Sprint sprint, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
