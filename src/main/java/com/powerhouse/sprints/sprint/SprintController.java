@@ -71,4 +71,11 @@ public class SprintController {
 		sprintRepo.save(s);
 		return "redirect:/projects/" + s.getProject().getId();
 	}
+	
+	@GetMapping("/projects/{projectID}/sprints/delete/{sprintID}")
+	public String deleteSprint(@PathVariable("sprintID") long sprintID, Model model) {
+		Sprint s = sprintRepo.findById(sprintID).orElse(null);
+		sprintRepo.delete(s);
+		return "redirect:/projects/" + s.getProject().getId();
+	}
 }

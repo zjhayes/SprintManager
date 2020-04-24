@@ -72,7 +72,7 @@ public class ProjectController {
 	}
 
 	@GetMapping("/projects/delete/{id}")
-	public String deleteUser(@PathVariable("id") long id, Model model) {
+	public String deleteProject(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		projectRepo.delete(p);
 

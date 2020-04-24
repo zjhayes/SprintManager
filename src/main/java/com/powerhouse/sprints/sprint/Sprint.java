@@ -40,7 +40,7 @@ public class Sprint extends NamedEntity {
 	private Date endDate;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Task> tasks;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
 	private Project project;
 
 	public Sprint() {

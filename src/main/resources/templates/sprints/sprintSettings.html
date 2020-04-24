@@ -68,6 +68,10 @@
 					</div>
 				</fieldset>
 			</form>
+			<div class="delete_button align-right">
+				<a  th:href="@{/projects/{projectID}/sprints/delete/{sprintID}(sprintID=${sprintID}, projectID=${projectID})}" 
+					th:text="${newSprint.id != null} ? 'Delete Sprint' : null"></a>
+			</div>
 		</div>
 	</section>
 
