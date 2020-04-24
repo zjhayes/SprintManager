@@ -56,7 +56,7 @@ public class ProjectController {
 		return viewAllProjects(model);
 	}
 
-	@GetMapping("/projects/edit/{id}")
+	@GetMapping("/projects/{id}/edit/")
 	public String showUpdateProject(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		model.addAttribute("newProject", p);
@@ -92,6 +92,7 @@ public class ProjectController {
 		Sprint s = new Sprint();
 		s.setProject(projectRepo.getOne(projectID));
 		model.addAttribute("newSprint", s);
+		model.addAttribute("projectID", projectID);
 		return "sprints/sprintSettings";
 	}
 

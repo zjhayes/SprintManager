@@ -32,32 +32,33 @@
 
 	<section class="section">
 		<div class="column is-10 is-offset-1">					
-			<form class="form-horizontal" th:object="${newSprint}" th:action="@{/sprints/update/{id}(id=${newProject.id})}" method="POST">
+			<form class="form-horizontal" th:object="${newSprint}" 
+				th:action="@{/projects/{projectID}/sprints/update/{sprintID}(sprintID=${newSprint.id}, projectID=${projectID})}" method="POST">
 				<fieldset>
 					<input type="hidden" name="project" th:value="${newSprint.project.id}">
 					<div class="field">
 					  <label class="label" for="name">Sprint Name</label>
 					  <div class="control">
-					    <input id="name" name="name" type="text" class="input" th:field="*{name}>
+					    <input id="name" name="name" type="text" class="input" th:field="*{name}">
 					    
 					  </div>
 					</div>
 					<div class="field">
 					  <label class="label" for="description">Description</label>
 					  <div class="control">
-					    <input id="description" name="description" type="text" class="input" th:field="*{description}>
+					    <input id="description" name="description" type="text" class="input" th:field="*{description}">
 					  </div>
 					</div>
 					<div class="field">
 						<label class="label" for="startDate">Start Date</label>
 						<div class="control">
-							<input type="date" id="startDate" name="startDate" th:field="*{startDate}>
+							<input type="date" id="startDate" name="startDate" th:field="*{startDate}">
 						</div>
 					</div>
 					<div class="field">
 						<label class="label" for="endDate">End Date</label>
 						<div class="control">
-							<input type="date" id="endDate" name="endDate" th:field="*{endDate}>
+							<input type="date" id="endDate" name="endDate" th:field="*{endDate}">
 						</div>
 					</div>
 					<div class="field">

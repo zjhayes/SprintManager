@@ -37,7 +37,7 @@ public class SprintController {
 	}
 
 	@GetMapping("projects/{projectID}/sprints/{sprintID}")
-	public String viewSprintDetails(@PathVariable("sprintID") long sprintID,@PathVariable("projectID") long projectID, Model model) {
+	public String viewSprintDetails(@PathVariable("sprintID") long sprintID, @PathVariable("projectID") long projectID, Model model) {
 		Sprint s = sprintRepo.getOne(sprintID);
 		model.addAttribute("sprint", s);
 		model.addAttribute("projectID", projectID);
@@ -52,22 +52,23 @@ public class SprintController {
 		return "sprints/taskForm";
 	}
 
-	@PostMapping("/projects/addSprint")
+	@PostMapping("/projects/{projectID}/sprints/update")
 	public String addSprintToProject(@ModelAttribute Sprint s, Model model) {
 		sprintRepo.save(s);
 		return "redirect:/projects/" + s.getProject().getId();
 	}
 	
-	@GetMapping("/sprints/edit/{id}")
-	public String showUpdateProject(@PathVariable("id") long id, Model model) {
+	@GetMapping("/projects/{projectID}/sprints/{sprintID}/edit")
+	public String showUpdateProject(@PathVariable("sprintID") long id, @PathVariable("projectID") long projectID, Model model) {
 		Sprint s = sprintRepo.findById(id).orElse(null);
 		model.addAttribute("newSprint", s);
-		return "/sprints/sprintSettings";
+		model.addAttribute("projectID", projectID);
+		return "sprints/sprintSettings";
 	}
 	
-	@PostMapping("/sprints/update/{id}")
-	public String reviseProject(Sprint s, Model model) {
+	@PostMapping("/projects/{projectID}/sprints/update/{sprintID}")
+	public String reviseSprint(Sprint s, Model model) {
 		sprintRepo.save(s);
-		return "/projects/" + s.getProject().getId();
+		return "redirect:/projects/" + s.getProject().getId();
 	}
 }
