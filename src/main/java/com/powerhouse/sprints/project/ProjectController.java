@@ -56,7 +56,7 @@ public class ProjectController {
 		return viewAllProjects(model);
 	}
 
-	@GetMapping("/projects/{id}/edit/")
+	@GetMapping("/projects/edit/{id}")
 	public String showUpdateProject(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		model.addAttribute("newProject", p);
