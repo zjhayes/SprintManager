@@ -27,9 +27,7 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Sprint extends NamedEntity {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private String description;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")

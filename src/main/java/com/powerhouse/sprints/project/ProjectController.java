@@ -35,10 +35,16 @@ public class ProjectController {
 		return "projects/projects";
 	}
 	
-	@InitBinder     
-	public void initBinder(WebDataBinder binder){
-	     binder.registerCustomEditor( Date.class,
-	                         new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));   
+	@GetMapping("/viewBacklog")
+	public String viewBacklog(Model model) {
+		List<Project> backlog = projectRepo.findAll();
+		model.addAttribute("project", backlog);
+		return "projects/backlogs";
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
 	}
 
 	@GetMapping("/addProject")
