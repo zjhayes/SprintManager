@@ -39,11 +39,27 @@ public class TaskController {
 	}
 
 	@GetMapping("/tasks")
-	public String viewTask(Model model, Project project) {
+	public String viewProjectTasks(Model model, Project project) {
 		Project p = projectRepo.getOne(project.getId());
 		model.addAttribute("project", project);
 		return "projects/backlogs";
 	}
+
+	@GetMapping("/tasks/{taskID}")
+	public String viewTask(@PathVariable("taskID") long taskID, Model model, Project project) {
+		Task task = taskRepo.getOne(taskID);
+		model.addAttribute("task", task);
+		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
+	}
+	
+	@PostMapping("/tasks/{taskID}")
+	public String upDateTask(Task task, Model model, Project project) {
+		project.addTask(task);
+		model.addAttribute("task", task);
+		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
+	}
+
+
 
 	@GetMapping("/tasks/new")
 	public String initCreationForm(Project project, Model model) {
