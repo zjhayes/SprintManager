@@ -17,17 +17,16 @@ public class WorkflowController
 	@Autowired
 	ProjectRepository projectRepo;
 	
-	@GetMapping("/projects/{projectID}/addWorkflow")
-	public String addWorkflow( @PathVariable("projectID") Long projectID, Model model) {
+	@GetMapping("/admin/schemes/addWorkflow/")
+	public String addWorkflow( Model model) {
 		WorkflowScheme w = new WorkflowScheme();
-		w.setProject(projectRepo.getOne(projectID));
 		model.addAttribute("newWorkflow", w);
 		return "schemes/workflowSettings";
 	}
 
-	@PostMapping("/projects/{projectID}/workflows/update")
-	public String addProject(@ModelAttribute WorkflowScheme w, @PathVariable("projectID") Long projectID, Model model) {
+	@PostMapping("/admin/schemes/workflows/update")
+	public String addWorkflow(@ModelAttribute WorkflowScheme w, Model model) {
 		workflowRepo.save(w);
-		return "redirect:/projects/{projectID}";
+		return "redirect:/dashboard/";
 	}
 }

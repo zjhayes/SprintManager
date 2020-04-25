@@ -28,7 +28,7 @@ public class WorkflowScheme extends NamedEntity {
 	
 	@ElementCollection
 	private Set<String> steps = new HashSet<String>();
-	@ManyToOne(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@OneToOne(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
 	private Project project;
 	
 	public WorkflowScheme() {

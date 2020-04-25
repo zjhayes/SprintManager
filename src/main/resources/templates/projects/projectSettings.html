@@ -58,17 +58,15 @@
 						<label class="label" for="currentWorkflow">Workflow</label>
 						<div class="control">
 							<div class="select">
-								<select id="currentWorkflow" name="currentWorkflow" th:field="*{currentWorkflow}">
+								<select id="workflow" name="workflow" th:field="*{workflow}">
 									<option
-										th:each="workflow : ${newProject.availableWorkflowSchemes}"
+										th:each="workflow : ${allWorkflows}"
 										th:value="${workflow.id}"
-										th:text="${workflow.getName()}"
-										th:selected="${currentWorkflow == workflow.id} ? 'selected' : null">
+										th:text="${workflow.getName()}">
 									</option>
 								</select>
 							</div>
 						</div>
-						<a th:href="@{/projects/{projectID}/addWorkflow(projectID=${newProject.id})}">Create New Workflow</a>
 					</div>
 					<div class="field">
 					  <label class="label" for="submit"></label>
