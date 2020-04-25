@@ -36,4 +36,8 @@ public class WorkflowScheme extends NamedEntity {
 		super();
 		this.steps = steps;
 	}
+	
+	public void addStep(String step) {
+		steps.add(step);
+	}
 }
