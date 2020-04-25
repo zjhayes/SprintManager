@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -48,7 +49,7 @@ public class Project extends NamedEntity {
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Task> backlog;
 	
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "project", cascade = { CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	private WorkflowScheme workflow;
 
 	public Project() {
