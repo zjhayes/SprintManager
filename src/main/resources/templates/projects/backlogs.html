@@ -45,8 +45,15 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tr th:each="task : ${backlog}">
-				<td th:text="${task.name}"></td>
+			<tr th:each="task : ${project.backlog}">
+				<td><a
+					th:text="${task.taskDescription}"
+					th:href="@{/projects/{projectID}/tasks/{taskID}(projectID=${project.id},taskID=${task.id})}"></a></td>
+				<td th:text="${task.assignedUser.getFullName()}"></td>
+				<td th:text="${task.priority}"></td>
+				<td th:text="${task.currentStep}"></td>
+				<td th:text="${task.storyPoints}"></td>
+
 			</tr>
 		</table>
 	</section>
