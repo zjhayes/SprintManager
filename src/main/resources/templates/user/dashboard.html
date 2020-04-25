@@ -48,9 +48,7 @@
 						<thead>
 							<tr>
 								<th>Task</th>
-
 								<th>Sprint</th>
-
 								<th>Status</th>
 								<th>Due</th>
 							</tr>
@@ -61,7 +59,6 @@
 								<td th:text="${task.currentStep}">
 								<td th:if="${task.sprint == null}">Not On Sprint Yet</td>
 							</tr>
-
 								<td><a
 									th:text="${task.sprint.name}"
 									th:href="@{/sprints/{sprintID}(sprintID=${task.sprint.id})}" />
