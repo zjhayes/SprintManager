@@ -22,7 +22,7 @@
 					<span th:text="${task.project.name}"></span>
 				</h1>
 				<p class="subtitle">
-					<a th:href="@{/}">Home</a>
+					<a th:href="@{/projects/{projectId}(projectId=${project.id})}">Back to <span th:text="${project.name}"></span></a>
 				</p>
 			</div>
 		</div>
