@@ -16,7 +16,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import com.powerhouse.sprints.auth.user.User;
+import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.model.NamedEntity;
 import com.powerhouse.sprints.sprint.Sprint;
 import com.powerhouse.sprints.sprint.Task;
@@ -37,9 +37,9 @@ public class Project extends NamedEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = { CascadeType.MERGE })
 	private List<Sprint> sprints;
-	
+
 	@ToString.Exclude
-	@ManyToMany(mappedBy="projects")
+	@ManyToMany(mappedBy = "projects")
 	private Set<User> projectMembers = new HashSet<User>();
 	
 	@LazyCollection(LazyCollectionOption.FALSE)

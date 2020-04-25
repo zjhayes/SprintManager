@@ -7,18 +7,6 @@ progress[value]::-webkit-progress-value {
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
 }
 
-.bar-warning[value]::-webkit-progress-value {
-	background-color: #F2F55C;
-}
-
-.bar-success[value]::-webkit-progress-value {
-	background-color: #7DE566;
-}
-
-.bar-error[value]::-webkit-progress-value {
-	background-color: #E56A66;
-}
-
 .delete_button a
 {
 	color: red;

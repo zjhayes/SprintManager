@@ -1,10 +1,8 @@
-package com.powerhouse.sprints.auth.user;
+package com.powerhouse.sprints.auth.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +17,6 @@ import org.springframework.data.annotation.Transient;
 import com.powerhouse.sprints.model.BaseEntity;
 import com.powerhouse.sprints.project.Project;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -52,21 +49,18 @@ public class User extends BaseEntity {
 	@Column(name = "confirmation_token")
 	private String confirmationToken;
 
-	@ManyToMany
-	@ToString.Exclude
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
 
 	@ManyToMany
-	@JoinTable(name = "project_project_members", 
-	joinColumns = @JoinColumn(name = "project_member_id"), 
-	inverseJoinColumns = @JoinColumn(name = "project_id"))
+	@JoinTable(name = "project_project_members", joinColumns = @JoinColumn(name = "project_member_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
 	@ToString.Exclude
 	private Set<Project> projects = new HashSet<Project>();
 
 	public String getFullName() {
 		return firstName + " " + lastName;
 	}
-	
+
 	public void addToProject(Project project) {
 		projects.add(project);
 	}

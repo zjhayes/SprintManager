@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.powerhouse.sprints.auth.user.User;
-import com.powerhouse.sprints.auth.user.UserRepository;
+import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.auth.repository.UserRepository;
 import com.powerhouse.sprints.sprint.Sprint;
 
 @Controller
@@ -34,7 +34,7 @@ public class ProjectController {
 		model.addAttribute("projects", allSprints);
 		return "projects/projects";
 	}
-	
+
 	@GetMapping("/viewBacklog")
 	public String viewBacklog(Model model) {
 		List<Project> backlog = projectRepo.findAll();
@@ -62,10 +62,9 @@ public class ProjectController {
 		projectRepo.save(p);
 		return "redirect:/projects/" + p.getId();
 	}
-	
+
 	@GetMapping("/projects/edit/{id}")
-	public String showUpdateProject(@PathVariable("id") long id, Model model)
-	{
+	public String showUpdateProject(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		model.addAttribute("newProject", p);
 		model.addAttribute("allUsers", userRepo.findAll());
@@ -79,12 +78,12 @@ public class ProjectController {
 		projectRepo.save(p);	
 		return "redirect:/projects/{projectID}";
 	}
-	
+
 	@GetMapping("/projects/delete/{id}")
 	public String deleteProject(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		projectRepo.delete(p);
-		
+
 		return viewAllProjects(model);
 	}
 
@@ -104,9 +103,9 @@ public class ProjectController {
 		model.addAttribute("projectID", projectID);
 		return "sprints/sprintSettings";
 	}
-	
+
 	private void addMembersToProject(List<Long> users, Project p) {
-		for(Long userID : users) {
+		for (Long userID : users) {
 			User member = userRepo.findById(userID).orElse(null);
 			member.addToProject(p);
 			p.addMember(member);
