@@ -29,13 +29,20 @@ public class TaskController {
 	}
 
 	@ModelAttribute("project")
-	public Project findSprint(@PathVariable("projectID") long projectID) {
+	public Project findProject(@PathVariable("projectID") long projectID) {
 		return this.projectRepo.findById(projectID).orElse(null);
 	}
 
 	@InitBinder("project")
 	public void initOwnerBinder(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
+	}
+
+	@GetMapping("/tasks")
+	public String viewTask(Model model, Project project) {
+		Project p = projectRepo.getOne(project.getId());
+		model.addAttribute("project", project);
+		return "projects/backlogs";
 	}
 
 	@GetMapping("/tasks/new")
