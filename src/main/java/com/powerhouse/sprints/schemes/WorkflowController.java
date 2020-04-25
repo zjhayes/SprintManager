@@ -16,7 +16,7 @@ public class WorkflowController
 	WorkflowSchemeRepository workflowRepo;
 	@Autowired
 	ProjectRepository projectRepo;
-	
+
 	@GetMapping("/admin/schemes/addWorkflow/")
 	public String addWorkflow( Model model) {
 		WorkflowScheme w = new WorkflowScheme();

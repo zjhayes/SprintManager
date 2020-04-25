@@ -30,7 +30,7 @@
 	</section>
 	<section class="section">
 		<div class="column is-10 is-offset-1">		
-			<form class="form-horizontal" th:object="${newWorkflow}" 
+			<form class="form-horizontal" th:object="${newWorkflow}"
 				th:action="@{/admin/schemes/workflows/update/{workflowID}(workflowID=${newWorkflow.id})}" method="POST">
 				<fieldset>
 					<div class="field">
