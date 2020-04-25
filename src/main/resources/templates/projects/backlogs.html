@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <meta
@@ -27,9 +27,11 @@
 	<section class="section box">
 		<div class="row has-text-centered">
 			<p class="subtitle">
-				<a href="/viewBacklog">Add Task to Backlog</a>
+				<a
+					th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}">Add
+					Task to Backlog</a>
 			</p>
-			<span class="is-size-3 has-text-centered">Tasks </span>
+			<span class="is-size-3 has-text-centered">Tasks</span>
 		</div>
 
 		<table class="has-border table is-striped is-fullwidth ">
