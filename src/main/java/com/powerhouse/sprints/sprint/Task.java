@@ -6,7 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.powerhouse.sprints.auth.user.User;
+import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.model.BaseEntity;
 import com.powerhouse.sprints.project.Project;
 
@@ -31,7 +31,7 @@ public class Task extends BaseEntity {
 	@OneToOne
 	private User assignedUser;
 	private String priority;
-	
+
 	// Starting simple
 	private boolean completed;
 

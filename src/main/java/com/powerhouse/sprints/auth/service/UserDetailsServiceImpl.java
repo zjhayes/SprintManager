@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.powerhouse.sprints.auth.user.User;
-import com.powerhouse.sprints.auth.user.UserDetailsImpl;
-import com.powerhouse.sprints.auth.user.UserRepository;
+import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.auth.model.UserDetailsImpl;
+import com.powerhouse.sprints.auth.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

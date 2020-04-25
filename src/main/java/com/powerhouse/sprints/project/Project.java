@@ -17,7 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import com.powerhouse.sprints.auth.user.User;
+import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.model.NamedEntity;
 import com.powerhouse.sprints.schemes.WorkflowScheme;
 import com.powerhouse.sprints.sprint.Sprint;
@@ -39,9 +39,9 @@ public class Project extends NamedEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = { CascadeType.MERGE })
 	private List<Sprint> sprints;
-	
+
 	@ToString.Exclude
-	@ManyToMany(mappedBy="projects")
+	@ManyToMany(mappedBy = "projects")
 	private Set<User> projectMembers = new HashSet<User>();
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -55,14 +55,6 @@ public class Project extends NamedEntity {
 	public Project() {
 		super();
 		backlog = new ArrayList<Task>();
-		/*
-		// Create and Add Default Workflow
-		Set<String> defaultSteps = new HashSet<String>();
-		defaultSteps.add("To Do");
-		defaultSteps.add("In Progress");
-		defaultSteps.add("Done");
-		WorkflowScheme defaultWorkflow = new WorkflowScheme(defaultSteps);
-		this.addWorkflowScheme(defaultWorkflow);*/
 	}
 
 	public void addTask(Task task) {
