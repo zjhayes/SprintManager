@@ -39,18 +39,18 @@ public class TaskController {
 	}
 
 	@GetMapping("/tasks/new")
-	public String initCreationForm(Sprint sprint, Model model) {
+	public String initCreationForm(Project project, Model model) {
 		Task task = new Task();
-		sprint.addTask(task);
+		project.addTask(task);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/tasks/new")
-	public String processCreationForm(Sprint sprint, Task task, Model model) {
-		sprint.addTask(task);
+	public String processCreationForm(Project project, Task task, Model model) {
+		project.addTask(task);
 		this.taskRepo.save(task);
-		return "redirect:/sprints/{sprintID}";
+		return "redirect:/projects/{projectID}/tasks";
 	}
 
 	@GetMapping("/tasks/{taskId}/edit")
