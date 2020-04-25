@@ -25,10 +25,13 @@
 		<div class="hero-body">
 			<div class="container">
 				<h1 class="title">Project Settings</h1>
+				<p class="subtitle">
+					<a th:href="@{/projects/{id}(id=${newProject.id})}" th:text="${newProject.id != null} ? 'Return to Project' : null"></a>
+					<a th:href="@{/projects/}" th:text="${newProject.id != null} ? null : 'Return to All Projects'"></a>
+				</p>
 			</div>
 		</div>
 	</section>
-
 	<section class="section">
 		<div class="column is-10 is-offset-1">		
 			<form class="form-horizontal" th:object="${newProject}" th:action="@{/projects/update/{id}(id=${newProject.id})}" method="POST">
@@ -46,15 +49,32 @@
 					      	<option
 								th:each="user : ${allUsers}"
 								th:value="${user.id}"
-								th:text="${user.getFullName()}">Project Members
+								th:text="${user.getFullName()}">
 							</option>
 					    </select>
 					  </div>
 					</div>
 					<div class="field">
+						<label class="label" for="currentWorkflow">Workflow</label>
+						<div class="control">
+							<div class="select">
+								<select id="currentWorkflow" name="currentWorkflow" th:field="*{currentWorkflow}">
+									<option
+										th:each="workflow : ${newProject.availableWorkflowSchemes}"
+										th:value="${workflow.id}"
+										th:text="${workflow.getName()}"
+										th:selected="${currentWorkflow == workflow.id} ? 'selected' : null">
+									</option>
+								</select>
+							</div>
+						</div>
+						<a th:href="@{/projects/{projectID}/addWorkflow(projectID=${newProject.id})}">Create New Workflow</a>
+					</div>
+					<div class="field">
 					  <label class="label" for="submit"></label>
 					  <div class="control">
 					    <button id="submit" name="submit" class="button is-primary" th:text="${newProject.id != null} ? 'Save' : 'Create'">Save</button>
+					    <a th:href="@{/projects/{projectID}(projectID=${newProject.id})}" th:text="${newProject.id != null} ? 'Cancel' : null">Cancel</a>
 					  </div>
 					</div>
 				</fieldset>

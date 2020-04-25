@@ -76,6 +76,7 @@ public class ProjectController {
 	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model)
 	{
 		addMembersToProject(users, p);
+		System.out.print("TEST TEST " + p.getCurrentWorkflow());
 		projectRepo.save(p);	
 		return "redirect:/projects/{projectID}";
 	}
