@@ -48,6 +48,10 @@
 						<thead>
 							<tr>
 								<th>Task</th>
+<<<<<<< HEAD
+=======
+								<th>Sprint</th>
+>>>>>>> 8b0c657... Revert "Merge branch 'master' into Development"
 								<th>Status</th>
 								<th>Due</th>
 							</tr>
@@ -55,16 +59,28 @@
 						<tbody>
 							<tr th:each="task: ${tasks}">
 								<td th:text="${task.taskDescription}">
+<<<<<<< HEAD
 								<td th:text="${task.currentStep}">
 								<td th:if="${task.sprint == null}">Not On Sprint Yet</td>
 							</tr>
 
+=======
+								<td><a
+									th:text="${task.sprint.name}"
+									th:href="@{/sprints/{sprintID}(sprintID=${task.sprint.id})}" />
+								<td th:text="${task.currentStep}">
+								<td th:text="${task.sprint.endDate}">
+							</tr>
+>>>>>>> 8b0c657... Revert "Merge branch 'master' into Development"
 						</tbody>
 					</table>
 					<div
 						th:if="${#lists.isEmpty(tasks)}"
 						class="">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8b0c657... Revert "Merge branch 'master' into Development"
 						<h1 class="subtitle">You're all caught up! Whoo!</h1>
 					</div>
 
@@ -100,6 +116,9 @@
 		</section>
 	</div>
 
+<<<<<<< HEAD
 <a th:href="@{/admin/schemes/addWorkflow/}">Create New Workflow</a>
+=======
+>>>>>>> 8b0c657... Revert "Merge branch 'master' into Development"
 </body>
 </html>
