@@ -2,12 +2,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1">
 <title>Backlog</title>
 <script src="/js/progressbar.js"></script>
-<link rel="stylesheet"
+<link
+	rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-<script defer
+<script
+	defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
@@ -23,7 +27,7 @@
 	<section class="section box">
 		<div class="row has-text-centered">
 			<p class="subtitle">
-			<a href="/viewBacklog">Add Task to Backlog</a>
+				<a href="/viewBacklog">Add Task to Backlog</a>
 			</p>
 			<span class="is-size-3 has-text-centered">Tasks </span>
 		</div>
@@ -37,50 +41,20 @@
 					<th>Current Step</th>
 					<th width="8%">Points</th>
 					<th width="4%">Complete</th>
-					<th><p class="subtitle">
-							
-						</p></th>
+					<th><p class="subtitle"></p></th>
 					<th></th>
 				</tr>
 			</thead>
-			<tr th:each="project: ${project}">
-						<td th:text="${project.backlog}"></td>
-			</tr>
-<!--			
-			
-			<tbody>
-				<form method="post">
-				<tr th:each="task: ${project.backlog}">
-					<td th:text="${task.taskDescription}">
-					<td th:text="${task.priority}">
-					<td th:text="${task.currentStep}">
-					<td th:text="${task.storyPoints}">
+			<tr th:each="task : ${project.backlog}">
+				<td><a
+					th:text="${task.taskDescription}"
+					th:href="@{/projects/{projectID}/tasks/{taskID}(projectID=${project.id},taskID=${task.id})}"></a></td>
+				<td th:text="${task.assignedUser.getFullName()}"></td>
+				<td th:text="${task.priority}"></td>
+				<td th:text="${task.currentStep}"></td>
+				<td th:text="${task.storyPoints}"></td>
 
-					<div class="field">
-						<label class="label" for="current-sprint">Sprint</label>
-						<div class="control">
-							<div class="select">
-								<select id="sprint-id" name="sprint-id" th:field="*{sprint.id}"
-									class="">
-									<tr th:each="sprint: ${project.sprints}">
-										<option th:value="${project.sprint.id}"
-											th:text="${project.sprint.id}">Sprint #</option>
-									</tr>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="field">
-						<label class="label" for="submit"></label>
-						<div class="control">
-							<button id="submit" name="submit" class="button is-default">Move
-								task to sprint</button>
-						</div>
-					</div>
-				</tr>
-				</form>
-			</tbody>
--->			
+			</tr>
 		</table>
 	</section>
 </body>

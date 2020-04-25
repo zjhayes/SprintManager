@@ -18,11 +18,11 @@
 	<section class="hero is-small has-text-centered">
 		<div class="hero-body">
 			<div class="container">
-				<h1
-					th:text="${task.sprint.name}"
-					class="title"></h1>
+				<h1 class="title">Adding task to 
+					<span th:text="${task.project.name}"></span>
+				</h1>
 				<p class="subtitle">
-					<a th:href="@{/}">Home</a>
+					<a th:href="@{/projects/{projectId}(projectId=${project.id})}">Back to <span th:text="${project.name}"></span></a>
 				</p>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 
 								<select th:field="*{assignedUser}">
 									<option
-										th:each="user : ${sprint.project.projectMembers}"
+										th:each="user : ${task.project.projectMembers}"
 										th:value="${user.id}"
 										th:text="${user.getFullName()}">Assigned</option>
 								</select>
@@ -124,7 +124,7 @@
 									class="">
 									<option
 										th:value="Todo"
-										th:text="Todo">Todo</option>
+										th:text="Todo">To Do</option>
 									<option
 										th:value="Doing"
 										th:text="Doing">Doing</option>

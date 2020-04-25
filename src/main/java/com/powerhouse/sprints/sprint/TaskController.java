@@ -14,7 +14,7 @@ import com.powerhouse.sprints.project.Project;
 import com.powerhouse.sprints.project.ProjectRepository;
 
 @Controller
-@RequestMapping("/sprints/{sprintID}")
+@RequestMapping("/projects/{projectID}")
 public class TaskController {
 	private static final String VIEWS_TASKS_CREATE_OR_UPDATE_FORM = "tasks/createOrUpdateTaskForm";
 
@@ -28,29 +28,52 @@ public class TaskController {
 		this.taskRepo = taskRepo;
 	}
 
-	@ModelAttribute("sprint")
-	public Sprint findSprint(@PathVariable("sprintID") long sprintID) {
-		return this.sprintRepo.findById(sprintID).orElse(null);
+	@ModelAttribute("project")
+	public Project findProject(@PathVariable("projectID") long projectID) {
+		return this.projectRepo.findById(projectID).orElse(null);
 	}
 
-	@InitBinder("sprint")
+	@InitBinder("project")
 	public void initOwnerBinder(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
 
+	@GetMapping("/tasks")
+	public String viewProjectTasks(Model model, Project project) {
+		Project p = projectRepo.getOne(project.getId());
+		model.addAttribute("project", project);
+		return "projects/backlogs";
+	}
+
+	@GetMapping("/tasks/{taskID}")
+	public String viewTask(@PathVariable("taskID") long taskID, Model model, Project project) {
+		Task task = taskRepo.getOne(taskID);
+		model.addAttribute("task", task);
+		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
+	}
+	
+	@PostMapping("/tasks/{taskID}")
+	public String upDateTask(Task task, Model model, Project project) {
+		project.addTask(task);
+		model.addAttribute("task", task);
+		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
+	}
+
+
+
 	@GetMapping("/tasks/new")
-	public String initCreationForm(Sprint sprint, Model model) {
+	public String initCreationForm(Project project, Model model) {
 		Task task = new Task();
-		sprint.addTask(task);
+		project.addTask(task);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/tasks/new")
-	public String processCreationForm(Sprint sprint, Task task, Model model) {
-		sprint.addTask(task);
+	public String processCreationForm(Project project, Task task, Model model) {
+		project.addTask(task);
 		this.taskRepo.save(task);
-		return "redirect:/sprints/{sprintID}";
+		return "redirect:/projects/{projectID}/tasks";
 	}
 
 	@GetMapping("/tasks/{taskId}/edit")
