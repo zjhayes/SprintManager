@@ -39,14 +39,7 @@ public class TaskController {
 	}
 
 	@GetMapping("/tasks")
->>>>>conflict
 	public String viewProjectTasks(Model model, Project project) {
-=======
-	public String viewTask(Model model, Project project) {
-		Project p = projectRepo.getOne(project.getId());
-======
-	public String viewProjectTasks(Model model, Project project) {
->>>>>
 		model.addAttribute("project", project);
 		return "projects/backlogs";
 	}
