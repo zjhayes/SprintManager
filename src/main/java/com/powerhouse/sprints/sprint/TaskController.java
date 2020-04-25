@@ -40,7 +40,6 @@ public class TaskController {
 
 	@GetMapping("/tasks")
 	public String viewProjectTasks(Model model, Project project) {
-		Project p = projectRepo.getOne(project.getId());
 		model.addAttribute("project", project);
 		return "projects/backlogs";
 	}
@@ -51,15 +50,13 @@ public class TaskController {
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
-	
+
 	@PostMapping("/tasks/{taskID}")
 	public String upDateTask(Task task, Model model, Project project) {
 		project.addTask(task);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
-
-
 
 	@GetMapping("/tasks/new")
 	public String initCreationForm(Project project, Model model) {
@@ -71,6 +68,8 @@ public class TaskController {
 
 	@PostMapping("/tasks/new")
 	public String processCreationForm(Project project, Task task, Model model) {
+		// TODO check for Sprint ID in URL and assign URL if found
+		// (ie /projects/1/tasks/new?sprint=10)
 		project.addTask(task);
 		this.taskRepo.save(task);
 		return "redirect:/projects/{projectID}/tasks";
