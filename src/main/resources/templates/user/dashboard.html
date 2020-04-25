@@ -48,6 +48,7 @@
 						<thead>
 							<tr>
 								<th>Task</th>
+								<th>Sprint</th>
 								<th>Status</th>
 								<th>Due</th>
 							</tr>
@@ -58,13 +59,17 @@
 								<td th:text="${task.currentStep}">
 								<td th:if="${task.sprint == null}">Not On Sprint Yet</td>
 							</tr>
-
+								<td><a
+									th:text="${task.sprint.name}"
+									th:href="@{/sprints/{sprintID}(sprintID=${task.sprint.id})}" />
+								<td th:text="${task.currentStep}">
+								<td th:text="${task.sprint.endDate}">
+							</tr>
 						</tbody>
 					</table>
 					<div
 						th:if="${#lists.isEmpty(tasks)}"
 						class="">
-
 						<h1 class="subtitle">You're all caught up! Whoo!</h1>
 					</div>
 
@@ -99,7 +104,6 @@
 			</div>
 		</section>
 	</div>
-
-
+<a th:href="@{/admin/schemes/addWorkflow/}">Create New Workflow</a>
 </body>
 </html>

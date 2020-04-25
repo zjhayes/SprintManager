@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,6 +19,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.model.NamedEntity;
+import com.powerhouse.sprints.schemes.WorkflowScheme;
 import com.powerhouse.sprints.sprint.Sprint;
 import com.powerhouse.sprints.sprint.Task;
 
@@ -45,6 +47,9 @@ public class Project extends NamedEntity {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Task> backlog;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+	private WorkflowScheme workflow;
 
 	public Project() {
 		super();
