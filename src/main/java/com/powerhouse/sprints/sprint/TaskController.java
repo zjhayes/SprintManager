@@ -39,7 +39,12 @@ public class TaskController {
 	}
 
 	@GetMapping("/tasks")
+<<<<<<< HEAD
 	public String viewProjectTasks(Model model, Project project) {
+=======
+	public String viewTask(Model model, Project project) {
+		Project p = projectRepo.getOne(project.getId());
+>>>>>>> 0e2d275... add mapping to view a projects tasks
 		model.addAttribute("project", project);
 		return "projects/backlogs";
 	}
