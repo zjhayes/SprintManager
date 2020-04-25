@@ -17,6 +17,7 @@
 <script
 	defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="/js/cascadingTextbox.js"></script>
 </head>
 <body>
 	<div th:insert="fragments/header :: header"></div>
@@ -38,6 +39,44 @@
 					  <div class="control">
 					  	<input id="name" name="name" type="text" class="input" th:field="*{name}">
 					  </div>
+					</div>
+					<div class="field">
+						<label class="label" for="numSteps">Number of Steps</label>
+						<div class="control">
+							<div class="select">
+								<select id="numSteps" name="numSteps">
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="field">
+						<label class="label" id="step1-label" for="step1">Step 1</label>
+						<input id="step1" name="step1" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step2-label" for="step2">Step 2</label>
+						<input id="step2" name="step2" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step3-label" for="step3">Step 3</label>
+						<input id="step3" name="step3" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step4-label" for="step4">Step 4</label>
+						<input id="step4" name="step4" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step5-label" for="step5">Step 5</label>
+						<input id="step5" name="step5" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step6-label" for="step6">Step 6</label>
+						<input id="step6" name="step6" type="text" class="input">
 					</div>
 					<div class="field">
 					  <label class="label" for="submit"></label>
