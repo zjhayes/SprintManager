@@ -80,6 +80,7 @@ public class ProjectController {
 		addMembersToProject(users, p);
 		projectRepo.save(p);
 		return "redirect:/projects/{projectID}";
+
 	}
 
 	@GetMapping("/projects/delete/{id}")
