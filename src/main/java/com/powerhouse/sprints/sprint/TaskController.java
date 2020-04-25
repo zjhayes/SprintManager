@@ -29,13 +29,20 @@ public class TaskController {
 	}
 
 	@ModelAttribute("project")
-	public Project findSprint(@PathVariable("projectID") long projectID) {
+	public Project findProject(@PathVariable("projectID") long projectID) {
 		return this.projectRepo.findById(projectID).orElse(null);
 	}
 
 	@InitBinder("project")
 	public void initOwnerBinder(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
+	}
+
+	@GetMapping("/tasks")
+	public String viewTask(Model model, Project project) {
+		Project p = projectRepo.getOne(project.getId());
+		model.addAttribute("project", project);
+		return "projects/backlogs";
 	}
 
 	@GetMapping("/tasks/new")
@@ -52,7 +59,7 @@ public class TaskController {
 		this.taskRepo.save(task);
 		return "redirect:/projects/{projectID}/tasks";
 	}
-	
+
 	@GetMapping("/tasks/{taskId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("taskId") long taskId, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
@@ -61,20 +68,19 @@ public class TaskController {
 	}
 
 	@PostMapping("/tasks/{taskId}/edit")
-	public String processUpdateTaskForm(Task task, Sprint sprint, Model model,
-			@PathVariable("taskId") long taskId) {
-			sprint.addTask(task);
-			taskRepo.save(task);
-			return "redirect:/sprints/{sprintID}";
+	public String processUpdateTaskForm(Task task, Sprint sprint, Model model, @PathVariable("taskId") long taskId) {
+		sprint.addTask(task);
+		taskRepo.save(task);
+		return "redirect:/sprints/{sprintID}";
 	}
-	
+
 	@PostMapping("/tasks/{taskId}/update")
 	public String reviseTask(Task task, Model model) {
 		this.taskRepo.save(task);
 		model.addAttribute("sprint.tasks", taskRepo.findAll());
 		return "redirect:/sprints/{sprintID}";
 	}
-	
+
 	@GetMapping("/tasks/{taskId}/delete")
 	public String deleteTask(@PathVariable("taskId") long taskId, Sprint sprint, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
