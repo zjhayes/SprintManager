@@ -48,7 +48,6 @@
 						<thead>
 							<tr>
 								<th>Task</th>
-								<th>Sprint</th>
 								<th>Status</th>
 								<th>Due</th>
 							</tr>
@@ -56,17 +55,16 @@
 						<tbody>
 							<tr th:each="task: ${tasks}">
 								<td th:text="${task.taskDescription}">
-								<td><a
-									th:text="${task.sprint.name}"
-									th:href="@{/sprints/{sprintID}(sprintID=${task.sprint.id})}" />
 								<td th:text="${task.currentStep}">
-								<td th:text="${task.sprint.endDate}">
+								<td th:if="${task.sprint == null}">Not On Sprint Yet</td>
 							</tr>
+
 						</tbody>
 					</table>
 					<div
 						th:if="${#lists.isEmpty(tasks)}"
 						class="">
+
 						<h1 class="subtitle">You're all caught up! Whoo!</h1>
 					</div>
 
@@ -101,6 +99,7 @@
 			</div>
 		</section>
 	</div>
+
 
 </body>
 </html>
