@@ -35,6 +35,13 @@ public class ProjectController {
 		return "projects/projects";
 	}
 
+	@GetMapping("/viewBacklog")
+	public String viewBacklog(Model model) {
+		List<Project> backlog = projectRepo.findAll();
+		model.addAttribute("project", backlog);
+		return "projects/backlogs";
+	}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
@@ -53,7 +60,7 @@ public class ProjectController {
 		p.setCreatedDate(LocalDate.now());
 		addMembersToProject(users, p);
 		projectRepo.save(p);
-		return viewAllProjects(model);
+		return "redirect:/projects/" + p.getId();
 	}
 
 	@GetMapping("/projects/edit/{id}")
@@ -63,12 +70,13 @@ public class ProjectController {
 		model.addAttribute("allUsers", userRepo.findAll());
 		return "projects/projectSettings";
 	}
-
-	@PostMapping("/projects/update/{id}")
-	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model) {
+	
+	@PostMapping("/projects/update/{projectID}")
+	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model)
+	{
 		addMembersToProject(users, p);
-		projectRepo.save(p);
-		return viewAllProjects(model);
+		projectRepo.save(p);	
+		return "redirect:/projects/{projectID}";
 	}
 
 	@GetMapping("/projects/delete/{id}")

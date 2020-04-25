@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.powerhouse.sprints.project.Project;
+import com.powerhouse.sprints.project.ProjectRepository;
+
 @Controller
 @RequestMapping("/sprints/{sprintID}")
 public class TaskController {
@@ -17,8 +20,10 @@ public class TaskController {
 
 	private final SprintRepository sprintRepo;
 	private final TaskRepository taskRepo;
+	private final ProjectRepository projectRepo;
 
-	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo) {
+	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo) {
+		this.projectRepo = projectRepo;
 		this.sprintRepo = sprintRepo;
 		this.taskRepo = taskRepo;
 	}
