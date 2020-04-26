@@ -36,53 +36,39 @@
 	</section>
 	<section>
 		<div class="column is-10 is-offset-1">
+			<p class="subtitle">
+				<a th:href="@{/projects/{projectID}/sprints/{sprintID}(projectID=${projectID}, sprintID=${sprint.id})}">View Sprint Details</a>
+			</p>
 			<div class="box">
-				<div class="row">
-					<div class="column">
-						<strong>Description:</strong> <span
-							th:text="${sprint.description}" />
-					</div>
-				</div>
-				<div class="column">
-					<strong>Start Date:</strong> <span
-						th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
-				</div>
-				<div class="column">
-					<strong>End Date:</strong> <span
-						th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
-				</div>
-				<section class="section box column">
+				<section class="section column">
 					<div class="row has-text-centered">
-						<span class="is-size-3 has-text-centered">Board </span><small><a
+						<span class="is-size-3 has-text-centered">Sprint Board </span><small><a
 							th:href="@{{sprintID}/tasks/new(sprintID=${sprint.id})}"> Add Task</a></small>
 					</div>
 
 					<table class="has-border table is-striped is-fullwidth ">
 						<thead>
-							<tr th:each="step: ${sprint.project.workflow.steps}">
-								<th th:text="${step}"></th>
+							<tr>
+								<th th:each="step: ${sprint.project.workflow.steps}" th:text="${step}"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<form>
-								<tr th:each="task: ${sprint.tasks}">
-									<td th:text="${task.taskDescription}">
-									<td th:text="${task.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
-									<td th:text="${task.priority}">
-									<td th:text="${task.currentStep}">
-									<td th:text="${task.storyPoints}">
-									<td class="has-text-centered"><i
-										th:if="${task.completed}"
-										class="fa fa-check" /></td>
-									<td><a th:href="@{tasks/{taskId}/edit (taskId=${task.id})}">Edit</a></td>
-									<td><a th:href="@{tasks/{taskId}/delete (taskId=${task.id})}">Delete</a></td> 			
-									<td><a th:href="@{{sprintID}/tasks/{taskId}/moveToBacklog (sprintID=${sprint.id}, taskId=${task.id})}">Move to backlog</a></td>
-								</tr>
-							</form>
+							<tr th:each="task: ${sprint.tasks}">
+								<td th:text="${task.taskDescription}">
+								<td th:text="${task.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
+								<td th:text="${task.priority}">
+								<td th:text="${task.currentStep}">
+								<td th:text="${task.storyPoints}">
+								<td class="has-text-centered"><i
+									th:if="${task.completed}"
+									class="fa fa-check" /></td>
+								<td><a th:href="@{tasks/{taskId}/edit (taskId=${task.id})}">Edit</a></td>
+								<td><a th:href="@{tasks/{taskId}/delete (taskId=${task.id})}">Delete</a></td> 			
+								<td><a th:href="@{{sprintID}/tasks/{taskId}/moveToBacklog (sprintID=${sprint.id}, taskId=${task.id})}">Move to backlog</a></td>
+							</tr>
 						</tbody>
 					</table>
 				</section>
-				<a th:href="@{/projects/{projectID}/sprints/{sprintID}/edit(projectID=${projectID}, sprintID=${sprint.id})}"  class="align-right">Sprint Settings</div>
 			</div>
 		</div>
 	</section>
