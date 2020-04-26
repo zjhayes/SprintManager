@@ -84,7 +84,7 @@ public class ProjectController {
 		{
 			addMembersToProject(users, p);
 		}
-		projectRepo.save(p);
+		projectRepo.saveAndFlush(p);
 		return "redirect:/projects/{projectID}";
 
 	}
