@@ -62,6 +62,10 @@ public class Project extends NamedEntity {
 		}
 		task.setProject(this);
 	}
+	
+	public void clearMembers() {
+		projectMembers.clear();
+	}
   
 	public void addMember(User member) {
 		projectMembers.add(member);

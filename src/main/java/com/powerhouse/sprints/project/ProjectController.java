@@ -115,6 +115,7 @@ public class ProjectController {
 	}
 
 	private void addMembersToProject(List<Long> users, Project p) {
+		p.clearMembers();
 		for (Long userID : users) {
 			User member = userRepo.findById(userID).orElse(null);
 			member.addToProject(p);
