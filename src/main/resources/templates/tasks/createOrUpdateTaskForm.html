@@ -117,21 +117,13 @@
 							for="current-step">Status</label>
 						<div class="control">
 							<div class="select">
-								<select
-									id="current-step"
-									name="current-step"
-									th:field="*{currentStep}"
-									class="">
-									<option
-										th:value="Todo"
-										th:text="Todo">To Do</option>
-									<option
-										th:value="Doing"
-										th:text="Doing">Doing</option>
-									<option
-										th:value="Done"
-										th:text="Done">Done</option>
-								</select>
+								<select id="current-step" name="current-step" th:field="*{currentStep}">
+							      	<option
+										th:each="step : ${task.project.workflow.steps}"
+										th:value="${step}"
+										th:text="${step}">
+									</option>
+					    		</select>
 							</div>
 						</div>
 					</div>

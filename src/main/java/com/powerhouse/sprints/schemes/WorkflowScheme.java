@@ -2,6 +2,7 @@ package com.powerhouse.sprints.schemes;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -23,7 +24,7 @@ import lombok.Setter;
 public class WorkflowScheme extends NamedEntity {
 	
 	@ElementCollection
-	private Set<String> steps = new HashSet<String>();
+	private Set<String> steps = new LinkedHashSet<String>();
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "workflow", cascade = { CascadeType.MERGE })
 	private Set<Project> projects;
