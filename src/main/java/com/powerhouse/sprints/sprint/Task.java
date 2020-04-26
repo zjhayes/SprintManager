@@ -42,6 +42,6 @@ public class Task extends BaseEntity {
 	@ToString.Exclude
 	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST }, fetch = FetchType.EAGER)
 	private Sprint sprint;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
 	private Project project;
 }

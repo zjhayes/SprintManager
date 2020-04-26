@@ -27,9 +27,10 @@
 	<section class="section box">
 		<div class="row has-text-centered">
 			<p class="subtitle">
-				<a
-					th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}">Add
-					Task to Backlog</a>
+				<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return to Project</a>
+			</p>
+			<p class="subtitle">
+				<a th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}">Add Task to Backlog</a>
 			</p>
 			<span class="is-size-3 has-text-centered">Tasks</span>
 		</div>
@@ -48,14 +49,23 @@
 				</tr>
 			</thead>
 			<tr th:each="task : ${project.backlog}">
-				<td><a
-					th:text="${task.taskDescription}"
-					th:href="@{/projects/{projectID}/tasks/{taskID}(projectID=${project.id},taskID=${task.id})}"></a></td>
+				<td th:text="${task.taskDescription}"></td>	
 				<td th:text="${task.assignedUser.getFullName()}"></td>
 				<td th:text="${task.priority}"></td>
 				<td th:text="${task.currentStep}"></td>
 				<td th:text="${task.storyPoints}"></td>
-
+				<td class="has-text-centered">
+					<i th:if="${task.completed}" class="fa fa-check"></i>
+				</td>
+				<td>
+					<a th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a>
+				</td>
+				<td>
+					<a th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a>
+				</td>
+				<td>
+					<a th:href="@{/projects/{projectID}/tasks/{taskId}/moveToSprint (projectID=${project.id}, taskId=${task.id})}">Move to Sprint</a>
+				</td>
 			</tr>
 		</table>
 	</section>

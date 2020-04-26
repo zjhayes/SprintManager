@@ -45,7 +45,7 @@ public class Project extends NamedEntity {
 	private Set<User> projectMembers = new HashSet<User>();
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Task> backlog;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
