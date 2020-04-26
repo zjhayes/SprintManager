@@ -1,8 +1,10 @@
 package com.powerhouse.sprints.schemes;
 
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -24,7 +26,7 @@ import lombok.Setter;
 public class WorkflowScheme extends NamedEntity {
 	
 	@ElementCollection
-	private Set<String> steps = new LinkedHashSet<String>();
+	private List<String> steps = new ArrayList<String>();
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "workflow", cascade = { CascadeType.MERGE })
 	private Set<Project> projects;
@@ -33,7 +35,7 @@ public class WorkflowScheme extends NamedEntity {
 		super();
 	}
 	
-	public WorkflowScheme(Set<String> steps) {
+	public WorkflowScheme(List<String> steps) {
 		super();
 		this.steps = steps;
 	}
