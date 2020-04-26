@@ -41,6 +41,14 @@ public class SprintController {
 		model.addAttribute("projectID", projectID);
 		return "sprints/sprintDetail";
 	}
+	
+	@GetMapping("projects/{projectID}/sprints/{sprintID}/board")
+	public String viewSprintBoard(@PathVariable("sprintID") long sprintID, @PathVariable("projectID") long projectID, Model model) {
+		Sprint s = sprintRepo.getOne(sprintID);
+		model.addAttribute("sprint", s);
+		model.addAttribute("projectID", projectID);
+		return "sprints/sprintBoard";
+	}
 
 	@GetMapping("/sprints/{sprintID}/addTask")
 	public String initTaskForm(@PathVariable("sprintID") long sprintID, Model model) {

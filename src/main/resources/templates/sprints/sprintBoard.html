@@ -31,9 +31,6 @@
 				<p class="subtitle">
 					<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return to Project</a>
 				</p>
-				<p class="subtitle">
-					<a th:href="@{board}">View Sprint Board</a>
-				</p>
 			</div>
 		</div>
 	</section>
@@ -54,24 +51,16 @@
 					<strong>End Date:</strong> <span
 						th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
 				</div>
-
-				<section class="section box">
+				<section class="section box column">
 					<div class="row has-text-centered">
-						<span class="is-size-3 has-text-centered">Tasks </span><small><a
+						<span class="is-size-3 has-text-centered">Board </span><small><a
 							th:href="@{{sprintID}/tasks/new(sprintID=${sprint.id})}"> Add Task</a></small>
 					</div>
 
 					<table class="has-border table is-striped is-fullwidth ">
 						<thead>
-							<tr>
-								<th width="50%">Task</th>
-								<th>Assigned To</th>
-								<th>Priority</th>
-								<th>Current Step</th>
-								<th width="8%">Points</th>
-								<th width="4%">Complete</th>
-								<th></th>
-								
+							<tr th:each="step: ${sprint.project.workflow.steps}">
+								<th th:text="${step}"></th>
 							</tr>
 						</thead>
 						<tbody>
