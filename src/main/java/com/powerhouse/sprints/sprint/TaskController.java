@@ -67,26 +67,45 @@ public class TaskController {
 	}
 
 	@PostMapping("/tasks/new")
-	public String processCreationForm(Project project, Task task, Model model) {
+	public String processCreationForm(@PathVariable("projectID") long projectID, Sprint sprint, Project project, Task task, Model model) {
 		// TODO check for Sprint ID in URL and assign URL if found
 		// (ie /projects/1/tasks/new?sprint=10)
 		project.addTask(task);
 		this.taskRepo.save(task);
 		return "redirect:/projects/{projectID}/tasks";
 	}
+	
+/*
+	
+	@GetMapping("/{sprintID}/tasks/new")
+	public String initCreationForm2(@PathVariable("sprintID") long sprintID, Project project, Model model) {
+		Task task = new Task();
+		project.addTask(task);
+		model.addAttribute("task", task);
+		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
+	}
+
+	@PostMapping("/{sprintID}/tasks/new")
+	public String processCreationForm2(@PathVariable("sprintID") long sprintID, Sprint sprint, Task task, Model model) {
+		sprint.addTask(task);
+		this.taskRepo.save(task);
+		return "redirect:/sprints/{sprintID}";
+	}
+	
+*/	
 
 	@GetMapping("/tasks/{taskId}/edit")
-	public String initUpdateOwnerForm(@PathVariable("taskId") long taskId, Model model) {
+	public String initUpdateOwnerForm(@PathVariable("taskId") long taskId,Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
 		model.addAttribute(task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/tasks/{taskId}/edit")
-	public String processUpdateTaskForm(Task task, Sprint sprint, Model model, @PathVariable("taskId") long taskId) {
-		sprint.addTask(task);
+	public String processUpdateTaskForm(@PathVariable("projectID") long projectID, Task task, Project project, Model model) {
+		project.addTask(task);
 		taskRepo.save(task);
-		return "redirect:/sprints/{sprintID}";
+		return "redirect:/projects/{projectID}/tasks";
 	}
 
 	@PostMapping("/tasks/{taskId}/update")
@@ -97,10 +116,10 @@ public class TaskController {
 	}
 
 	@GetMapping("/tasks/{taskId}/delete")
-	public String deleteTask(@PathVariable("taskId") long taskId, Sprint sprint, Model model) {
+	public String deleteTask(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
-		sprint.getTasks().remove(task);
-		sprintRepo.save(sprint);
-		return "redirect:/sprints/{sprintID}";
+		project.getBacklog().remove(task);
+		projectRepo.save(project);
+		return "redirect:/projects/{projectID}/tasks";
 	}
 }
