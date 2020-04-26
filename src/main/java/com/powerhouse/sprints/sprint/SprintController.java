@@ -41,13 +41,21 @@ public class SprintController {
 		model.addAttribute("projectID", projectID);
 		return "sprints/sprintDetail";
 	}
+	
+	@GetMapping("projects/{projectID}/sprints/{sprintID}/board")
+	public String viewSprintBoard(@PathVariable("sprintID") long sprintID, @PathVariable("projectID") long projectID, Model model) {
+		Sprint s = sprintRepo.getOne(sprintID);
+		model.addAttribute("sprint", s);
+		model.addAttribute("projectID", projectID);
+		return "sprints/sprintBoard";
+	}
 
 	@GetMapping("/sprints/{sprintID}/addTask")
 	public String initTaskForm(@PathVariable("sprintID") long sprintID, Model model) {
 		Task t = new Task();
 		t.setSprint(sprintRepo.getOne(sprintID));
 		model.addAttribute("task", t);
-		return "sprints/taskForm";
+		return "tasks/createOrUpdateTaskForm";
 	}
 
 	@PostMapping("/projects/{projectID}/sprints/update")
@@ -57,7 +65,7 @@ public class SprintController {
 	}
 	
 	@GetMapping("/projects/{projectID}/sprints/{sprintID}/edit")
-	public String showUpdateProject(@PathVariable("sprintID") long id, @PathVariable("projectID") long projectID, Model model) {
+	public String showUpdateSprint(@PathVariable("sprintID") long id, @PathVariable("projectID") long projectID, Model model) {
 		Sprint s = sprintRepo.findById(id).orElse(null);
 		model.addAttribute("newSprint", s);
 		model.addAttribute("projectID", projectID);

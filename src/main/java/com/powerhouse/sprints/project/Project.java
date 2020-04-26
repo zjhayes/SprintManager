@@ -37,11 +37,11 @@ public class Project extends NamedEntity {
 	@CreationTimestamp
 	private LocalDate createdDate;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = { CascadeType.MERGE })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
 	private List<Sprint> sprints;
 
 	@ToString.Exclude
-	@ManyToMany(mappedBy = "projects")
+	@ManyToMany(mappedBy = "projects", cascade = { CascadeType.MERGE })
 	private Set<User> projectMembers = new HashSet<User>();
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -61,6 +61,10 @@ public class Project extends NamedEntity {
 			this.backlog.add(task);
 		}
 		task.setProject(this);
+	}
+	
+	public void clearMembers() {
+		projectMembers.clear();
 	}
   
 	public void addMember(User member) {

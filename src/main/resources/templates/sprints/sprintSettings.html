@@ -36,6 +36,7 @@
 				th:action="@{/projects/{projectID}/sprints/update/{sprintID}(sprintID=${newSprint.id}, projectID=${projectID})}" method="POST">
 				<fieldset>
 					<input type="hidden" name="project" th:value="${newSprint.project.id}">
+					<input type="hidden" id="id" name="id" th:value="*{id}" th:field="*{id}">
 					<div class="field">
 					  <label class="label" for="name">Sprint Name</label>
 					  <div class="control">

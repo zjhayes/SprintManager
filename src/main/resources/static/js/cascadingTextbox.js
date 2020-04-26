@@ -2,8 +2,8 @@
  * Show/hide fields based on dropdown selection.
  */
 $(document).ready(function(){
-	$("#step3-label").hide();
-    $("#step3").hide();
+	$("#step3-label").show();
+    $("#step3").show();
     $("#step4-label").hide();
     $("#step4").hide();
     $("#step5-label").hide();
