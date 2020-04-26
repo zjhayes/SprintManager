@@ -55,7 +55,7 @@ public class SprintController {
 		Task t = new Task();
 		t.setSprint(sprintRepo.getOne(sprintID));
 		model.addAttribute("task", t);
-		return "sprints/taskForm";
+		return "tasks/createOrUpdateTaskForm";
 	}
 
 	@PostMapping("/projects/{projectID}/sprints/update")
@@ -65,7 +65,7 @@ public class SprintController {
 	}
 	
 	@GetMapping("/projects/{projectID}/sprints/{sprintID}/edit")
-	public String showUpdateProject(@PathVariable("sprintID") long id, @PathVariable("projectID") long projectID, Model model) {
+	public String showUpdateSprint(@PathVariable("sprintID") long id, @PathVariable("projectID") long projectID, Model model) {
 		Sprint s = sprintRepo.findById(id).orElse(null);
 		model.addAttribute("newSprint", s);
 		model.addAttribute("projectID", projectID);

@@ -28,7 +28,7 @@ public class WorkflowScheme extends NamedEntity {
 	@ElementCollection
 	private List<String> steps = new ArrayList<String>();
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "workflow", cascade = { CascadeType.MERGE })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "workflow")
 	private Set<Project> projects;
 	
 	public WorkflowScheme() {
