@@ -61,7 +61,10 @@ public class ProjectController {
 	@PostMapping("/projects/update")
 	public String addProject(@ModelAttribute Project p, @RequestParam("projectMembers") List<Long> users, Model model) {
 		p.setCreatedDate(LocalDate.now());
-		addMembersToProject(users, p);
+		if(!users.isEmpty())
+		{
+			addMembersToProject(users, p);
+		}
 		projectRepo.save(p);
 		return "redirect:/projects/" + p.getId();
 	}
@@ -77,7 +80,10 @@ public class ProjectController {
 
 	@PostMapping("/projects/update/{projectID}")
 	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model) {
-		addMembersToProject(users, p);
+		if(!users.isEmpty())
+		{
+			addMembersToProject(users, p);
+		}
 		projectRepo.save(p);
 		return "redirect:/projects/{projectID}";
 
