@@ -40,8 +40,6 @@ public class Sprint extends ProjectResource {
 	private List<Task> tasks;
 
 	public Sprint() {
-		setName("");
-		description = "";
 		tasks = new ArrayList<Task>();
 	}
 
