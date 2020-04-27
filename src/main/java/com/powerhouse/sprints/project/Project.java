@@ -53,7 +53,7 @@ public class Project extends NamedEntity {
 	private WorkflowScheme workflow;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
-	private PriorityScheme priorities;
+	private PriorityScheme priorityScheme;
 
 	public Project() {
 		super();
