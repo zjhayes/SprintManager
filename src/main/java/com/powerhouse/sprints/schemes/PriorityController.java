@@ -1,6 +1,5 @@
 package com.powerhouse.sprints.schemes;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,19 +12,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class WorkflowController {
-	@Autowired
-	WorkflowSchemeRepository workflowRepo;
+public class PriorityController {
 	
-	@GetMapping("/admin/schemes/addWorkflow/")
+	@Autowired
+	PrioritySchemeRepository priorityRepo;
+	
+	@GetMapping("/admin/schemes/addPriority/")
 	public String addWorkflow(Model model) {
-		WorkflowScheme w = new WorkflowScheme();
-		model.addAttribute("newWorkflow", w);
-		return "schemes/workflowSettings";
+		PriorityScheme p = new PriorityScheme();
+		model.addAttribute("newPriorityScheme", p);
+		return "schemes/prioritySchemeSettings";
 	}
 
-	@PostMapping("/admin/schemes/workflows/update")
-	public String addWorkflow(@ModelAttribute WorkflowScheme w, @RequestParam("numSteps") String numStepsString, 
+	@PostMapping("/admin/schemes/priorities/update")
+	public String addWorkflow(@ModelAttribute PriorityScheme p, @RequestParam("numSteps") String numStepsString, 
 			@RequestParam("step1") String step1, @RequestParam("step2") String step2, @RequestParam("step3") String step3,
 			@RequestParam("step4") String step4, @RequestParam("step5") String step5, @RequestParam("step6") String step6, Model model) {
 		List<String> steps = new ArrayList<String>();
@@ -36,9 +36,9 @@ public class WorkflowController {
 		steps.add(step5);
 		steps.add(step6);
 		for(int i = 0; i < Integer.parseInt(numStepsString); i++) {
-			w.addStep(steps.get(i));
+			p.addPriority(steps.get(i));
 		}
-		workflowRepo.save(w);
+		priorityRepo.save(p);
 		return "redirect:/admin/schemes/";
 	}
 }

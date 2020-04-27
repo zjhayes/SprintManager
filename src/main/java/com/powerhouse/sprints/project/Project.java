@@ -19,6 +19,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.model.NamedEntity;
+import com.powerhouse.sprints.schemes.PriorityScheme;
 import com.powerhouse.sprints.schemes.WorkflowScheme;
 import com.powerhouse.sprints.sprint.Sprint;
 import com.powerhouse.sprints.sprint.Task;
@@ -50,6 +51,9 @@ public class Project extends NamedEntity {
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	private WorkflowScheme workflow;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+	private PriorityScheme priorityScheme;
 
 	public Project() {
 		super();

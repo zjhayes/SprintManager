@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1">
+<title>Sprint Manager - Priority Scheme Settings</title>
+<link
+	rel="stylesheet"
+	type="text/css"
+	href="/css/style.css">
+<script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+<script
+	defer
+	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="/js/cascadingTextbox.js"></script>
+</head>
+<body>
+	<div th:insert="fragments/header :: header"></div>
+
+	<section class="hero is-small has-text-centered">
+		<div class="hero-body">
+			<div class="container">
+				<h1 class="title">Priority Scheme Settings</h1>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<div class="column is-10 is-offset-1">		
+			<form class="form-horizontal" th:object="${newPriorityScheme}"
+				th:action="@{/admin/schemes/priorities/update/{prioritySchemeID}(prioritySchemeID=${newPriorityScheme.id})}" method="POST">
+				<fieldset>
+					<div class="field">
+					  <label class="label" for="name">Priority Scheme Name</label>
+					  <div class="control">
+					  	<input id="name" name="name" type="text" class="input" th:field="*{name}">
+					  </div>
+					</div>
+					<div class="field">
+						<label class="label" for="numSteps">Number of Priorities</label>
+						<div class="control">
+							<div class="select">
+								<select id="numSteps" name="numSteps">
+									<option value="2">2</option>
+									<option value="3" selected="selected">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="field">
+						<label class="label" id="step1-label" for="step1">Priority 1</label>
+						<input id="step1" name="step1" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step2-label" for="step2">Priority 2</label>
+						<input id="step2" name="step2" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step3-label" for="step3">Priority 3</label>
+						<input id="step3" name="step3" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step4-label" for="step4">Priority 4</label>
+						<input id="step4" name="step4" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step5-label" for="step5">Priority 5</label>
+						<input id="step5" name="step5" type="text" class="input">
+					</div>
+					<div class="field">
+						<label class="label" id="step6-label" for="step6">Priority 6</label>
+						<input id="step6" name="step6" type="text" class="input">
+					</div>
+					<div class="field">
+					  <label class="label" for="submit"></label>
+					  <div class="control">
+					    <button id="submit" name="submit" class="button is-primary" th:text="${newPriorityScheme.id != null} ? 'Save' : 'Create'">Save</button>
+					  </div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

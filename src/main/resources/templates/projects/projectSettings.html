@@ -71,6 +71,20 @@
 						</div>
 					</div>
 					<div class="field">
+						<label class="label" for="priorityScheme">Priority Scheme</label>
+						<div class="control">
+							<div class="select">
+								<select id="priorityScheme" name="priorityScheme" th:field="*{priorityScheme}">
+									<option
+										th:each="priorityScheme : ${allPrioritySchemes}"
+										th:value="${priorityScheme.id}"
+										th:text="${priorityScheme.getName()}">
+									</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="field">
 					  <label class="label" for="submit"></label>
 					  <div class="control">
 					    <button id="submit" name="submit" class="button is-primary" th:text="${newProject.id != null} ? 'Save' : 'Create'">Save</button>

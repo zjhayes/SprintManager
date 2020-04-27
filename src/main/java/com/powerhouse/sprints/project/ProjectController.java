@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.auth.repository.UserRepository;
+import com.powerhouse.sprints.schemes.PrioritySchemeRepository;
 import com.powerhouse.sprints.schemes.WorkflowSchemeRepository;
 import com.powerhouse.sprints.sprint.Sprint;
 
@@ -30,6 +31,8 @@ public class ProjectController {
 	UserRepository userRepo;
 	@Autowired
 	WorkflowSchemeRepository workflowRepo;
+	@Autowired
+	PrioritySchemeRepository priorityRepo;
 
 	@GetMapping("/projects")
 	public String viewAllProjects(Model model) {
@@ -55,6 +58,7 @@ public class ProjectController {
 		model.addAttribute("newProject", p);
 		model.addAttribute("allUsers", userRepo.findAll());
 		model.addAttribute("allWorkflows", workflowRepo.findAll());
+		model.addAttribute("allPrioritySchemes", priorityRepo.findAll());
 		return "projects/projectSettings";
 	}
 
@@ -75,6 +79,7 @@ public class ProjectController {
 		model.addAttribute("newProject", p);
 		model.addAttribute("allUsers", userRepo.findAll());
 		model.addAttribute("allWorkflows", workflowRepo.findAll());
+		model.addAttribute("allPrioritySchemes", priorityRepo.findAll());
 		return "projects/projectSettings";
 	}
 

@@ -88,24 +88,13 @@
 							for="priority">Priority</label>
 						<div class="control">
 							<div class="select">
-								<select
-									id="priority"
-									name="priority"
-									th:field="*{priority}"
-									class="">
-									<option
-										th:value="High"
-										th:text="High">High</option>
-									<option
-										th:value="Medium"
-										th:text="Medium">Medium</option>
-									<option
-										th:value="Low"
-										th:text="Low">Low</option>
-									<option
-										th:value="Blocker"
-										th:text="Blocker">Blocker</option>
-								</select>
+								<select id="current-priority" name="current-priority" th:field="*{priority}">
+							      	<option
+										th:each="priority : ${task.project.priorityScheme.priorities}"
+										th:value="${priority}"
+										th:text="${priority}">
+									</option>
+					    		</select>
 							</div>
 						</div>
 					</div>
@@ -127,7 +116,6 @@
 							</div>
 						</div>
 					</div>
-					Test
 
 
 					<!-- Multiple Checkboxes -->
