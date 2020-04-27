@@ -16,22 +16,21 @@
 </head>
 <body>
 	<div th:insert="fragments/header :: header"></div>
-
 	<section class="hero is-small has-text-centered">
 		<div class="hero-body">
 			<div class="container">
 				<h1 class="title">Project Backlog</h1>
 			</div>
+			<div class="subtitle">
+				<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return to Project</a>
+			</div>
+			<div class="subtitle">
+				<a th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}">Add Task to Backlog</a>
+			</div>
 		</div>
 	</section>
 	<section class="section box">
 		<div class="row has-text-centered">
-			<p class="subtitle">
-				<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return to Project</a>
-			</p>
-			<p class="subtitle">
-				<a th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}">Add Task to Backlog</a>
-			</p>
 			<span class="is-size-3 has-text-centered">Tasks</span>
 		</div>
 
