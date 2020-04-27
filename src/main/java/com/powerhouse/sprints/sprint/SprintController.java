@@ -43,12 +43,13 @@ public class SprintController {
 		dataBinder.setDisallowedFields("id");
 	}
 
-	@GetMapping({ "/sprints" })
-	public String viewAllSprints(Model model) {
-		List<Sprint> allSprints = sprintRepo.findAll();
-		model.addAttribute("sprints", allSprints);
-		return "sprints/sprints";
-	}
+	// IS this used?
+//	@GetMapping("/sprints")
+//	public String viewAllSprints(Model model, Project project) {
+//		List<Sprint> allSprints = sprintRepo.findAllByProjectId(project.getId());
+//		model.addAttribute("sprints", allSprints);
+//		return "sprints/sprints";
+//	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -63,7 +64,7 @@ public class SprintController {
 		return "sprints/sprintDetail";
 	}
 
-	@GetMapping("projects/{projectID}/sprints/{sprintID}/board")
+	@GetMapping("/sprints/{sprintID}/board")
 	public String viewSprintBoard(@PathVariable("sprintID") long sprintID, @PathVariable("projectID") long projectID,
 			Model model) {
 		Sprint s = sprintRepo.getOne(sprintID);
@@ -80,13 +81,13 @@ public class SprintController {
 		return "tasks/createOrUpdateTaskForm";
 	}
 
-	@PostMapping("/projects/{projectID}/sprints/update")
+	@PostMapping("/sprints/update")
 	public String addSprintToProject(@ModelAttribute Sprint s, Model model) {
 		sprintRepo.save(s);
 		return "redirect:/projects/" + s.getProject().getId();
 	}
 
-	@GetMapping("/projects/{projectID}/sprints/{sprintID}/edit")
+	@GetMapping("/sprints/{sprintID}/edit")
 	public String showUpdateSprint(@PathVariable("sprintID") long id, @PathVariable("projectID") long projectID,
 			Model model) {
 		Sprint s = sprintRepo.findById(id).orElse(null);
@@ -95,13 +96,13 @@ public class SprintController {
 		return "sprints/sprintSettings";
 	}
 
-	@PostMapping("/projects/{projectID}/sprints/update/{sprintID}")
+	@PostMapping("/sprints/update/{sprintID}")
 	public String reviseSprint(Sprint s, Model model) {
 		sprintRepo.save(s);
 		return "redirect:/projects/" + s.getProject().getId();
 	}
 
-	@GetMapping("/projects/{projectID}/sprints/delete/{sprintID}")
+	@GetMapping("/sprints/delete/{sprintID}")
 	public String deleteSprint(@PathVariable("sprintID") long sprintID, Model model) {
 		Sprint s = sprintRepo.findById(sprintID).orElse(null);
 		sprintRepo.delete(s);

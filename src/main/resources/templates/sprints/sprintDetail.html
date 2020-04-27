@@ -58,7 +58,7 @@
 				<section class="section box">
 					<div class="row has-text-centered">
 						<span class="is-size-3 has-text-centered">Tasks </span><small><a
-							th:href="@{{sprintID}/tasks/new(sprintID=${sprint.id})}"> Add Task</a></small>
+							th:href="@{/projects/{projectId}/tasks/new?sprintid={sprintId}(projectId=${sprint.project.id}, sprintId=${sprint.id})}"> Add Task</a></small>
 					</div>
 
 					<table class="has-border table is-striped is-fullwidth ">
