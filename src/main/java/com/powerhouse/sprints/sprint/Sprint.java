@@ -26,8 +26,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Sprint extends NamedEntity {
-	
+public class Sprint extends ProjectResource {
+
 	private static final long serialVersionUID = 1L;
 	private String description;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -38,8 +38,6 @@ public class Sprint extends NamedEntity {
 	private Date endDate;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Task> tasks;
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Project project;
 
 	public Sprint() {
 		setName("");
