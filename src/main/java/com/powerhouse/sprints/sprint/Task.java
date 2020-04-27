@@ -21,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Task extends BaseEntity {
+public class Task extends ProjectResource {
 
 	/**
 	 * 
@@ -42,6 +42,4 @@ public class Task extends BaseEntity {
 	@ToString.Exclude
 	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST }, fetch = FetchType.EAGER)
 	private Sprint sprint;
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
-	private Project project;
 }
