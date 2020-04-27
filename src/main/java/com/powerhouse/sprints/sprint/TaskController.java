@@ -1,5 +1,6 @@
 package com.powerhouse.sprints.sprint;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,7 +22,8 @@ public class TaskController {
 	private final SprintRepository sprintRepo;
 	private final TaskRepository taskRepo;
 	private final ProjectRepository projectRepo;
-
+	
+	@Autowired
 	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo) {
 		this.projectRepo = projectRepo;
 		this.sprintRepo = sprintRepo;
