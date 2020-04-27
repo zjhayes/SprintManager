@@ -51,5 +51,28 @@
 			</table>
 		</div>
 	</section>
+	<section class="section">
+		<div class="column is-10 is-offset-1">
+			<p class="subtitle">
+				<a th:href="@{/admin/schemes/addPriority/}">Create Priority Scheme</a><br/>
+			</p>
+			<table class="table is-bordered is-fullwidth is-striped is-hoverable">
+				<thead>
+					<tr>
+						<th>Priority Scheme</th>
+						<th>Priorities</th>
+						<th>Projects</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="priorityScheme: ${priorities}">
+						<td th:text="${priorityScheme.name}"/>
+						<td th:text="${priorityScheme.priorities.size()}" />
+						<td th:text="${priorityScheme.projects.size()}"/>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
 </body>
 </html>
