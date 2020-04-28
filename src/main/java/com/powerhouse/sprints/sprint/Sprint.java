@@ -36,12 +36,10 @@ public class Sprint extends ProjectResource {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sprint", cascade = {CascadeType.MERGE}, orphanRemoval = true)
 	private List<Task> tasks;
 
 	public Sprint() {
-		setName("");
-		description = "";
 		tasks = new ArrayList<Task>();
 	}
 

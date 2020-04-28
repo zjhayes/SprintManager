@@ -36,8 +36,8 @@ public class ProjectController {
 
 	@GetMapping("/projects")
 	public String viewAllProjects(Model model) {
-		List<Project> allSprints = projectRepo.findAll();
-		model.addAttribute("projects", allSprints);
+		List<Project> allProjects = projectRepo.findAll();
+		model.addAttribute("projects", allProjects);
 		return "projects/projects";
 	}
 
@@ -65,8 +65,7 @@ public class ProjectController {
 	@PostMapping("/projects/update")
 	public String addProject(@ModelAttribute Project p, @RequestParam("projectMembers") List<Long> users, Model model) {
 		p.setCreatedDate(LocalDate.now());
-		if(!users.isEmpty())
-		{
+		if (!users.isEmpty()) {
 			addMembersToProject(users, p);
 		}
 		projectRepo.save(p);
@@ -85,8 +84,7 @@ public class ProjectController {
 
 	@PostMapping("/projects/update/{projectID}")
 	public String reviseProject(Project p, @RequestParam("projectMembers") List<Long> users, Model model) {
-		if(!users.isEmpty())
-		{
+		if (!users.isEmpty()) {
 			addMembersToProject(users, p);
 		}
 		projectRepo.saveAndFlush(p);
@@ -98,14 +96,13 @@ public class ProjectController {
 	public String deleteProject(@PathVariable("id") long id, Model model) {
 		Project p = projectRepo.findById(id).orElse(null);
 		projectRepo.delete(p);
-
 		return viewAllProjects(model);
 	}
 
 	@GetMapping("/projects/{projectID}")
 	public String viewProjectDetails(@PathVariable("projectID") long projectID, Model model) {
-		Project p = projectRepo.getOne(projectID);
-		model.addAttribute("project", p);
+		Project project = projectRepo.findById(projectID).orElse(null);
+		model.addAttribute("project", project);
 		return "projects/projectBoard";
 	}
 
