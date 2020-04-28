@@ -42,8 +42,8 @@
 			<div class="box">
 				<section class="section column">
 					<div class="row has-text-centered">
-						<span class="is-size-3 has-text-centered">Sprint Board </span><small><a
-							th:href="@{{sprintID}/tasks/new(sprintID=${sprint.id})}"> Add Task</a></small>
+						<span class="is-size-3 has-text-centered">Sprint Board </span><small>
+						<a th:href="@{/board/tasks/new(sprintID=${sprint.id})}"> Add Task</a></small>
 					</div>
 
 					<table class="has-border table is-striped is-fullwidth ">

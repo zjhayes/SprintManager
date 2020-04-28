@@ -2,16 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<meta
-	name="viewport"
-	content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Backlog</title>
 <script src="/js/progressbar.js"></script>
-<link
-	rel="stylesheet"
+<link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-<script
-	defer
+<script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
@@ -22,10 +18,13 @@
 				<h1 class="title">Project Backlog</h1>
 			</div>
 			<div class="subtitle">
-				<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return to Project</a>
+				<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return
+					to Project</a>
 			</div>
 			<div class="subtitle">
-				<a th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}">Add Task to Backlog</a>
+				<a
+					th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}">Add
+					Task to Backlog</a>
 			</div>
 		</div>
 	</section>
@@ -47,24 +46,39 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tr th:each="task : ${project.backlog}">
-				<td th:text="${task.taskDescription}"></td>	
+
+			<tr th:each="task : ${project.backlog}"
+				th:if="${task.sprint == null}">
+				<td th:text="${task.taskDescription}"></td>
 				<td th:text="${task.assignedUser.getFullName()}"></td>
 				<td th:text="${task.priority}"></td>
 				<td th:text="${task.currentStep}"></td>
 				<td th:text="${task.storyPoints}"></td>
-				<td class="has-text-centered">
-					<i th:if="${task.completed}" class="fa fa-check"></i>
+				<td class="has-text-centered"><i th:if="${task.completed}"
+					class="fa fa-check"></i></td>
+
+				<td><a
+					th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a>
 				</td>
-				<td>
-					<a th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a>
+				<td><a
+					th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a>
 				</td>
-				<td>
-					<a th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a>
-				</td>
-				<td>
-					<a th:href="@{/projects/{projectID}/tasks/{taskId}/moveToSprint (projectID=${project.id}, taskId=${task.id})}">Move to Sprint</a>
-				</td>
+				<td><a
+					th:href="@{/projects/{projectID}/tasks/{taskId}/moveToSprint (projectID=${project.id}, taskId=${task.id})}">Move
+						to Sprint</a></td>
+
+				<!-- Text input-->
+				<div class="field">
+					<label class="label" for="assigned-to">Send to sprint</label>
+					<div class="control">
+						<div class="select">
+							<select th:field="*{project.sprints}">
+								<option th:each="sprint : ${project.sprints}"
+									th:value="${sprint.id}" th:text="${sprint.name}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
 			</tr>
 		</table>
 	</section>

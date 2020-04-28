@@ -77,19 +77,20 @@ public class TaskController {
 	
 /*
 	
-	@GetMapping("/{sprintID}/tasks/new")
+	@GetMapping("{sprintID}/board/tasks/new")
 	public String initCreationForm2(@PathVariable("sprintID") long sprintID, Project project, Model model) {
 		Task task = new Task();
+		task.getSprint().setId(sprintID);
 		project.addTask(task);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
-
-	@PostMapping("/{sprintID}/tasks/new")
+		
+	@PostMapping("/{sprintID}/board/tasks/new")
 	public String processCreationForm2(@PathVariable("sprintID") long sprintID, Sprint sprint, Task task, Model model) {
 		sprint.addTask(task);
 		this.taskRepo.save(task);
-		return "redirect:/sprints/{sprintID}";
+		return "redirect:/projects/{projectID}/sprints/{sprintID}/board";
 	}
 	
 */	
@@ -115,6 +116,39 @@ public class TaskController {
 		return "redirect:/sprints/{sprintID}";
 	}
 
+	@GetMapping("/tasks/{taskId}/moveToSprint")
+	public String moveTaskToSprint(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Project project, Model model) {
+		Task task = this.taskRepo.findById(taskId).orElse(null);
+		System.out.println("*******************************");
+		System.out.println("Task ID = " + task.getId());
+		try {
+			System.out.println("Task sprint.id = " + task.getSprint().getId());
+		} catch (Exception e) {
+			System.out.println("Task sprint.id is null");
+		}
+		
+		int taskIndex = project.getBacklog().indexOf(task);
+		
+		
+		long sprintID = 36; // predefined test sprint
+		Sprint sprint = this.sprintRepo.findById(sprintID).orElse(null);
+		task.setSprint(sprint);
+		System.out.println("*******************************");
+		System.out.println("Task ID = " + task.getId());
+		try {
+			System.out.println("Task sprint.id = " + task.getSprint().getId());
+		} catch (Exception e) {
+			System.out.println("Task sprint.id is null");
+		}
+		project.getBacklog().get(taskIndex).setSprint(sprint);
+		//project.getBacklog().remove(task);
+		projectRepo.save(project);
+		sprint.addTask(task);
+		sprintRepo.save(sprint);
+		
+		return "redirect:/projects/{projectID}/tasks";
+	}
+	
 	@GetMapping("/tasks/{taskId}/delete")
 	public String deleteTask(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
