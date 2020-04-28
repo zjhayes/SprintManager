@@ -19,8 +19,8 @@
 			sec:authorize="isAuthenticated()"
 			class="navbar-end">
 			<div class="navbar-item">
-				Logged in as:
-				<div sec:authentication="name"></div>
+				Logged in as:&nbsp;
+				 <a th:href="@{/dashboard}" th:text="${#authentication.getPrincipal().getUser().getEmail()}"></a>
 			</div>
 			<div class="navbar-item">
 				<a

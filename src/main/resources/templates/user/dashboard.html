@@ -27,7 +27,7 @@
 <body>
 	<div th:insert="fragments/header :: header"></div>
 	<div class="container ">
-		<section class="hero">
+		<section class="hero ">
 			<div class="hero-body">
 				<div class="container has-text-centered">
 					<h1 class="title is-1">
@@ -44,7 +44,7 @@
 					<h2 class="title is-3">Your tasks</h2>
 					<table
 						th:if="${not #lists.isEmpty(tasks)}"
-						class="table is-fullwidth is-bordered is-striped">
+						class="table is-fullwidth is-striped">
 						<thead>
 							<tr>
 								<th>Task</th>
@@ -55,15 +55,20 @@
 						</thead>
 						<tbody>
 							<tr th:each="task: ${tasks}">
-								<td th:text="${task.taskDescription}">
-								<td th:text="${task.currentStep}">
-								<td th:if="${task.sprint == null}">Not On Sprint Yet</td>
-							</tr>
 								<td><a
+									th:text="${task.taskDescription}"
+									th:href="@{/projects/{projectID}/tasks/{taskID}(projectID=${task.project.id}, taskID=${task.id})}">
+								</a></td>
+								<td><a
+									th:if="${task.sprint ne null}"
 									th:text="${task.sprint.name}"
-									th:href="@{/sprints/{sprintID}(sprintID=${task.sprint.id})}" />
+									th:href="@{/projects/{projectID}/sprints/{sprintID}(projectID=${task.project.id}, sprintID=${task.sprint.id})}">
+								</a></td>
+								<td
+									th:if="${task.sprint == null}"
+									>Not assigned to Sprint</td>
 								<td th:text="${task.currentStep}">
-								<td th:text="${task.sprint.endDate}">
+	
 							</tr>
 						</tbody>
 					</table>
@@ -76,19 +81,19 @@
 				</div>
 				<div class="column">
 					<h2 class="title is-3 ">Your Projects</h2>
-					<table class="table is-fullwidth is-bordered is-striped">
+					<table class="table is-fullwidth is-striped">
 						<tbody>
 							<tr th:each="project: ${user.projects}">
 								<td width="20%"><a
 									th:text="${project.name}"
-									th:href="@{/projects/{sprintID}(sprintID=${sprintID})}"></a></td>
+									th:href="@{/projects/{projectID}(projectID=${project.id})}"></a></td>
 								<td>
-									<table class="table is-fullwidth">
+									<table class="table is-striped is-fullwidth">
 										<tbody>
 											<tr th:each="sprint: ${project.sprints}">
 												<td width="20%"><a
 													th:text="${sprint.name}"
-													th:href="@{/sprints/{sprintID}(sprintID=${sprint.id})}"></a></td>
+													th:href="@{projects/{projectID}/sprints/{sprintID}(projectID=${project.id},sprintID=${sprint.id})}"></a></td>
 												<td><progress
 														class="progress is-large"
 														th:value="${sprint.calculateCompletedPercentage()}"

@@ -16,7 +16,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class ProjectResource extends NamedEntity {
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST }, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
 	private Project project;
-
 }
