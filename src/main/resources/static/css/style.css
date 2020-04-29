@@ -38,3 +38,40 @@ progress[value]::-webkit-progress-value {
     text-align: center;
     
 }
+
+.task_box {
+	
+	background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
+    color: #4a4a4a;
+    display: block;
+    padding: 1.25rem;
+    margin: 1rem 0;
+}
+
+.task_desc {
+
+	display: inline;
+}
+
+.task_assignee {
+	
+	
+}
+
+.task_priority {
+	
+	
+}
+
+.story_points {
+	
+	
+}
+
+.task_completed {
+	
+	display: inline;
+	width: 1rem;
+}
