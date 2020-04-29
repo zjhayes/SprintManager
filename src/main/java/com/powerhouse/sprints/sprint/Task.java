@@ -49,20 +49,13 @@ public class Task extends ProjectResource implements Comparable<Task> {
 		List<String> priorityScheme = sprint.getProject().getPriorityScheme().getPriorities();
 		int thisIndex = priorityScheme.indexOf(priority);
 		int anotherIndex = priorityScheme.indexOf(anotherTask.getPriority());
-		System.out.println(priority + " hey " + anotherTask.getPriority());
-		System.out.println(taskDescription);
-		System.out.println(priorityScheme);
-		System.out.println("TEST TEST TEST " + thisIndex + " " + anotherIndex);
 		if(thisIndex > anotherIndex) {
-			System.out.println("1");
 			return 1;
 		}
 		else if(thisIndex < anotherIndex) {
-			System.out.println("-1");
 			return -1;
 		}
 		else {
-			System.out.println("0");
 			return 0;
 		}
 	}
