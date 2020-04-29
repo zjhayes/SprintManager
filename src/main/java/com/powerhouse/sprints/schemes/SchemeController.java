@@ -19,6 +19,7 @@ public class SchemeController {
 	public String viewAllSchemes(Model model) {
 		List<WorkflowScheme> allWorkflowSchemes = workflowRepo.findAll();
 		model.addAttribute("workflows", allWorkflowSchemes);
+		System.out.println("TEST TEST" + allWorkflowSchemes.size());
 		List<PriorityScheme> allPrioritySchemes = priorityRepo.findAll();
 		model.addAttribute("priorities", allPrioritySchemes);
 		return "schemes/schemeManager";

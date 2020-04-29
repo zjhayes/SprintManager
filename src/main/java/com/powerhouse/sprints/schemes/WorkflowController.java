@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.powerhouse.sprints.project.Project;
 
 @Controller
 public class WorkflowController {
@@ -39,6 +42,13 @@ public class WorkflowController {
 			w.addStep(steps.get(i));
 		}
 		workflowRepo.save(w);
+		return "redirect:/admin/schemes/";
+	}
+	
+	@GetMapping("/admin/schemes/workflow/delete/{id}")
+	public String deleteWorkflow(@PathVariable("id") long id, Model model) {
+		WorkflowScheme w = workflowRepo.findById(id).orElse(null);
+		workflowRepo.delete(w);
 		return "redirect:/admin/schemes/";
 	}
 }

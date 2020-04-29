@@ -39,6 +39,7 @@
 						<th>Workflow</th>
 						<th>Steps</th>
 						<th>Projects</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -46,6 +47,10 @@
 						<td th:text="${workflow.name}"/>
 						<td th:text="${workflow.steps.size()}" />
 						<td th:text="${workflow.projects.size()}"/>
+						<td>
+							<a th:href="@{/admin/schemes/workflow/delete/{id}(id=${workflow.id})}">Delete</a>
+						</td>
+						
 					</tr>
 				</tbody>
 			</table>
