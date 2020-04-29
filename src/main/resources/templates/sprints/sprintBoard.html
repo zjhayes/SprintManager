@@ -49,7 +49,7 @@
 						th:style="'width: ' + 1/${sprint.project.workflow.steps.size()}*95 + '%'">
 						<h2 th:text="${step}"/>
 						<div th:each="task: ${sortedTasks.get(iter.index)}">
-							<a th:href="@{tasks/{taskId}/edit (taskId=${task.id})}">
+							<a th:href="@{/projects/{projectID}/tasks/{taskId}/edit(projectID=${projectID}, taskId=${task.id})}">
 								<div class="task_box">
 									<img class="task_completed" th:src="${task.completed} ? @{/img/green-checkmark.png} : ''"/>
 									<p class="task_desc" th:text="${task.taskDescription}"/>
