@@ -1,5 +1,7 @@
 package com.powerhouse.sprints.sprint;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,8 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.powerhouse.sprints.auth.model.User;
-import com.powerhouse.sprints.model.BaseEntity;
-import com.powerhouse.sprints.project.Project;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Task extends ProjectResource {
+public class Task extends ProjectResource implements Comparable<Task> {
 
 	/**
 	 * 
@@ -42,4 +42,28 @@ public class Task extends ProjectResource {
 	@ToString.Exclude
 	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST }, fetch = FetchType.EAGER)
 	private Sprint sprint;
+	
+	@Override
+	public int compareTo(Task anotherTask)
+	{
+		List<String> priorityScheme = sprint.getProject().getPriorityScheme().getPriorities();
+		int thisIndex = priorityScheme.indexOf(priority);
+		int anotherIndex = priorityScheme.indexOf(anotherTask.getPriority());
+		System.out.println(priority + " hey " + anotherTask.getPriority());
+		System.out.println(taskDescription);
+		System.out.println(priorityScheme);
+		System.out.println("TEST TEST TEST " + thisIndex + " " + anotherIndex);
+		if(thisIndex > anotherIndex) {
+			System.out.println("1");
+			return 1;
+		}
+		else if(thisIndex < anotherIndex) {
+			System.out.println("-1");
+			return -1;
+		}
+		else {
+			System.out.println("0");
+			return 0;
+		}
+	}
 }
