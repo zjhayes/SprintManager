@@ -53,21 +53,28 @@ progress[value]::-webkit-progress-value {
 .task_desc {
 
 	display: inline;
+    font-size: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    text-align: center;
 }
 
 .task_assignee {
 	
-	
+	margin-top: 1em;
 }
 
 .task_priority {
 	
-	
+	margin-top: 0.5em;
 }
 
 .story_points {
 	
-	
+	margin-top: 0.5em;
 }
 
 .task_completed {

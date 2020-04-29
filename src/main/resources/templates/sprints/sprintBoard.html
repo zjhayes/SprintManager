@@ -7,7 +7,7 @@
 	content="width=device-width, initial-scale=1">
 <title>Sprints</title>
 <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
-<script src="js/progressbar.js"></script>
+<script src="/js/progressbar.js"></script>
 <link
 	rel="stylesheet"
 	type="text/css"
@@ -52,10 +52,9 @@
 							<div class="task_box">
 								<img class="task_completed" th:src="${task.completed} ? @{/img/green-checkmark.png} : ''"/>
 								<p class="task_desc" th:text="${task.taskDescription}"/>
-								<p class="task_assignee" th:text="${task.assignedUser.getFullName()}"/>
-								<p class="task_priority" th:text="${task.priority}"/>
-								<p th:text="${task.completed}"/>
-								<p class="story_points" th:text="${task.storyPoints}"/>
+								<p class="task_assignee" th:text="'Assignee: ' + ${task.assignedUser.getFullName()}"/>
+								<p class="task_priority" th:text="'Priority: ' + ${task.priority}"/>
+								<p class="story_points" th:text="'Story Points: ' + ${task.storyPoints}"/>
 							</div>
 						</div>
 					</div>

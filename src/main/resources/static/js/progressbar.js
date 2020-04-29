@@ -14,7 +14,7 @@ $(document).ready(function() {
     } else if (progress >= "50" && progress < "90") {
       $(bars[i]).addClass("is-warning");
     } else {
-      $(bars[i]).addClass("is-error");
+      $(bars[i]).addClass("is-danger");
     }
   }
 });
