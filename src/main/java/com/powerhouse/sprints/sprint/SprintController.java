@@ -1,9 +1,9 @@
 package com.powerhouse.sprints.sprint;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -93,7 +93,8 @@ public class SprintController {
 					tasksInStatus.add(task);
 				}
 			}
-			 sortedTasks.add(tasksInStatus);
+			Collections.sort(tasksInStatus);
+			sortedTasks.add(tasksInStatus);
 		}
 		
 		return sortedTasks;
