@@ -16,3 +16,69 @@ progress[value]::-webkit-progress-value {
 	margin: 0 auto;
   	text-align: right;
 }
+
+.sprint_column {
+	
+	display: inline-block;
+	background-color: #fff;
+    border-radius: 6px;
+    padding: 1.25rem;
+    vertical-align:top;
+}
+
+.sprint_column h2 {
+	
+	display: block;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+.task_box {
+	
+	background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
+    color: #4a4a4a;
+    display: block;
+    padding: 1.25rem;
+    margin: 1rem 0;
+}
+
+.task_desc {
+
+	display: inline;
+    font-size: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.task_assignee {
+	
+	margin-top: 1em;
+}
+
+.task_priority {
+	
+	margin-top: 0.5em;
+}
+
+.story_points {
+	
+	margin-top: 0.5em;
+}
+
+.task_completed {
+	
+	display: inline;
+	width: 1rem;
+}
