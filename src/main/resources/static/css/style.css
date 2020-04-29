@@ -22,7 +22,19 @@ progress[value]::-webkit-progress-value {
 	display: inline-block;
 	background-color: #fff;
     border-radius: 6px;
-    box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
-    color: #4a4a4a;
     padding: 1.25rem;
+    vertical-align:top;
+}
+
+.sprint_column h2 {
+	
+	display: block;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    text-align: center;
+    
 }
