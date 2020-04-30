@@ -40,7 +40,7 @@
 					<div class="field">
 					  <label class="label" for="name">Sprint Name</label>
 					  <div class="control">
-					    <input id="name" name="name" type="text" class="input" th:field="*{name}">
+					    <input id="name" name="name" type="text" class="input" th:field="*{name}" required>
 					    
 					  </div>
 					</div>
@@ -53,13 +53,13 @@
 					<div class="field">
 						<label class="label" for="startDate">Start Date</label>
 						<div class="control">
-							<input type="date" id="startDate" name="startDate" th:field="*{startDate}">
+							<input type="date" id="startDate" name="startDate" th:field="*{startDate}" required>
 						</div>
 					</div>
 					<div class="field">
 						<label class="label" for="endDate">End Date</label>
 						<div class="control">
-							<input type="date" id="endDate" name="endDate" th:field="*{endDate}">
+							<input type="date" id="endDate" name="endDate" th:field="*{endDate}" required>
 						</div>
 					</div>
 					<div class="field">
