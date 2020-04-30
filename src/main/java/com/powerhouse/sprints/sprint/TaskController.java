@@ -1,9 +1,6 @@
 package com.powerhouse.sprints.sprint;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -112,18 +109,8 @@ public class TaskController {
 	}
 
 	@PostMapping("/tasks/update/{taskId}")
-	public String addTaskToProject(@ModelAttribute Task t, Model model) {
+	public String addTaskToProject(@ModelAttribute Task t, Sprint sprint, Model model) {
 		Task task = this.taskRepo.findById(t.getId()).orElse(null);
-		
-		System.out.println("*************************");
-		System.out.println("Task id = " + task.getId());
-		System.out.println("Task priority = " + task.getPriority());
-		try {
-			System.out.println("sprint = " + task.getSprint().getId());
-		} catch (Exception e) {
-			System.out.println("sprint = null");
-		}
-		
 		//taskRepo.save(task);
 		return "redirect:/projects/{projectID}/tasks";
 	}
