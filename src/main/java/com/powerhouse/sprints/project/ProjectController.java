@@ -36,19 +36,18 @@ public class ProjectController {
 	@Autowired
 	ProjectService projectService;
 
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+	}
+
 	@GetMapping("/projects")
 	public String viewAllProjects(Model model) {
 		List<Project> allProjects = projectService.findAll();
 		model.addAttribute("projects", allProjects);
 		return "projects/projects";
 	}
-
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
-	}
-
+	
 	@GetMapping("/addProject")
 	public String addProject(Model model) {
 		Project p = new Project();
