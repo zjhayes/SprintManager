@@ -33,6 +33,8 @@ public class ProjectController {
 	WorkflowSchemeRepository workflowRepo;
 	@Autowired
 	PrioritySchemeRepository priorityRepo;
+	@Autowired
+	ProjectService projectService;
 
 	@GetMapping("/projects")
 	public String viewAllProjects(Model model) {
