@@ -102,9 +102,13 @@ public class TaskController {
 	@PostMapping("/tasks/{taskId}/edit")
 	public String processUpdateTaskForm(@PathVariable("projectID") long projectID, Task task, Project project,
 			Model model) {
+		String path = "redirect:/projects/{projectID}/tasks";
 		project.addTask(task);
 		taskService.save(task);
-		return "redirect:/projects/{projectID}/tasks";
+		if (task.getSprint() != null) {
+			path = "redirect:/projects/{projectID}/sprints/" + task.getSprint().getId();
+		}
+		return path;
 	}
 
 	@GetMapping("/tasks/{taskId}/moveToBacklog")
