@@ -87,26 +87,6 @@ public class TaskController {
 		return path;
 	}
 
-/*
-	
-	@GetMapping("{sprintID}/board/tasks/new")
-	public String initCreationForm2(@PathVariable("sprintID") long sprintID, Project project, Model model) {
-		Task task = new Task();
-		task.getSprint().setId(sprintID);
-		project.addTask(task);
-		model.addAttribute("task", task);
-		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
-	}
-		
-	@PostMapping("/{sprintID}/board/tasks/new")
-	public String processCreationForm2(@PathVariable("sprintID") long sprintID, Sprint sprint, Task task, Model model) {
-		sprint.addTask(task);
-		this.taskRepo.save(task);
-		return "redirect:/projects/{projectID}/sprints/{sprintID}/board";
-	}
-	
-*/	
-
 	@GetMapping("/tasks/{taskId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("taskId") long taskId, Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
@@ -122,45 +102,21 @@ public class TaskController {
 		return "redirect:/projects/{projectID}/tasks";
 	}
 
-	@PostMapping("/tasks/{taskId}/update")
-	public String reviseTask(Task task, Model model) {
-		this.taskRepo.save(task);
-		model.addAttribute("sprint.tasks", taskRepo.findAll());
-		return "redirect:/sprints/{sprintID}";
-	}
-
-	@PostMapping("/tasks/{taskId}/moveToSprint")
-	public String moveTaskToSprint(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Sprint s,  Project project, Model model) {
+	// IS this used?
+//	@PostMapping("/tasks/{taskId}/update")
+//	public String reviseTask(Task task, Model model) {
+//		this.taskRepo.save(task);
+//		model.addAttribute("sprint.tasks", taskRepo.findAll());
+//		return "redirect:/sprints/{sprintID}";
+//	}
+	
+	@GetMapping("/tasks/{taskId}/moveToBacklog")
+	public String moveTaskToBacklog(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
-		System.out.println("*******************************");
-		System.out.println("Task ID = " + task.getId());
-		try {
-			System.out.println("Task sprint.id = " + task.getSprint().getId());
-		} catch (Exception e) {
-			System.out.println("Task sprint.id is null");
-		}
-		
-		int taskIndex = project.getBacklog().indexOf(task);
-		
-		
-		long sprintID = 39; 
-		System.out.println("Sprint id from Sprint s = " + s.getId());
-		
-		Sprint sprint = this.sprintRepo.findById(sprintID).orElse(null);
-		task.setSprint(sprint);
-		System.out.println("*******************************");
-		System.out.println("Task ID = " + task.getId());
-		try {
-			System.out.println("Task sprint.id = " + task.getSprint().getId());
-		} catch (Exception e) {
-			System.out.println("Task sprint.id is null");
-		}
-		project.getBacklog().get(taskIndex).setSprint(sprint);
-		projectRepo.save(project);
-		sprint.addTask(task);
-		sprintRepo.save(sprint);
-		
-		return "redirect:/projects/{projectID}/tasks";
+		long sprintID = task.getSprint().getId();
+		task.setSprint(null);
+		this.taskRepo.save(task);
+		return "redirect:/projects/{projectID}/sprints/" + sprintID;
 	}
 	
 	@GetMapping("/tasks/{taskId}/delete")
