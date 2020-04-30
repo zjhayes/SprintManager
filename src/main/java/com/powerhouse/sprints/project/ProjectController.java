@@ -70,7 +70,7 @@ public class ProjectController {
 
 	@GetMapping("/projects/edit/{id}")
 	public String showUpdateProject(@PathVariable("id") long id, Model model) {
-		Project p = projectRepo.findById(id).orElse(null);
+		Project p = projectService.findById(id);
 		model.addAttribute("newProject", p);
 		model.addAttribute("allUsers", userRepo.findAll());
 		model.addAttribute("allWorkflows", workflowRepo.findAll());

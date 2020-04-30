@@ -3,6 +3,7 @@ package com.powerhouse.sprints.project;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +21,10 @@ public class ProjectService {
 	public void save(Project project) {
 		projectRepository.save(project);
 	}
+
+	@PostAuthorize("returnObject.projectMembers.contains(authentication.principal.user) || + hasRole('ROLE_ADMIN')")
+	public Project findById(long projectId) {
+		return projectRepository.findById(projectId).orElse(null);
+	}
+
 }
