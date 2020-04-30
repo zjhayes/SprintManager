@@ -96,7 +96,7 @@ public class TaskController {
 
 	@GetMapping("/tasks/{taskId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("taskId") long taskId, Project project, Model model) {
-		Task task = this.taskRepo.findById(taskId).orElse(null);
+		Task task = this.taskService.findById(taskId);
 		model.addAttribute(task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
@@ -105,13 +105,12 @@ public class TaskController {
 	public String processUpdateTaskForm(@PathVariable("projectID") long projectID, Task task, Project project,
 			Model model) {
 		project.addTask(task);
-		taskRepo.save(task);
+		taskService.save(task);
 		return "redirect:/projects/{projectID}/tasks";
 	}
 
 	@GetMapping("/tasks/{taskId}/moveToBacklog")
-	public String moveTaskToBacklog(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId,
-			Project project, Model model) {
+	public String moveTaskToBacklog(@PathVariable("taskId") long taskId, Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
 		long sprintID = task.getSprint().getId();
 		task.setSprint(null);
