@@ -26,12 +26,16 @@ public class TaskController {
 	private final SprintRepository sprintRepo;
 	private final TaskRepository taskRepo;
 	private final ProjectRepository projectRepo;
+	
+	@Autowired
+	private final TaskService taskService;
 
 	@Autowired
-	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo) {
+	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo, TaskService taskService) {
 		this.projectRepo = projectRepo;
 		this.sprintRepo = sprintRepo;
 		this.taskRepo = taskRepo;
+		this.taskService = taskService;
 	}
 
 	@ModelAttribute("project")
@@ -51,9 +55,8 @@ public class TaskController {
 	}
 
 	@GetMapping("/tasks/{taskID}")
-	@PreAuthorize("#project.projectMembers.contains(authentication.principal.user)")
 	public String viewTask(@PathVariable("taskID") long taskID, Model model, Project project) {
-		Task task = taskRepo.getOne(taskID);
+		Task task=this.taskService.findById(taskID);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
