@@ -33,23 +33,19 @@ public class ProjectController {
 	WorkflowSchemeRepository workflowRepo;
 	@Autowired
 	PrioritySchemeRepository priorityRepo;
-
-	@GetMapping("/projects")
-	public String viewAllProjects(Model model) {
-		List<Project> allProjects = projectRepo.findAll();
-		model.addAttribute("projects", allProjects);
-		return "projects/projects";
-	}
-
-	@GetMapping("/viewBacklog")
-	public String viewBacklog(Model model, Project project) {
-		model.addAttribute("project", project);
-		return "projects/backlogs";
-	}
+	@Autowired
+	ProjectService projectService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+	}
+
+	@GetMapping("/projects")
+	public String viewAllProjects(Model model) {
+		List<Project> allProjects = projectService.findAll();
+		model.addAttribute("projects", allProjects);
+		return "projects/projects";
 	}
 
 	@GetMapping("/addProject")
@@ -68,13 +64,13 @@ public class ProjectController {
 		if (!users.isEmpty()) {
 			addMembersToProject(users, p);
 		}
-		projectRepo.save(p);
+		projectService.save(p);
 		return "redirect:/projects/" + p.getId();
 	}
 
 	@GetMapping("/projects/edit/{id}")
 	public String showUpdateProject(@PathVariable("id") long id, Model model) {
-		Project p = projectRepo.findById(id).orElse(null);
+		Project p = projectService.findById(id);
 		model.addAttribute("newProject", p);
 		model.addAttribute("allUsers", userRepo.findAll());
 		model.addAttribute("allWorkflows", workflowRepo.findAll());
@@ -87,9 +83,8 @@ public class ProjectController {
 		if (!users.isEmpty()) {
 			addMembersToProject(users, p);
 		}
-		projectRepo.saveAndFlush(p);
+		projectService.saveAndFlush(p);
 		return "redirect:/projects/{projectID}";
-
 	}
 
 	@GetMapping("/projects/delete/{id}")
@@ -101,16 +96,15 @@ public class ProjectController {
 
 	@GetMapping("/projects/{projectID}")
 	public String viewProjectDetails(@PathVariable("projectID") long projectID, Model model) {
-		Project project = projectRepo.findById(projectID).orElse(null);
+		Project project = projectService.findById(projectID);
 		model.addAttribute("project", project);
 		return "projects/projectBoard";
 	}
 
 	@GetMapping("/projects/{projectID}/addSprint")
 	public String addSprintToProject(@PathVariable("projectID") long projectID, Model model) {
-
 		Sprint s = new Sprint();
-		s.setProject(projectRepo.getOne(projectID));
+		s.setProject(projectService.findById(projectID));
 		model.addAttribute("newSprint", s);
 		model.addAttribute("projectID", projectID);
 		return "sprints/sprintSettings";
