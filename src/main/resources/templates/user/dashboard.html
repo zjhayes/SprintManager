@@ -64,11 +64,9 @@
 									th:text="${task.sprint.name}"
 									th:href="@{/projects/{projectID}/sprints/{sprintID}(projectID=${task.project.id}, sprintID=${task.sprint.id})}">
 								</a></td>
-								<td
-									th:if="${task.sprint == null}"
-									>Not assigned to Sprint</td>
+								<td th:if="${task.sprint == null}">Not assigned
+									to Sprint</td>
 								<td th:text="${task.currentStep}">
-	
 							</tr>
 						</tbody>
 					</table>
