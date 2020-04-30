@@ -26,12 +26,13 @@ public class TaskController {
 	private final SprintRepository sprintRepo;
 	private final TaskRepository taskRepo;
 	private final ProjectRepository projectRepo;
-	
+
 	@Autowired
 	private final TaskService taskService;
 
 	@Autowired
-	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo, TaskService taskService) {
+	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo,
+			TaskService taskService) {
 		this.projectRepo = projectRepo;
 		this.sprintRepo = sprintRepo;
 		this.taskRepo = taskRepo;
@@ -108,23 +109,16 @@ public class TaskController {
 		return "redirect:/projects/{projectID}/tasks";
 	}
 
-	// IS this used?
-//	@PostMapping("/tasks/{taskId}/update")
-//	public String reviseTask(Task task, Model model) {
-//		this.taskRepo.save(task);
-//		model.addAttribute("sprint.tasks", taskRepo.findAll());
-//		return "redirect:/sprints/{sprintID}";
-//	}
-	
 	@GetMapping("/tasks/{taskId}/moveToBacklog")
-	public String moveTaskToBacklog(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Project project, Model model) {
+	public String moveTaskToBacklog(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId,
+			Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
 		long sprintID = task.getSprint().getId();
 		task.setSprint(null);
 		this.taskRepo.save(task);
 		return "redirect:/projects/{projectID}/sprints/" + sprintID;
 	}
-	
+
 	@GetMapping("/tasks/{taskId}/delete")
 	public String deleteTask(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId,
 			Project project, Model model) {
