@@ -1,6 +1,6 @@
 package com.powerhouse.sprints.project;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ public class ProjectService {
 	@Autowired
 	private ProjectRepository projectRepository;
 
-	public Collection<Project> findAll() {
+	public List<Project> findAll() {
 		return projectRepository.findAll();
 	}
 }
