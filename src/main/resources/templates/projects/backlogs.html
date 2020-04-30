@@ -53,16 +53,56 @@
 				<td th:text="${task.priority}"></td>
 				<td th:text="${task.currentStep}"></td>
 				<td th:text="${task.storyPoints}"></td>
-				<td class="has-text-centered"><i th:if="${task.completed}"
-					class="fa fa-check"></i></td>
-
-				<td><a
-					th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a>
+				<td class="has-text-centered"><i th:if="${task.completed}" class="fa fa-check"></i></td>
+				<td><a th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a></td>
+				<td><a th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a></td>
+				<td>
+					<form class="form-horizontal" th:object="${task}" th:action="@{/projects/{projectID}/tasks/update/{taskId} (projectID=${project.id}, taskId=${task.id})}" method="post">
+						<input type="hidden" name="id" th:value="*{id}" />
+						
+						
+						<td class="has-text-centered">
+							<label class="label" for="assigned-to"></label>
+								<div class="control">
+									<div class="select">
+										<select id="sprint" name="sprint" th:field="*{project.sprints}">
+											<option th:each="sprint : ${project.sprints}"
+												th:value="${sprint.id}" th:text="${sprint.name}"></option>
+										</select>
+									</div>
+								</div></td>
+						<td>
+						<!-- Button -->
+						<div class="field">
+							<label class="label" for="submit"></label>
+							<div class="control">
+								<button
+									id="submit"
+									name="submit"
+									class="button is-default">Move to Sprint</button>
+							</div>
+						</div>
+						</td>
+					</form>
 				</td>
-				<td><a
-					th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a>
-				</td>
 
+	<!--  
+				<form class="form-horizontal" th:object="${newProject}" th:action="@{/projects/update/{id}(id=${newProject.id})}" method="POST">
+					<fieldset>
+						<input type="hidden" id="id" name="id" th:field="*{id}">
+						<input type="hidden" id="createdDate" name="createdDate" th:field="*{createdDate}">
+
+
+				<form class="form-horizontal" th:object="${task}" method="post">
+					<fieldset>
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
+						<input type="hidden" name="id" th:value="*{id}" /> 
+						<input th:if="${task.sprint}" type="hidden" name="sprint" th:value="*{sprint.id}" />
+-->
+				<!-- to use --> 
+					
+
+<!-- 
 				<td class="has-text-centered"><label class="label"
 					for="assigned-to">Send to sprint</label>
 					<div class="control">
@@ -76,6 +116,7 @@
 				<td><a
 					th:href="@{/projects/{projectID}/tasks/{taskId}/moveToSprint (projectID=${project.id}, taskId=${task.id})}">Move
 						to Sprint</a></td>
+ -->
 			</tr>
 		</table>
 	</section>

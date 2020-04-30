@@ -107,6 +107,23 @@ public class TaskController {
 		return "redirect:/projects/{projectID}/tasks";
 	}
 
+	@PostMapping("/tasks/update/{taskId}")
+	public String addTaskToProject(@ModelAttribute Task t, Model model) {
+		Task task = this.taskRepo.findById(t.getId()).orElse(null);
+		
+		System.out.println("*************************");
+		System.out.println("Task id = " + task.getId());
+		System.out.println("Task priority = " + task.getPriority());
+		try {
+			System.out.println("sprint = " + task.getSprint().getId());
+		} catch (Exception e) {
+			System.out.println("sprint = null");
+		}
+		
+		//taskRepo.save(task);
+		return "redirect:/projects/{projectID}/tasks";
+	}
+	
 	@GetMapping("/tasks/{taskId}/moveToBacklog")
 	public String moveTaskToBacklog(@PathVariable("taskId") long taskId, Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
