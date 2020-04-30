@@ -3,6 +3,7 @@ package com.powerhouse.sprints.sprint;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -25,12 +26,15 @@ public class TaskController {
 	private final SprintRepository sprintRepo;
 	private final TaskRepository taskRepo;
 	private final ProjectRepository projectRepo;
+	private final TaskService taskService;
 
 	@Autowired
-	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo) {
+	public TaskController(SprintRepository sprintRepo, TaskRepository taskRepo, ProjectRepository projectRepo,
+			TaskService taskService) {
 		this.projectRepo = projectRepo;
 		this.sprintRepo = sprintRepo;
 		this.taskRepo = taskRepo;
+		this.taskService = taskService;
 	}
 
 	@ModelAttribute("project")
@@ -51,7 +55,7 @@ public class TaskController {
 
 	@GetMapping("/tasks/{taskID}")
 	public String viewTask(@PathVariable("taskID") long taskID, Model model, Project project) {
-		Task task = taskRepo.getOne(taskID);
+		Task task = this.taskService.findById(taskID);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
@@ -59,6 +63,7 @@ public class TaskController {
 	@PostMapping("/tasks/{taskID}")
 	public String upDateTask(Task task, Model model, Project project) {
 		project.addTask(task);
+		taskService.save(task);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
@@ -83,13 +88,13 @@ public class TaskController {
 
 		}
 		project.addTask(task);
-		this.taskRepo.save(task);
+		this.taskService.save(task);
 		return path;
 	}
 
 	@GetMapping("/tasks/{taskId}/edit")
 	public String initUpdateOwnerForm(@PathVariable("taskId") long taskId, Project project, Model model) {
-		Task task = this.taskRepo.findById(taskId).orElse(null);
+		Task task = this.taskService.findById(taskId);
 		model.addAttribute(task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
@@ -98,27 +103,19 @@ public class TaskController {
 	public String processUpdateTaskForm(@PathVariable("projectID") long projectID, Task task, Project project,
 			Model model) {
 		project.addTask(task);
-		taskRepo.save(task);
+		taskService.save(task);
 		return "redirect:/projects/{projectID}/tasks";
 	}
 
-	// IS this used?
-//	@PostMapping("/tasks/{taskId}/update")
-//	public String reviseTask(Task task, Model model) {
-//		this.taskRepo.save(task);
-//		model.addAttribute("sprint.tasks", taskRepo.findAll());
-//		return "redirect:/sprints/{sprintID}";
-//	}
-	
 	@GetMapping("/tasks/{taskId}/moveToBacklog")
-	public String moveTaskToBacklog(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Project project, Model model) {
+	public String moveTaskToBacklog(@PathVariable("taskId") long taskId, Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
 		long sprintID = task.getSprint().getId();
 		task.setSprint(null);
 		this.taskRepo.save(task);
 		return "redirect:/projects/{projectID}/sprints/" + sprintID;
 	}
-	
+
 	@GetMapping("/tasks/{taskId}/delete")
 	public String deleteTask(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId,
 			Project project, Model model) {
