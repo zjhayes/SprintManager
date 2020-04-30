@@ -26,8 +26,6 @@ public class TaskController {
 	private final SprintRepository sprintRepo;
 	private final TaskRepository taskRepo;
 	private final ProjectRepository projectRepo;
-
-	@Autowired
 	private final TaskService taskService;
 
 	@Autowired
@@ -90,7 +88,7 @@ public class TaskController {
 
 		}
 		project.addTask(task);
-		this.taskRepo.save(task);
+		this.taskService.save(task);
 		return path;
 	}
 
