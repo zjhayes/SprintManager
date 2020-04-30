@@ -129,8 +129,8 @@ public class TaskController {
 		return "redirect:/sprints/{sprintID}";
 	}
 
-	@GetMapping("/tasks/{taskId}/moveToSprint")
-	public String moveTaskToSprint(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Project project, Model model) {
+	@PostMapping("/tasks/{taskId}/moveToSprint")
+	public String moveTaskToSprint(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId, Sprint s,  Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);
 		System.out.println("*******************************");
 		System.out.println("Task ID = " + task.getId());
@@ -143,7 +143,9 @@ public class TaskController {
 		int taskIndex = project.getBacklog().indexOf(task);
 		
 		
-		long sprintID = 36; // predefined test sprint
+		long sprintID = 39; 
+		System.out.println("Sprint id from Sprint s = " + s.getId());
+		
 		Sprint sprint = this.sprintRepo.findById(sprintID).orElse(null);
 		task.setSprint(sprint);
 		System.out.println("*******************************");
@@ -154,7 +156,6 @@ public class TaskController {
 			System.out.println("Task sprint.id is null");
 		}
 		project.getBacklog().get(taskIndex).setSprint(sprint);
-		//project.getBacklog().remove(task);
 		projectRepo.save(project);
 		sprint.addTask(task);
 		sprintRepo.save(sprint);

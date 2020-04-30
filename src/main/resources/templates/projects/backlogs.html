@@ -46,7 +46,7 @@
 					<th></th>
 				</tr>
 			</thead>
-
+			
 			<tr th:each="task : ${project.backlog}"
 				th:if="${task.sprint == null}">
 				<td th:text="${task.taskDescription}"></td>
@@ -66,19 +66,18 @@
 				<td><a
 					th:href="@{/projects/{projectID}/tasks/{taskId}/moveToSprint (projectID=${project.id}, taskId=${task.id})}">Move
 						to Sprint</a></td>
-
-				<!-- Text input-->
-				<div class="field">
-					<label class="label" for="assigned-to">Send to sprint</label>
+				<td class="has-text-centered"><label class="label"
+					for="assigned-to">Send to sprint</label>
 					<div class="control">
 						<div class="select">
-							<select th:field="*{project.sprints}">
+							<select id="sprint" name="sprint" th:field="*{project.sprints}">
 								<option th:each="sprint : ${project.sprints}"
 									th:value="${sprint.id}" th:text="${sprint.name}"></option>
 							</select>
 						</div>
-					</div>
-				</div>
+					</div></td>
+
+
 			</tr>
 		</table>
 	</section>
