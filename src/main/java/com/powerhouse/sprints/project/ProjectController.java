@@ -38,7 +38,7 @@ public class ProjectController {
 
 	@GetMapping("/projects")
 	public String viewAllProjects(Model model) {
-		List<Project> allProjects = projectRepo.findAll();
+		List<Project> allProjects = projectService.findAll();
 		model.addAttribute("projects", allProjects);
 		return "projects/projects";
 	}
