@@ -15,4 +15,9 @@ public class ProjectService {
 	public List<Project> findAll() {
 		return projectRepository.findAll();
 	}
+
+	@PreAuthorize("#project.projectMembers.contains(authentication.principal.user) || + hasRole('ROLE_ADMIN')")
+	public void save(Project project) {
+		projectRepository.save(project);
+	}
 }
