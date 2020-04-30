@@ -47,7 +47,7 @@ public class ProjectController {
 		model.addAttribute("projects", allProjects);
 		return "projects/projects";
 	}
-	
+
 	@GetMapping("/addProject")
 	public String addProject(Model model) {
 		Project p = new Project();
@@ -64,7 +64,7 @@ public class ProjectController {
 		if (!users.isEmpty()) {
 			addMembersToProject(users, p);
 		}
-		projectRepo.save(p);
+		projectService.save(p);
 		return "redirect:/projects/" + p.getId();
 	}
 
