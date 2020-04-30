@@ -14,7 +14,8 @@ public class TaskService {
 	public Task findById(long id) {
 		return taskRepository.findById(id).orElse(null);
 	}
-	
+
+	@PreAuthorize("#task.project.projectMembers.contains(authentication.principal.user)")
 	public void save(Task task) {
 		taskRepository.save(task);
 	}
