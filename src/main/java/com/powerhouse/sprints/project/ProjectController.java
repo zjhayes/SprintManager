@@ -83,9 +83,8 @@ public class ProjectController {
 		if (!users.isEmpty()) {
 			addMembersToProject(users, p);
 		}
-		projectRepo.saveAndFlush(p);
+		projectService.saveAndFlush(p);
 		return "redirect:/projects/{projectID}";
-
 	}
 
 	@GetMapping("/projects/delete/{id}")

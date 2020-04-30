@@ -26,5 +26,10 @@ public class ProjectService {
 	public Project findById(long projectId) {
 		return projectRepository.findById(projectId).orElse(null);
 	}
+	
+	@PreAuthorize("#project.projectMembers.contains(authentication.principal.user) || + hasRole('ROLE_ADMIN')")
+	public void saveAndFlush(Project project) {
+		projectRepository.saveAndFlush(project);
+	}
 
 }
