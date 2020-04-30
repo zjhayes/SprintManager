@@ -56,7 +56,7 @@ public class TaskController {
 
 	@GetMapping("/tasks/{taskID}")
 	public String viewTask(@PathVariable("taskID") long taskID, Model model, Project project) {
-		Task task=this.taskService.findById(taskID);
+		Task task = this.taskService.findById(taskID);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
@@ -64,6 +64,7 @@ public class TaskController {
 	@PostMapping("/tasks/{taskID}")
 	public String upDateTask(Task task, Model model, Project project) {
 		project.addTask(task);
+		taskService.save(task);
 		model.addAttribute("task", task);
 		return VIEWS_TASKS_CREATE_OR_UPDATE_FORM;
 	}
