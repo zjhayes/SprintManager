@@ -43,11 +43,6 @@ public class ProjectController {
 		return "projects/projects";
 	}
 
-	@GetMapping("/viewBacklog")
-	public String viewBacklog(Model model, Project project) {
-		model.addAttribute("project", project);
-		return "projects/backlogs";
-	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
