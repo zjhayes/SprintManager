@@ -59,11 +59,24 @@
 				</div>
 
 				<section class="section box">
+					<nav class="level">
+						<div class="level-left">
+							<div class="level-item">
+								<span class="is-size-3 has-text-centered">Tasks </span>
+							</div>
+						</div>
+						<div class="level-right">
+							<div class="level-item">
+								<a
+									class="button"
+									th:href="@{/projects/{projectId}/tasks/new?sprintid={sprintId}(projectId=${sprint.project.id}, sprintId=${sprint.id})}"><i
+									class="fas fa-plus"></i></a>
+							</div>
+						</div>
+
+					</nav>
 					<div class="row has-text-centered">
-						<span class="is-size-3 has-text-centered">Tasks </span><small><a
-							class="button"
-							th:href="@{/projects/{projectId}/tasks/new?sprintid={sprintId}(projectId=${sprint.project.id}, sprintId=${sprint.id})}"><i
-								class="fas fa-plus"></i></a></small>
+						<small></small>
 					</div>
 
 					<table class="has-border table is-striped is-fullwidth ">
@@ -75,14 +88,15 @@
 								<th>Current Step</th>
 								<th width="8%">Points</th>
 								<th width="4%">Complete</th>
-								<th></th>
 
 							</tr>
 						</thead>
 						<tbody>
 							<form>
 								<tr th:each="task: ${sprint.tasks}">
-									<td th:text="${task.taskDescription}">
+									<td><a
+										th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${sprint.project.id}, taskId=${task.id})}"
+										th:text="${task.taskDescription}"></a></td>
 									<td
 										th:text="${task.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
 									<td th:text="${task.priority}">
@@ -91,13 +105,6 @@
 									<td class="has-text-centered"><i
 										th:if="${task.completed}"
 										class="fa fa-check" /></td>
-									<td><a
-										th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${sprint.project.id}, taskId=${task.id})}">Edit</a></td>
-									<td><a
-										th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${sprint.project.id}, taskId=${task.id})}">Delete</a></td>
-									<td><a
-										th:href="@{/projects/{projectID}/tasks/{taskId}/moveToBacklog (projectID=${sprint.project.id}, taskId=${task.id})}">Move
-											to backlog</a></td>
 								</tr>
 							</form>
 						</tbody>
