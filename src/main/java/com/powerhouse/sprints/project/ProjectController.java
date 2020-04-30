@@ -96,16 +96,15 @@ public class ProjectController {
 
 	@GetMapping("/projects/{projectID}")
 	public String viewProjectDetails(@PathVariable("projectID") long projectID, Model model) {
-		Project project = projectRepo.findById(projectID).orElse(null);
+		Project project = projectService.findById(projectID);
 		model.addAttribute("project", project);
 		return "projects/projectBoard";
 	}
 
 	@GetMapping("/projects/{projectID}/addSprint")
 	public String addSprintToProject(@PathVariable("projectID") long projectID, Model model) {
-
 		Sprint s = new Sprint();
-		s.setProject(projectRepo.getOne(projectID));
+		s.setProject(projectService.findById(projectID));
 		model.addAttribute("newSprint", s);
 		model.addAttribute("projectID", projectID);
 		return "sprints/sprintSettings";
