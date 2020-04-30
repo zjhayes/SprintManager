@@ -7,7 +7,7 @@
 	content="width=device-width, initial-scale=1">
 <title>Sprints</title>
 <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
-<script src="js/progressbar.js"></script>
+<script src="/js/progressbar.js"></script>
 <link
 	rel="stylesheet"
 	type="text/css"
@@ -42,33 +42,25 @@
 			<div class="box">
 				<section class="section column">
 					<div class="row has-text-centered">
-						<span class="is-size-3 has-text-centered">Sprint Board </span><small>
-						<a th:href="@{/board/tasks/new(sprintID=${sprint.id})}"> Add Task</a></small>
+						<span class="is-size-3 has-text-centered">Sprint Board</span><small><a
+							th:href="@{/projects/{projectId}/tasks/new?sprintid={sprintId}(projectId=${sprint.project.id}, sprintId=${sprint.id})}"> Add Task</a></small>
 					</div>
-
-					<table class="has-border table is-striped is-fullwidth ">
-						<thead>
-							<tr>
-								<th th:each="step: ${sprint.project.workflow.steps}" th:text="${step}"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="task: ${sprint.tasks}">
-								<td th:text="${task.taskDescription}">
-								<td th:text="${task.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
-								<td th:text="${task.priority}">
-								<td th:text="${task.currentStep}">
-								<td th:text="${task.storyPoints}">
-								<td class="has-text-centered"><i
-									th:if="${task.completed}"
-									class="fa fa-check" /></td>
-								<td><a th:href="@{tasks/{taskId}/edit (taskId=${task.id})}">Edit</a></td>
-								<td><a th:href="@{tasks/{taskId}/delete (taskId=${task.id})}">Delete</a></td> 			
-								<td><a th:href="@{{sprintID}/tasks/{taskId}/moveToBacklog (sprintID=${sprint.id}, taskId=${task.id})}">Move to backlog</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
+					<div th:each="step, iter: ${sprint.project.workflow.steps}" class="sprint_column" 
+						th:style="'width: ' + 1/${sprint.project.workflow.steps.size()}*95 + '%'">
+						<h2 th:text="${step}"/>
+						<div th:each="task: ${sortedTasks.get(iter.index)}">
+							<a th:href="@{/projects/{projectID}/tasks/{taskId}/edit(projectID=${projectID}, taskId=${task.id})}">
+								<div class="task_box">
+									<img class="task_completed" th:src="${task.completed} ? @{/img/green-checkmark.png} : ''"/>
+									<p class="task_desc" th:text="${task.taskDescription}"/>
+									<p class="task_assignee" th:text="'Assignee: ' + ${task.assignedUser.getFullName()}"/>
+									<p class="task_priority" th:text="'Priority: ' + ${task.priority}"/>
+									<p class="story_points" th:text="'Story Points: ' + ${task.storyPoints}"/>
+								</div>
+							</a>
+						</div>
+					</div>
+				</section>	
 			</div>
 		</div>
 	</section>

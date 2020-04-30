@@ -1,8 +1,9 @@
 package com.powerhouse.sprints.sprint;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -68,9 +69,35 @@ public class SprintController {
 	public String viewSprintBoard(@PathVariable("sprintID") long sprintID, @PathVariable("projectID") long projectID,
 			Model model) {
 		Sprint s = sprintRepo.getOne(sprintID);
+		ArrayList<ArrayList<Task>> sortedTasks = sortTasksByStep(s);
 		model.addAttribute("sprint", s);
 		model.addAttribute("projectID", projectID);
+		model.addAttribute("sortedTasks", sortedTasks);
 		return "sprints/sprintBoard";
+	}
+	
+	// Sorts tasks into 2D table based on its current step.
+	// TODO: replace with dynamic sorting.
+	private ArrayList<ArrayList<Task>> sortTasksByStep(Sprint sprint) {
+		
+		ArrayList<ArrayList<Task>> sortedTasks = new ArrayList<ArrayList<Task>>();
+		
+		for(String step : sprint.getProject().getWorkflow().getSteps()) {
+			
+			ArrayList<Task> tasksInStatus = new ArrayList<Task>();
+			
+			for(Task task : sprint.getTasks()) {
+				
+				if(step.equals(task.getCurrentStep())) {
+					
+					tasksInStatus.add(task);
+				}
+			}
+			Collections.sort(tasksInStatus);
+			sortedTasks.add(tasksInStatus);
+		}
+		
+		return sortedTasks;
 	}
 
 	@GetMapping("/sprints/{sprintID}/addTask")
