@@ -17,17 +17,17 @@ public class ProjectService {
 		return projectRepository.findAll();
 	}
 
-	@PreAuthorize("#project.projectMembers.contains(authentication.principal.user) || + hasRole('ROLE_ADMIN')")
+	@PreAuthorize("#project.projectMembers.contains(authentication.principal.user) || hasRole('ROLE_ADMIN')")
 	public void save(Project project) {
 		projectRepository.save(project);
 	}
 
-	@PostAuthorize("returnObject.projectMembers.contains(authentication.principal.user) || + hasRole('ROLE_ADMIN')")
+	@PostAuthorize("returnObject.projectMembers.contains(authentication.principal.user) || hasRole('ROLE_ADMIN')")
 	public Project findById(long projectId) {
 		return projectRepository.findById(projectId).orElse(null);
 	}
 	
-	@PreAuthorize("#project.projectMembers.contains(authentication.principal.user) || + hasRole('ROLE_ADMIN')")
+	@PreAuthorize("#project.projectMembers.contains(authentication.principal.user) || hasRole('ROLE_ADMIN')")
 	public void saveAndFlush(Project project) {
 		projectRepository.saveAndFlush(project);
 	}
