@@ -44,12 +44,22 @@
 							Sprint Details</a>
 					</p>
 					<div class="box">
-						<section class="section column">
-							<div class="row has-text-centered">
-								<span class="is-size-3 has-text-centered">Sprint Board</span><small><a
-									th:href="@{/projects/{projectId}/tasks/new?sprintid={sprintId}(projectId=${sprint.project.id}, sprintId=${sprint.id})}">
-										Add Task</a></small>
+						<nav class="level">
+							<div class="level-left">
+								<div class="level-item">
+									<span class="is-size-3 has-text-centered">Sprint Board</span>
+								</div>
 							</div>
+							<div class="level-right">
+								<div class="level-item">
+									<a
+										class="button"
+										th:href="@{/projects/{projectId}/tasks/new?sprintid={sprintId}(projectId=${sprint.project.id}, sprintId=${sprint.id})}"><i
+										class="fas fa-plus"></i></a>
+								</div>
+							</div>
+						</nav>
+						<section class="section column">
 							<div
 								th:each="step, iter: ${sprint.project.workflow.steps}"
 								class="sprint_column"
