@@ -1,9 +1,6 @@
 package com.powerhouse.sprints.sprint;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -111,6 +108,13 @@ public class TaskController {
 		return path;
 	}
 
+	@PostMapping("/tasks/update/{taskId}")
+	public String addTaskToProject(@ModelAttribute Task t, Sprint sprint, Model model) {
+		Task task = this.taskRepo.findById(t.getId()).orElse(null);
+		//taskRepo.save(task);
+		return "redirect:/projects/{projectID}/tasks";
+	}
+	
 	@GetMapping("/tasks/{taskId}/moveToBacklog")
 	public String moveTaskToBacklog(@PathVariable("taskId") long taskId, Project project, Model model) {
 		Task task = this.taskRepo.findById(taskId).orElse(null);

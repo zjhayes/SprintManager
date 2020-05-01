@@ -41,13 +41,13 @@
 					<div class="field">
 					  <label class="label" for="name">Project Name</label>
 					  <div class="control">
-					  	<input id="name" name="name" type="text" class="input" th:field="*{name}">
+					  	<input id="name" name="name" type="text" class="input" th:field="*{name}" required>
 					  </div>
 					</div>
 					<div class="field">
 					  <label class="label" for="projectMembers">Project Members</label>
 					  <div class="control">
-					    <select id="projectMembers" name="projectMembers" class="textarea" multiple="multiple" th:field="*{projectMembers}">
+					    <select id="projectMembers" name="projectMembers" class="textarea" multiple="multiple" th:field="*{projectMembers}" required>
 					      	<option
 								th:each="user : ${allUsers}"
 								th:value="${user.id}"

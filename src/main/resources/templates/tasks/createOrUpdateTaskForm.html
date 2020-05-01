@@ -2,15 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<meta
-	name="viewport"
-	content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sprints</title>
-<link
-	rel="stylesheet"
+<link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-<script
-	defer
+<script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
@@ -31,6 +27,7 @@
 	</section>
 	<div class="column is-6 is-offset-3">
 		<section class="box">
+
 			<form
 				class="form-horizontal"
 				method="post"
@@ -54,34 +51,23 @@
 
 					<!-- Text input-->
 					<div class="field">
-						<label
-							class="label"
-							for="subject">Task</label>
+						<label class="label" for="subject">Task</label>
 						<div class="control">
-							<input
-								id="description"
-								th:field="*{taskDescription}"
-								name="subject"
-								type="text"
-								class="input"
-								required>
+							<input id="description" th:field="*{taskDescription}"
+								name="subject" type="text" class="input" required>
 						</div>
 					</div>
 
 
 					<!-- Text input-->
 					<div class="field">
-						<label
-							class="label"
-							for="assigned-to">Assigned To</label>
+						<label class="label" for="assigned-to">Assigned To</label>
 						<div class="control">
 							<div class="select">
 
 								<select th:field="*{assignedUser}">
-									<option
-										th:each="user : ${task.project.projectMembers}"
-										th:value="${user.id}"
-										th:text="${user.getFullName()}">Assigned</option>
+									<option th:each="user : ${task.project.projectMembers}"
+										th:value="${user.id}" th:text="${user.getFullName()}">Assigned</option>
 								</select>
 							</div>
 						</div>
@@ -89,19 +75,14 @@
 
 					<!-- Select Basic -->
 					<div class="field">
-						<label
-							class="label"
-							for="priority">Priority</label>
+						<label class="label" for="priority">Priority</label>
 						<div class="control">
 							<div class="select">
-								<select
-									id="current-priority"
-									name="current-priority"
+								<select id="current-priority" name="current-priority"
 									th:field="*{priority}">
 									<option
 										th:each="priority : ${task.project.priorityScheme.priorities}"
-										th:value="${priority}"
-										th:text="${priority}"></option>
+										th:value="${priority}" th:text="${priority}"></option>
 								</select>
 							</div>
 						</div>
@@ -109,19 +90,13 @@
 
 					<!-- Select Basic -->
 					<div class="field">
-						<label
-							class="label"
-							for="current-step">Status</label>
+						<label class="label" for="current-step">Status</label>
 						<div class="control">
 							<div class="select">
-								<select
-									id="current-step"
-									name="current-step"
+								<select id="current-step" name="current-step"
 									th:field="*{currentStep}">
-									<option
-										th:each="step : ${task.project.workflow.steps}"
-										th:value="${step}"
-										th:text="${step}"></option>
+									<option th:each="step : ${task.project.workflow.steps}"
+										th:value="${step}" th:text="${step}"></option>
 								</select>
 							</div>
 						</div>
@@ -130,21 +105,15 @@
 
 					<!-- Multiple Checkboxes -->
 					<div class="field">
-						<label
-							class="label"
-							for=""></label>
+						<label class="label" for=""></label>
 						<div class="control">
-							<label
-								class="checkbox"
-								for="completed-0"> <input
-								type="checkbox"
-								th:field="*{completed}"
-								name="completed"
-								id="completed-0"
-								value="Completed"> Completed
+							<label class="checkbox" for="completed-0"> <input
+								type="checkbox" th:field="*{completed}" name="completed"
+								id="completed-0" value="Completed"> Completed
 							</label>
 						</div>
 					</div>
+
 					<nav class="level">
 						<div class="level-left">
 							<div class="level-item">

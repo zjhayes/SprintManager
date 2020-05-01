@@ -19,7 +19,7 @@
 			</div>
 			<div class="subtitle">
 				<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return
-					to Project</a>
+					to <span th:text="${project.name}"></span></a>
 			</div>
 			<div class="subtitle">
 				<a
@@ -43,6 +43,9 @@
 					<th width="8%">Points</th>
 					<th width="4%">Complete</th>
 					<th><p class="subtitle"></p></th>
+					<th><form class="form-horizontal"></form></th>
+					<th><div></div></th>
+					<th><label class="label"></label></th>
 					<th></th>
 				</tr>
 			</thead>
@@ -55,27 +58,39 @@
 				<td th:text="${task.storyPoints}"></td>
 				<td class="has-text-centered"><i th:if="${task.completed}"
 					class="fa fa-check"></i></td>
-
+				<td>
+				<a
+					th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a></td>
 				<td><a
-					th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a>
+					th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a></td>
+				<td>
+				<!-- Has issues, not saving selected sprint.id to the task -->
+					<form th:object="${task}"
+						th:action="@{/projects/{projectID}/tasks/update/{taskId} (projectID=${project.id}, taskId=${task.id})}"
+						method="post">
+						<input type="hidden" name="id" th:value="*{id}" />
+						<td class="has-text-centered"><label 
+							for="assigned-to"></label>
+							<div class="control">
+								<div class="select">
+									<select id="sprint" name="sprint" th:field="*{project.sprints}">
+										<option th:each="sprint : ${project.sprints}"
+											th:value="${sprint.id}" th:text="${sprint.name}"></option>
+									</select>
+								</div>
+							</div></td>
+						<td>
+							<!-- Button -->
+							<div class="field">
+								<label for="submit"></label>
+								<div class="control">
+									<button id="submit" name="submit" class="button is-default">Move
+										to Sprint</button>
+								</div>
+							</div>
+						</td>
+					</form>
 				</td>
-				<td><a
-					th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a>
-				</td>
-
-				<td class="has-text-centered"><label class="label"
-					for="assigned-to">Send to sprint</label>
-					<div class="control">
-						<div class="select">
-							<select id="sprint" name="sprint" th:field="*{project.sprints}">
-								<option th:each="sprint : ${project.sprints}"
-									th:value="${sprint.id}" th:text="${sprint.name}"></option>
-							</select>
-						</div>
-					</div></td>
-				<td><a
-					th:href="@{/projects/{projectID}/tasks/{taskId}/moveToSprint (projectID=${project.id}, taskId=${task.id})}">Move
-						to Sprint</a></td>
 			</tr>
 		</table>
 	</section>
