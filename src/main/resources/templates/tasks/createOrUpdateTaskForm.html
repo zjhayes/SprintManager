@@ -25,13 +25,24 @@
 			</div>
 		</div>
 	</section>
-	<div class="column is-10 is-offset-1">
+	<div class="column is-6 is-offset-3">
 		<section class="box">
-			<form class="form-horizontal" method="post" th:object="${task}">
-				<input type="hidden" th:name="${_csrf.parameterName}"
-					th:value="${_csrf.token}" /> <input type="hidden" name="id"
-					th:value="*{id}" /> <input th:if="${task.sprint}" type="hidden"
-					name="sprint" th:value="*{sprint.id}" />
+
+			<form
+				class="form-horizontal"
+				method="post"
+				th:object="${task}">
+				<input
+					type="hidden"
+					th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" /> <input
+					type="hidden"
+					name="id"
+					th:value="*{id}" /> <input
+					th:if="${task.sprint}"
+					type="hidden"
+					name="sprint"
+					th:value="*{sprint.id}" />
 
 				<fieldset>
 
@@ -102,13 +113,44 @@
 							</label>
 						</div>
 					</div>
-					<!-- Button -->
-					<div class="field">
-						<label class="label" for="submit"></label>
-						<div class="control">
-							<button id="submit" name="submit" class="button is-default">Submit</button>
+
+					<nav class="level">
+						<div class="level-left">
+							<div class="level-item">
+								<div class="field">
+									<label
+										class="label"
+										for="submit"></label>
+									<div class="control">
+										<button
+											id="submit"
+											name="submit"
+											class="button is-rounded is-default">Submit</button>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
+						<div class="level-right">
+							<div class="level-item">
+								<div class="field is-grouped ">
+									<div class="control">
+										<a
+											class="button is-rounded is-danger"
+											th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${task.project.id}, taskId=${task.id})}">Delete</a>
+									</div>
+									<div class="control">
+										<a
+											class="button is-rounded is-warning"
+											th:href="@{/projects/{projectID}/tasks/{taskId}/moveToBacklog (projectID=${task.project.id}, taskId=${task.id})}">Send
+											To Backlog</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</nav>
+
 				</fieldset>
 			</form>
 		</section>

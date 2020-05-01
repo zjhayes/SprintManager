@@ -5,13 +5,13 @@
 <body>
 	<nav
 		th:fragment="header"
-		class="navbar is-dark "
+		class="navbar has-background-grey-lighter "
 		role="navigation"
 		aria-label="main navigation">
 		<div class="navbar-brand">
 			<a
 				class="navbar-item"
-				href="/"> <span class="title content has-text-white">Sprint
+				th:href="@{/dashboard}"> <span class="title content">Sprint
 					Manager</span>
 			</a>
 		</div>
