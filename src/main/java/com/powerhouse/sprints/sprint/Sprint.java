@@ -17,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.powerhouse.sprints.model.NamedEntity;
 import com.powerhouse.sprints.project.Project;
+import com.powerhouse.sprints.task.Task;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

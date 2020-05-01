@@ -29,8 +29,8 @@ import com.powerhouse.sprints.auth.service.SecurityService;
 import com.powerhouse.sprints.auth.service.UserService;
 import com.powerhouse.sprints.project.Project;
 import com.powerhouse.sprints.project.ProjectRepository;
-import com.powerhouse.sprints.sprint.Task;
-import com.powerhouse.sprints.sprint.TaskRepository;
+import com.powerhouse.sprints.task.Task;
+import com.powerhouse.sprints.task.TaskRepository;
 
 @Controller
 public class UserController {

@@ -1,4 +1,4 @@
-package com.powerhouse.sprints.sprint;
+package com.powerhouse.sprints.task;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.powerhouse.sprints.auth.model.User;
+import com.powerhouse.sprints.sprint.ProjectResource;
+import com.powerhouse.sprints.sprint.Sprint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

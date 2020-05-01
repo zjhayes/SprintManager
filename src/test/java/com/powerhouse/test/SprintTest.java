@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.powerhouse.sprints.sprint.Sprint;
-import com.powerhouse.sprints.sprint.Task;
+import com.powerhouse.sprints.task.Task;
 
 class SprintTest {
 	private Sprint s;

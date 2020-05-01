@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.powerhouse.sprints.project.Project;
 import com.powerhouse.sprints.project.ProjectRepository;
+import com.powerhouse.sprints.task.Task;
+import com.powerhouse.sprints.task.TaskRepository;
 
 @Controller
 @RequestMapping("/projects/{projectID}")

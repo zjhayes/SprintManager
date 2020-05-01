@@ -1,4 +1,4 @@
-package com.powerhouse.sprints.sprint;
+package com.powerhouse.sprints.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;

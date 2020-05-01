@@ -22,7 +22,7 @@ import com.powerhouse.sprints.model.NamedEntity;
 import com.powerhouse.sprints.schemes.PriorityScheme;
 import com.powerhouse.sprints.schemes.WorkflowScheme;
 import com.powerhouse.sprints.sprint.Sprint;
-import com.powerhouse.sprints.sprint.Task;
+import com.powerhouse.sprints.task.Task;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
