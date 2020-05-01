@@ -11,7 +11,7 @@
 <link
 	rel="stylesheet"
 	type="text/css"
-	href="css/style.css" />
+	href="/css/style.css">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script
 	defer
@@ -20,92 +20,100 @@
 <link
 	rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
+	<link
+	rel="stylesheet"
+	href="" />
+	
 <script
 	defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
 	<div th:insert="fragments/header :: header"></div>
-	<div class="container ">
-		<section class="hero ">
-			<div class="hero-body">
-				<div class="container has-text-centered">
-					<h1 class="title is-1">
-						Hi, <span
-							th:text="${#authentication.getPrincipal().getUser().getFirstName()}"
-							class=""></span>!
-					</h1>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div class="columns">
-				<div class=" column ">
-					<h2 class="title is-3">Your tasks</h2>
-					<table
-						th:if="${not #lists.isEmpty(tasks)}"
-						class="table is-fullwidth is-striped">
-						<thead>
-							<tr>
-								<th>Task</th>
-								<th>Sprint</th>
-								<th>Status</th>
-								<th>Due</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="task: ${tasks}">
-								<td><a
-									th:text="${task.taskDescription}"
-									th:href="@{/projects/{projectID}/tasks/{taskID}(projectID=${task.project.id}, taskID=${task.id})}">
-								</a></td>
-								<td><a
-									th:if="${task.sprint ne null}"
-									th:text="${task.sprint.name}"
-									th:href="@{/projects/{projectID}/sprints/{sprintID}(projectID=${task.project.id}, sprintID=${task.sprint.id})}">
-								</a></td>
-								<td th:if="${task.sprint == null}">Not assigned
-									to Sprint</td>
-								<td th:text="${task.currentStep}">
-							</tr>
-						</tbody>
-					</table>
-					<div
-						th:if="${#lists.isEmpty(tasks)}"
-						class="">
-						<h1 class="subtitle">You're all caught up! Whoo!</h1>
+	<div
+		class="container"
+		id="page-container">
+		<div id="content-wrap">
+			<section class="hero ">
+				<div class="hero-body">
+					<div class="container has-text-centered">
+						<h1 class="title is-1">
+							Hi, <span
+								th:text="${#authentication.getPrincipal().getUser().getFirstName()}"
+								class=""></span>!
+						</h1>
 					</div>
+				</div>
+			</section>
+			<section>
+				<div class="columns">
+					<div class=" column ">
+						<h2 class="title is-3">Your tasks</h2>
+						<table
+							th:if="${not #lists.isEmpty(tasks)}"
+							class="table is-fullwidth is-striped">
+							<thead>
+								<tr>
+									<th>Task</th>
+									<th>Sprint</th>
+									<th>Status</th>
+									<th>Due</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="task: ${tasks}">
+									<td><a
+										th:text="${task.taskDescription}"
+										th:href="@{/projects/{projectID}/tasks/{taskID}(projectID=${task.project.id}, taskID=${task.id})}">
+									</a></td>
+									<td><a
+										th:if="${task.sprint ne null}"
+										th:text="${task.sprint.name}"
+										th:href="@{/projects/{projectID}/sprints/{sprintID}(projectID=${task.project.id}, sprintID=${task.sprint.id})}">
+									</a></td>
+									<td th:if="${task.sprint == null}">Not assigned to Sprint</td>
+									<td th:text="${task.currentStep}">
+								</tr>
+							</tbody>
+						</table>
+						<div
+							th:if="${#lists.isEmpty(tasks)}"
+							class="">
+							<h1 class="subtitle">You're all caught up! Whoo!</h1>
+						</div>
 
+					</div>
+					<div class="column">
+						<h2 class="title is-3 ">Your Projects</h2>
+						<table class="table is-fullwidth is-striped">
+							<tbody>
+								<tr th:each="project: ${user.projects}">
+									<td width="20%"><a
+										th:text="${project.name}"
+										th:href="@{/projects/{projectID}(projectID=${project.id})}"></a></td>
+									<td>
+										<table class="table is-striped is-fullwidth">
+											<tbody>
+												<tr th:each="sprint: ${project.sprints}">
+													<td width="20%"><a
+														th:text="${sprint.name}"
+														th:href="@{projects/{projectID}/sprints/{sprintID}(projectID=${project.id},sprintID=${sprint.id})}"></a></td>
+													<td><progress
+															class="progress is-large"
+															th:value="${sprint.calculateCompletedPercentage()}"
+															max="100" /></td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
-				<div class="column">
-					<h2 class="title is-3 ">Your Projects</h2>
-					<table class="table is-fullwidth is-striped">
-						<tbody>
-							<tr th:each="project: ${user.projects}">
-								<td width="20%"><a
-									th:text="${project.name}"
-									th:href="@{/projects/{projectID}(projectID=${project.id})}"></a></td>
-								<td>
-									<table class="table is-striped is-fullwidth">
-										<tbody>
-											<tr th:each="sprint: ${project.sprints}">
-												<td width="20%"><a
-													th:text="${sprint.name}"
-													th:href="@{projects/{projectID}/sprints/{sprintID}(projectID=${project.id},sprintID=${sprint.id})}"></a></td>
-												<td><progress
-														class="progress is-large"
-														th:value="${sprint.calculateCompletedPercentage()}"
-														max="100" /></td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</section>
+			</section>
+		</div>
+		<div th:insert="fragments/footer :: footer"></div>
 	</div>
 </body>
 </html>
