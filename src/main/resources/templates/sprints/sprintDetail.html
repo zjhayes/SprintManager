@@ -21,101 +21,110 @@
 </head>
 <body>
 	<div th:insert="fragments/header :: header"></div>
-
-	<section class="hero is-small has-text-centered">
-		<div class="hero-body">
-			<div class="container">
-				<h1
-					th:text="${sprint.name}"
-					class="title"></h1>
-				<p class="subtitle">
-					<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return
-						to Project</a>
-				</p>
-			</div>
-		</div>
-	</section>
-	<section>
-		<div class="column is-10 is-offset-1">
-			<p class="subtitle">
-				<a
-					th:href="@{/projects/{projectID}/sprints/{sprintID}/board(projectID=${projectID}, sprintID=${sprint.id})}">View
-					Sprint Board</a>
-			</p>
-			<div class="box">
-				<div class="row">
-					<div class="column">
-						<strong>Description:</strong> <span
-							th:text="${sprint.description}" />
+	<div
+		class=""
+		id="page-container">
+		<div
+			class=""
+			id="content-wrap">
+			<section class="hero is-small has-text-centered">
+				<div class="hero-body">
+					<div class="container">
+						<h1
+							th:text="${sprint.name}"
+							class="title"></h1>
+						<p class="subtitle">
+							<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return
+								to Project</a>
+						</p>
 					</div>
 				</div>
-				<div class="column">
-					<strong>Start Date:</strong> <span
-						th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
-				</div>
-				<div class="column">
-					<strong>End Date:</strong> <span
-						th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
-				</div>
-
-				<section class="section box">
-					<nav class="level">
-						<div class="level-left">
-							<div class="level-item">
-								<span class="is-size-3 has-text-centered">Tasks </span>
+			</section>
+			<section>
+				<div class="column is-10 is-offset-1">
+					<p class="subtitle">
+						<a
+							th:href="@{/projects/{projectID}/sprints/{sprintID}/board(projectID=${projectID}, sprintID=${sprint.id})}">View
+							Sprint Board</a>
+					</p>
+					<div class="box">
+						<div class="row">
+							<div class="column">
+								<strong>Description:</strong> <span
+									th:text="${sprint.description}" />
 							</div>
 						</div>
-						<div class="level-right">
-							<div class="level-item">
-								<a
-									class="button"
-									th:href="@{/projects/{projectId}/tasks/new?sprintid={sprintId}(projectId=${sprint.project.id}, sprintId=${sprint.id})}"><i
-									class="fas fa-plus"></i></a>
-							</div>
+						<div class="column">
+							<strong>Start Date:</strong> <span
+								th:text="${#dates.format(sprint.startDate, 'MM-dd-yyyy')}" />
+						</div>
+						<div class="column">
+							<strong>End Date:</strong> <span
+								th:text="${#dates.format(sprint.endDate, 'MM-dd-yyyy')}" />
 						</div>
 
-					</nav>
-					<div class="row has-text-centered">
-						<small></small>
+						<section class="section box">
+							<nav class="level">
+								<div class="level-left">
+									<div class="level-item">
+										<span class="is-size-3 has-text-centered">Tasks </span>
+									</div>
+								</div>
+								<div class="level-right">
+									<div class="level-item">
+										<a
+											class="button"
+											th:href="@{/projects/{projectId}/tasks/new?sprintid={sprintId}(projectId=${sprint.project.id}, sprintId=${sprint.id})}"><i
+											class="fas fa-plus"></i></a>
+									</div>
+								</div>
+
+							</nav>
+							<div class="row has-text-centered">
+								<small></small>
+							</div>
+
+							<table class="has-border table is-striped is-fullwidth ">
+								<thead>
+									<tr>
+										<th width="50%">Task</th>
+										<th>Assigned To</th>
+										<th>Priority</th>
+										<th>Current Step</th>
+										<th width="8%">Points</th>
+										<th width="4%">Complete</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<form>
+										<tr th:each="task: ${sprint.tasks}">
+											<td><a
+												th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${sprint.project.id}, taskId=${task.id})}"
+												th:text="${task.taskDescription}"></a></td>
+											<td
+												th:text="${task.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
+											<td th:text="${task.priority}">
+											<td th:text="${task.currentStep}">
+											<td th:text="${task.storyPoints}">
+											<td class="has-text-centered"><i
+												th:if="${task.completed}"
+												class="fa fa-check" /></td>
+										</tr>
+									</form>
+								</tbody>
+							</table>
+						</section>
+						<a
+							th:href="@{/projects/{projectID}/sprints/{sprintID}/edit(projectID=${projectID}, sprintID=${sprint.id})}"
+							class="align-right">Sprint Settings </a>
 					</div>
-
-					<table class="has-border table is-striped is-fullwidth ">
-						<thead>
-							<tr>
-								<th width="50%">Task</th>
-								<th>Assigned To</th>
-								<th>Priority</th>
-								<th>Current Step</th>
-								<th width="8%">Points</th>
-								<th width="4%">Complete</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							<form>
-								<tr th:each="task: ${sprint.tasks}">
-									<td><a
-										th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${sprint.project.id}, taskId=${task.id})}"
-										th:text="${task.taskDescription}"></a></td>
-									<td
-										th:text="${task.assignedUser != null} ? ${task.assignedUser.getFullName()} : Unassigned">
-									<td th:text="${task.priority}">
-									<td th:text="${task.currentStep}">
-									<td th:text="${task.storyPoints}">
-									<td class="has-text-centered"><i
-										th:if="${task.completed}"
-										class="fa fa-check" /></td>
-								</tr>
-							</form>
-						</tbody>
-					</table>
-				</section>
-				<a
-					th:href="@{/projects/{projectID}/sprints/{sprintID}/edit(projectID=${projectID}, sprintID=${sprint.id})}"
-					class="align-right">Sprint Settings 
-			</div>
+				</div>
 		</div>
-		</div>
-	</section>
+		</section>
+
+	</div>
+	<div th:insert="fragments/footer :: footer"></div>
+	</div>
 </body>
 </html>
