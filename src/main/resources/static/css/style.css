@@ -11,6 +11,10 @@ progress[value]::-webkit-progress-value {
 	color: red;
 }
 
+.member-list:not(:last-child) .comma-list:after{
+  content: ", ";
+}
+
 .align-right {
 	margin: 0 auto;
 	text-align: right;

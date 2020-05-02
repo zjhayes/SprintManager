@@ -21,78 +21,87 @@
 				<a th:href="@{/projects/{projectID}(projectID=${projectID})}">Return
 					to <span th:text="${project.name}"></span></a>
 			</div>
-			<div class="subtitle">
-				<a
-					th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}">Add
-					Task to Backlog</a>
-			</div>
 		</div>
 	</section>
-	<section class="section box">
-		<div class="row has-text-centered">
-			<span class="is-size-3 has-text-centered">Tasks</span>
-		</div>
+	<div class="column is-10 is-offset-1">
+		<section class="section box">
+			<nav class="level">
+				<div class="level-left">
+					<div class="level-item">
+						<span class="is-size-3 has-text-centered">Backlog</span>
+					</div>
+				</div>
+				<div class="level-right">
+					<div class="level-item">
+						<a
+							class="button"
+							th:href="@{/projects/{projectID}/tasks/new(projectID=${project.id})}"><i
+							class="fas fa-plus"></i></a>
+					</div>
+				</div>
 
-		<table class="has-border table is-striped is-fullwidth ">
-			<thead>
-				<tr>
-					<th width="50%">Task</th>
-					<th>Assigned To</th>
-					<th>Priority</th>
-					<th>Current Step</th>
-					<th width="8%">Points</th>
-					<th width="4%">Complete</th>
-					<th><p class="subtitle"></p></th>
-					<th><form class="form-horizontal"></form></th>
-					<th><div></div></th>
-					<th><label class="label"></label></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tr th:each="task : ${project.backlog}"
-				th:if="${task.sprint == null}">
-				<td th:text="${task.taskDescription}"></td>
-				<td th:text="${task.assignedUser.getFullName()}"></td>
-				<td th:text="${task.priority}"></td>
-				<td th:text="${task.currentStep}"></td>
-				<td th:text="${task.storyPoints}"></td>
-				<td class="has-text-centered"><i th:if="${task.completed}"
-					class="fa fa-check"></i></td>
-				<td>
-				<a
-					th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a></td>
-				<td><a
-					th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a></td>
-				<td>
-				<!-- Has issues, not saving selected sprint.id to the task -->
-					<form th:object="${task}"
-						th:action="@{/projects/{projectID}/tasks/update/{taskId} (projectID=${project.id}, taskId=${task.id})}"
-						method="post">
-						<input type="hidden" name="id" th:value="*{id}" />
-						<td class="has-text-centered"><label 
-							for="assigned-to"></label>
-							<div class="control">
-								<div class="select">
-									<select id="sprint" name="sprint" th:field="*{project.sprints}">
-										<option th:each="sprint : ${project.sprints}"
-											th:value="${sprint.id}" th:text="${sprint.name}"></option>
-									</select>
-								</div>
-							</div></td>
-						<td>
-							<!-- Button -->
-							<div class="field">
-								<label for="submit"></label>
+			</nav>
+			<table class="has-border table is-striped is-fullwidth ">
+				<thead>
+					<tr>
+						<th width="50%">Task</th>
+						<th>Assigned To</th>
+						<th>Priority</th>
+						<th>Current Step</th>
+						<th width="8%">Points</th>
+						<th width="4%">Complete</th>
+						<th><p class="subtitle"></p></th>
+						<th><form class="form-horizontal"></form></th>
+						<th><div></div></th>
+						<th><label class="label"></label></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tr th:each="task : ${project.backlog}"
+					th:if="${task.sprint == null}">
+					<td th:text="${task.taskDescription}"></td>
+					<td th:text="${task.assignedUser.getFullName()}"></td>
+					<td th:text="${task.priority}"></td>
+					<td th:text="${task.currentStep}"></td>
+					<td th:text="${task.storyPoints}"></td>
+					<td class="has-text-centered"><i th:if="${task.completed}"
+						class="fa fa-check"></i></td>
+					<td>
+					<a
+						th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${project.id}, taskId=${task.id})}">Delete</a></td>
+					<td><a
+						th:href="@{/projects/{projectID}/tasks/{taskId}/edit (projectID=${project.id}, taskId=${task.id})}">Edit</a></td>
+					<td>
+					<!-- Has issues, not saving selected sprint.id to the task -->
+						<form th:object="${task}"
+							th:action="@{/projects/{projectID}/tasks/update/{taskId} (projectID=${project.id}, taskId=${task.id})}"
+							method="post">
+							<input type="hidden" name="id" th:value="*{id}" />
+							<td class="has-text-centered"><label 
+								for="assigned-to"></label>
 								<div class="control">
-									<button id="submit" name="submit" class="button is-default">Move
-										to Sprint</button>
+									<div class="select">
+										<select id="sprint" name="sprint" th:field="*{project.sprints}">
+											<option th:each="sprint : ${project.sprints}"
+												th:value="${sprint.id}" th:text="${sprint.name}"></option>
+										</select>
+									</div>
+								</div></td>
+							<td>
+								<!-- Button -->
+								<div class="field">
+									<label for="submit"></label>
+									<div class="control">
+										<button id="submit" name="submit" class="button is-default">Move
+											to Sprint</button>
+									</div>
 								</div>
-							</div>
-						</td>
-					</form>
-				</td>
-			</tr>
-		</table>
-	</section>
+							</td>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</section>
+	</div>
 </body>
 </html>
