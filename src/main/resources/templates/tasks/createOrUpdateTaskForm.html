@@ -194,11 +194,13 @@
 								<div class="field is-grouped ">
 									<div class="control">
 										<a
+											th:if="${task.id}"
 											class="button is-rounded is-danger"
 											th:href="@{/projects/{projectID}/tasks/{taskId}/delete (projectID=${task.project.id}, taskId=${task.id})}">Delete</a>
 									</div>
 									<div class="control">
 										<a
+											th:if="${task.sprint}"
 											class="button is-rounded is-warning"
 											th:href="@{/projects/{projectID}/tasks/{taskId}/moveToBacklog (projectID=${task.project.id}, taskId=${task.id})}">Send
 											To Backlog</a>
@@ -206,8 +208,6 @@
 								</div>
 							</div>
 						</div>
-
-
 					</nav>
 
 				</fieldset>

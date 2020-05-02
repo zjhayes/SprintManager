@@ -25,15 +25,11 @@
 		<div class="hero-body">
 			<div class="container">
 				<h1 class="title">Project Settings</h1>
-				<p class="subtitle">
-					<a th:href="@{/projects/{id}(id=${newProject.id})}" th:text="${newProject.id != null} ? 'Return to Project' : null"></a>
-					<a th:href="@{/projects/}" th:text="${newProject.id != null} ? null : 'Return to All Projects'"></a>
-				</p>
 			</div>
 		</div>
 	</section>
-	<section class="section">
-		<div class="column is-10 is-offset-1">		
+	<div class="column is-6 is-offset-3">		
+		<section class="box">
 			<form class="form-horizontal" th:object="${newProject}" th:action="@{/projects/update/{id}(id=${newProject.id})}" method="POST">
 				<fieldset>
 					<input type="hidden" id="id" name="id" th:field="*{id}">
@@ -84,19 +80,46 @@
 							</div>
 						</div>
 					</div>
-					<div class="field">
-					  <label class="label" for="submit"></label>
-					  <div class="control">
-					    <button id="submit" name="submit" class="button is-primary" th:text="${newProject.id != null} ? 'Save' : 'Create'">Save</button>
-					    <a th:href="@{/projects/{projectID}(projectID=${newProject.id})}" th:text="${newProject.id != null} ? 'Cancel' : null">Cancel</a>
-					  </div>
-					</div>
+					<nav class="level">
+						<div class="level-left">
+							<div class="level-item">
+								<div class="field is-grouped">
+									<div class="control">
+										<button
+											id="submit"
+											name="submit"
+											class="button is-rounded is-default"
+											th:text="${newProject.id != null} ? 'Save' : 'Create'">
+										</button>
+									</div>
+									<div class="control">
+										<a
+											class="button is-rounded is-warning"											
+											th:href="${newProject.id != null} ? @{/projects/{projectID}(projectID=${newProject.id})} : @{/projects/}">
+											Cancel
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="level-right">
+							<div class="level-item">
+								<div class="field is-grouped ">
+									<div class="control">
+										<a
+											th:if="${newProject.id}"
+											class="button is-rounded is-danger"
+											th:href="@{/projects/delete/{id}(id=${newProject.id})}">
+											Delete Project
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</nav>
 				</fieldset>
 			</form>
-			<div class="delete_button align-right">
-				<a th:href="@{/projects/delete/{id}(id=${newProject.id})}" th:text="${newProject.id != null} ? 'Delete Project' : null"></a>
-			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 </body>
 </html>

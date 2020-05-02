@@ -30,8 +30,8 @@
 		</div>
 	</section>
 
-	<section class="section">
-		<div class="column is-10 is-offset-1">					
+	<div class="column is-6 is-offset-3">
+		<section class="box">			
 			<form class="form-horizontal" th:object="${newSprint}" 
 				th:action="@{/projects/{projectID}/sprints/update/{sprintID}(sprintID=${newSprint.id}, projectID=${projectID})}" method="POST">
 				<fieldset>
@@ -62,19 +62,45 @@
 							<input type="date" id="endDate" name="endDate" th:field="*{endDate}" required>
 						</div>
 					</div>
-					<div class="field">
-					  <div class="control">
-					    <button id="submit" name="submit" class="button is-primary">Save</button>
-					  </div>
-					</div>
+					<nav class="level">
+						<div class="level-left">
+							<div class="level-item">
+								<div class="field is-grouped">
+									<div class="control">
+										<button
+											id="submit"
+											name="submit"
+											class="button is-rounded is-default"
+											th:text="${newSprint.id != null} ? 'Save' : 'Create'">
+										</button>
+									</div>
+									<div class="control">
+										<a
+											class="button is-rounded is-warning"
+											th:href="${newSprint.id != null} ? @{/projects/{projectID}/sprints/{sprintID}(sprintID=${newSprint.id}, projectID=${projectID})} : @{/projects/{projectID}(projectID=${projectID})}">
+											Cancel
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="level-right">
+							<div class="level-item">
+								<div class="field is-grouped ">
+									<div class="control">
+										<a
+											th:if="${newSprint.id}"
+											class="button is-rounded is-danger"
+											th:href="@{/projects/{projectID}/sprints/delete/{sprintID}(sprintID=${sprintID}, projectID=${projectID})}"
+											th:text="${newSprint.id != null} ? 'Delete Sprint' : null"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</nav>
 				</fieldset>
 			</form>
-			<div class="delete_button align-right">
-				<a th:href="@{/projects/{projectID}/sprints/delete/{sprintID}(sprintID=${sprintID}, projectID=${projectID})}" 
-				th:text="${newSprint.id != null} ? 'Delete Sprint' : null"></a>
-			</div>
-		</div>
-	</section>
-
+		</section>
+	</div>
 </body>
 </html>
