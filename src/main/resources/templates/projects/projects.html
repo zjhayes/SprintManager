@@ -34,7 +34,7 @@
 	</section>
 
 	<section class="section">
-		<div class="column is-6 is-offset-3">
+		<div class="column is-10 is-offset-1">
 			<p class="subtitle">
 				<a href="/addProject">Add Project</a>
 			</p>
@@ -42,6 +42,9 @@
 				<thead>
 					<tr>
 						<th>Project Name</th>
+						<th>Workflow</th>
+						<th>Priority Scheme</th>
+						<th>Members</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -50,6 +53,14 @@
 						<td><a
 							th:href="@{/projects/{id}(id=${project.id})}"
 							th:text="${project.name}"></a></td>
+						<td th:text="${project.workflow.name}"></td>
+						<td th:text="${project.priorityScheme.name}"></td>
+						<td>
+							<span class="member-list" th:each="member : ${project.projectMembers}">
+								<span class="comma-list" th:text=${member.getFullName()}/>
+							</span>
+						</td>
+						
 						<td class="delete_button" width="10%"><a
 							th:href="@{/projects/delete/{id}(id=${project.id})}">
 							Delete</a>
