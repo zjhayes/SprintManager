@@ -19,4 +19,9 @@ public class TaskService {
 	public void save(Task task) {
 		taskRepository.save(task);
 	}
+
+	public void delete(Task task) {
+		task.getProject().getBacklog().remove(task);
+		taskRepository.delete(task);
+	}
 }
