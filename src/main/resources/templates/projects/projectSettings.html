@@ -34,6 +34,7 @@
 				<fieldset>
 					<input type="hidden" id="id" name="id" th:field="*{id}">
 					<input type="hidden" id="createdDate" name="createdDate" th:field="*{createdDate}">
+					<input type="hidden" id="backlog" name="backlog" th:field="*{backlog}">
 					<div class="field">
 					  <label class="label" for="name">Project Name</label>
 					  <div class="control">
@@ -97,20 +98,6 @@
 											class="button is-rounded is-warning"											
 											th:href="${newProject.id != null} ? @{/projects/{projectID}(projectID=${newProject.id})} : @{/projects/}">
 											Cancel
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="level-right">
-							<div class="level-item">
-								<div class="field is-grouped ">
-									<div class="control">
-										<a
-											th:if="${newProject.id}"
-											class="button is-rounded is-danger"
-											th:href="@{/projects/delete/{id}(id=${newProject.id})}">
-											Delete Project
 										</a>
 									</div>
 								</div>

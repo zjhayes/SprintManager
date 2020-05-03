@@ -27,21 +27,22 @@
 			<div class="container">
 				<h1 class="title">Projects</h1>
 				<p class="subtitle">
-					<a href="/dashboard">Return to Dashboard</a>
+					<a href="/admin/">Return to Admin Dashboard</a>
 				</p>
 			</div>
 		</div>
 	</section>
 
 	<section class="section">
-		<div class="column is-10 is-offset-1">
+		<div class="column is-6 is-offset-3">
 			<p class="subtitle">
 				<a href="/addProject">Add Project</a>
 			</p>
-			<table class="table is-bordered is-fullwidth is-striped is-hoverable">
+			<table class="has-border table is-striped is-fullwidth is-hoverable">
 				<thead>
 					<tr>
 						<th>Project Name</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,6 +50,10 @@
 						<td><a
 							th:href="@{/projects/{id}(id=${project.id})}"
 							th:text="${project.name}"></a></td>
+						<td class="delete_button" width="10%"><a
+							th:href="@{/projects/delete/{id}(id=${project.id})}">
+							Delete</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

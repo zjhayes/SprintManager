@@ -14,6 +14,10 @@ import com.powerhouse.sprints.auth.model.Role;
 import com.powerhouse.sprints.auth.model.User;
 import com.powerhouse.sprints.auth.repository.RoleRepository;
 import com.powerhouse.sprints.auth.repository.UserRepository;
+import com.powerhouse.sprints.schemes.PriorityScheme;
+import com.powerhouse.sprints.schemes.PrioritySchemeRepository;
+import com.powerhouse.sprints.schemes.WorkflowScheme;
+import com.powerhouse.sprints.schemes.WorkflowSchemeRepository;
 
 @Component
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -25,6 +29,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private WorkflowSchemeRepository workflowRepository;
+	
+	@Autowired
+	private PrioritySchemeRepository priorityRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -39,8 +49,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 		createRoleIfNotFound("ROLE_ADMIN");
 		User admin = createAdminUserIfNotFound();
 		userRepository.save(admin);
+		createWorkflowIfNotFound();
+		createPrioritySchemeIfNotFound();
+		
 		alreadySetup = true;
-
 	}
 
 	private User createAdminUserIfNotFound() {
@@ -68,5 +80,35 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 			roleRepository.save(role);
 		}
 		return role;
+	}
+	
+	private void createWorkflowIfNotFound() {
+		
+		if(workflowRepository.findAll().size() == 0) {
+			
+			WorkflowScheme defaultWorkflow = new WorkflowScheme();
+			defaultWorkflow.setName("Default Workflow");
+			defaultWorkflow.addStep("To Do");
+			defaultWorkflow.addStep("In Progress");
+			defaultWorkflow.addStep("On Hold");
+			defaultWorkflow.addStep("Done");
+			
+			workflowRepository.save(defaultWorkflow);
+		}
+	}
+	
+	private void createPrioritySchemeIfNotFound() {
+		
+		if(priorityRepository.findAll().size() == 0) {
+			
+			PriorityScheme defaultPriorityScheme = new PriorityScheme();
+			defaultPriorityScheme.setName("Default Priority Scheme");
+			defaultPriorityScheme.addPriority("High");
+			defaultPriorityScheme.addPriority("Medium");
+			defaultPriorityScheme.addPriority("Low");
+			defaultPriorityScheme.addPriority("Blocker");
+			
+			priorityRepository.save(defaultPriorityScheme);
+		}
 	}
 }
