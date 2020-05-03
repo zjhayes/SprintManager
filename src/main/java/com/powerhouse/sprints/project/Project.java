@@ -38,7 +38,7 @@ public class Project extends NamedEntity {
 	@CreationTimestamp
 	private LocalDate createdDate;
 
-	@OneToMany(mappedBy = "project", cascade = { CascadeType.REFRESH, CascadeType.MERGE })
+	@OneToMany(mappedBy = "project", cascade = { CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE })
 	private List<Sprint> sprints;
 
 	@ToString.Exclude
