@@ -46,12 +46,7 @@ public class UserController {
 		this.taskRepo = taskRepo;
 	}
 
-	@GetMapping("/")
-	public String welcome(Model model) {
-		return "auth/welcome";
-	}
-
-	@GetMapping("/dashboard")
+	@GetMapping(path = { "/", "/dashboard" })
 	public ModelAndView showUserDashboard(ModelAndView modelAndView) {
 		User authenticatedUser = userService.findByEmail(securityService.findLoggedInUsername());
 		modelAndView.setViewName("user/dashboard");
