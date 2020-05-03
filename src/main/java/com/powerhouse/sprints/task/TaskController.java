@@ -129,8 +129,8 @@ public class TaskController {
 	@GetMapping("/tasks/{taskId}/delete")
 	public String deleteTask(@PathVariable("projectID") long projectID, @PathVariable("taskId") long taskId,
 			Project project, Model model) {
-		Task task = this.taskRepo.findById(taskId).orElse(null);
-		project.getBacklog().remove(task);
+		Task task = this.taskService.findById(taskId);
+		taskService.delete(task);
 		projectRepo.save(project);
 		return "redirect:/projects/{projectID}/tasks";
 	}
