@@ -83,7 +83,7 @@ public class ProjectController {
 		if (!users.isEmpty()) {
 			addMembersToProject(users, p);
 		}
-		projectService.saveAndFlush(p);
+		projectService.save(p);
 		return "redirect:/projects/{projectID}";
 	}
 

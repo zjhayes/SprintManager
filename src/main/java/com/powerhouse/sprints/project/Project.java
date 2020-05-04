@@ -42,7 +42,7 @@ public class Project extends NamedEntity {
 	private List<Sprint> sprints;
 
 	@ToString.Exclude
-	@ManyToMany(mappedBy = "projects", cascade = { CascadeType.MERGE })
+	@ManyToMany(mappedBy = "projects", cascade = { CascadeType.REFRESH, CascadeType.PERSIST })
 	private Set<User> projectMembers = new HashSet<User>();
 	
 	@LazyCollection(LazyCollectionOption.FALSE)

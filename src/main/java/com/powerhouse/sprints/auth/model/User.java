@@ -64,4 +64,8 @@ public class User extends BaseEntity {
 	public void addToProject(Project project) {
 		projects.add(project);
 	}
+	
+	public void removeFromProject(Project project) {
+		projects.remove(project);
+	}
 }
